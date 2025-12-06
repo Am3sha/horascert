@@ -1,0 +1,304 @@
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.about-section {
+  background-color: var(--white);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-text h2 {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.about-text p {
+  margin-bottom: 20px;
+  color: var(--text-gray);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.about-image {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Vision Section */
+.vision-section {
+  background-color: var(--white);
+}
+
+.vision-card-full {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 40px;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon-large {
+  font-size: 5rem;
+  margin-bottom: 32px;
+  display: inline-block;
+}
+
+.vision-text,
+.mission-text {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--text-gray);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Mission Section */
+.mission-section {
+  background-color: var(--light-gray);
+}
+
+.mission-card-full {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 40px;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Geographical Coverage Section */
+.geographical-section {
+  background-color: var(--light-gray);
+}
+
+.geographical-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.current-operating,
+.expanding-soon {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.current-operating h3,
+.expanding-soon h3 {
+  font-size: 1.5rem;
+  color: var(--primary-navy);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.countries-badges {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.country-badge-primary {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+  color: var(--white);
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.country-badge-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.countries-badges-expanding {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.country-badge-secondary {
+  padding: 12px 24px;
+  background: var(--white);
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.country-badge-secondary:hover {
+  background: var(--primary-blue);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Certification Process Section */
+.certification-process-section {
+  background-color: var(--white);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  margin-top: 50px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.process-step {
+  text-align: center;
+  padding: 32px 20px;
+  background-color: var(--light-gray);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.process-step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background-color: var(--white);
+}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.process-step h3 {
+  font-size: 1.25rem;
+  color: var(--primary-navy);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.process-step p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.contact-section {
+  padding: 80px 0;
+  background-color: var(--white);
+}
+
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .vision-card-full,
+  .mission-card-full {
+    padding: 40px 24px;
+  }
+
+  .card-icon-large {
+    font-size: 4rem;
+    margin-bottom: 24px;
+  }
+
+  .vision-text,
+  .mission-text {
+    font-size: 1.05rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-text h2 {
+    text-align: center;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .countries-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .country-badge-primary {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .countries-badges-expanding {
+    gap: 12px;
+  }
+}
+

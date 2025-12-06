@@ -1,0 +1,130 @@
+.service-detail-page {
+  min-height: 100vh;
+}
+
+.service-detail-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.service-intro,
+.service-benefits,
+.service-who,
+.service-requirements,
+.service-cta {
+  margin-bottom: 60px;
+}
+
+.service-intro h2,
+.service-benefits h2,
+.service-who h2,
+.service-requirements h2,
+.service-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: var(--primary-navy);
+}
+
+.service-intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+}
+
+.service-benefits ul,
+.service-requirements ul {
+  list-style: none;
+  padding: 0;
+}
+
+.service-benefits li,
+.service-requirements li {
+  padding: 16px 0;
+  padding-left: 32px;
+  position: relative;
+  color: var(--text-gray);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.service-benefits li::before,
+.service-requirements li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-orange);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.service-who p {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  margin-bottom: 24px;
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.industry-tag {
+  background-color: var(--light-gray);
+  padding: 12px 20px;
+  border-radius: 4px;
+  text-align: center;
+  color: var(--primary-navy);
+  font-weight: 500;
+  border: 2px solid var(--primary-blue);
+  transition: all 0.3s ease;
+}
+
+.industry-tag:hover {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.service-cta {
+  background-color: var(--light-gray);
+  padding: 48px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.service-cta h2 {
+  margin-bottom: 16px;
+}
+
+.service-cta p {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  margin-bottom: 32px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .service-intro h2,
+  .service-benefits h2,
+  .service-who h2,
+  .service-requirements h2,
+  .service-cta h2 {
+    font-size: 1.75rem;
+  }
+
+  .industries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-cta {
+    padding: 32px 24px;
+  }
+}
+
