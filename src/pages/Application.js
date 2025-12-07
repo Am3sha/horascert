@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sanitizeInput, sanitizeAndValidateForm } from '../utils/security';
 import './Application.css';
 
 const Application = () => {
@@ -37,7 +38,8 @@ const Application = () => {
     if (type === 'checkbox') {
       const standards = [...formData.standards];
       if (checked) {
-        standards.push(value);
+        // Sanitize checkbox value
+        standards.push(sanitizeInput(value));
       } else {
         const index = standards.indexOf(value);
         if (index > -1) {
@@ -46,9 +48,11 @@ const Application = () => {
       }
       setFormData(prev => ({ ...prev, standards }));
     } else {
+      // Sanitize input on change
+      const sanitizedValue = sanitizeInput(value);
       setFormData(prev => ({
         ...prev,
-        [name]: value
+        [name]: sanitizedValue
       }));
     }
 
@@ -61,22 +65,54 @@ const Application = () => {
   };
 
   const validate = () => {
-    const newErrors = {};
+    const validationRules = {
+      companyName: {
+        required: true,
+        requiredMessage: 'Company name is required',
+        minLength: 2,
+        maxLength: 200
+      },
+      companyAddress: {
+        required: true,
+        requiredMessage: 'Company address is required',
+        minLength: 10,
+        maxLength: 500
+      },
+      industry: {
+        required: true,
+        requiredMessage: 'Industry is required',
+        minLength: 2,
+        maxLength: 100
+      },
+      contactName: {
+        required: true,
+        requiredMessage: 'Contact name is required',
+        minLength: 2,
+        maxLength: 100
+      },
+      contactEmail: {
+        required: true,
+        requiredMessage: 'Email is required',
+        email: true,
+        emailMessage: 'Please enter a valid email address'
+      },
+      contactPhone: {
+        required: true,
+        requiredMessage: 'Phone is required',
+        minLength: 8,
+        maxLength: 20
+      }
+    };
 
-    if (!formData.companyName.trim()) newErrors.companyName = 'Company name is required';
-    if (!formData.companyAddress.trim()) newErrors.companyAddress = 'Company address is required';
-    if (!formData.industry.trim()) newErrors.industry = 'Industry is required';
-    if (!formData.contactName.trim()) newErrors.contactName = 'Contact name is required';
-    if (!formData.contactEmail.trim()) {
-      newErrors.contactEmail = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.contactEmail)) {
-      newErrors.contactEmail = 'Please enter a valid email';
+    const { errors: validationErrors } = sanitizeAndValidateForm(formData, validationRules);
+    
+    // Additional validation for standards
+    if (formData.standards.length === 0) {
+      validationErrors.standards = 'Please select at least one standard';
     }
-    if (!formData.contactPhone.trim()) newErrors.contactPhone = 'Phone is required';
-    if (formData.standards.length === 0) newErrors.standards = 'Please select at least one standard';
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
@@ -89,8 +125,40 @@ const Application = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Simulate API call
-    setTimeout(() => {
+    // Sanitize all form data before submission
+    const sanitizedData = {
+      companyName: sanitizeInput(formData.companyName),
+      companyAddress: sanitizeInput(formData.companyAddress),
+      industry: sanitizeInput(formData.industry),
+      companySize: sanitizeInput(formData.companySize || ''),
+      numberOfEmployees: formData.numberOfEmployees || '',
+      numberOfLocations: formData.numberOfLocations || '',
+      contactPersonName: sanitizeInput(formData.contactName),
+      contactPersonPosition: sanitizeInput(formData.contactPosition || ''),
+      contactEmail: sanitizeInput(formData.contactEmail),
+      contactPhone: sanitizeInput(formData.contactPhone),
+      standards: formData.standards,
+      currentCertifications: sanitizeInput(formData.currentCertifications || ''),
+      preferredAuditDate: formData.preferredAuditDate || null,
+      additionalInfo: sanitizeInput(formData.additionalInfo || '')
+    };
+
+    try {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/applications`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sanitizedData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit application');
+      }
+
       setIsSubmitting(false);
       setSubmitStatus('success');
       
@@ -113,7 +181,12 @@ const Application = () => {
       });
       
       setTimeout(() => setSubmitStatus(null), 5000);
-    }, 2000);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
   };
 
   return (
@@ -343,6 +416,12 @@ const Application = () => {
             {submitStatus === 'success' && (
               <div className="success-message">
                 ✓ Thank you! Your application has been submitted successfully. We'll contact you within 24 hours.
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div className="error-message" style={{ padding: '16px', backgroundColor: '#fee', color: '#c33', borderRadius: '4px', marginBottom: '20px' }}>
+                ✗ There was an error submitting your application. Please try again or contact us directly.
               </div>
             )}
 

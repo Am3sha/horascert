@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sanitizeInput, sanitizeAndValidateForm } from '../../utils/security';
 import './ContactForm.css';
 
 const ContactForm = () => {
@@ -15,9 +16,11 @@ const ContactForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Sanitize input on change
+    const sanitizedValue = sanitizeInput(value);
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizedValue
     }));
     // Clear error when user starts typing
     if (errors[name]) {
@@ -29,32 +32,42 @@ const ContactForm = () => {
   };
 
   const validate = () => {
-    const newErrors = {};
+    const validationRules = {
+      name: {
+        required: true,
+        requiredMessage: 'Name is required',
+        minLength: 2,
+        maxLength: 100
+      },
+      email: {
+        required: true,
+        requiredMessage: 'Email is required',
+        email: true,
+        emailMessage: 'Please enter a valid email address'
+      },
+      phone: {
+        required: true,
+        requiredMessage: 'Phone is required',
+        minLength: 8,
+        maxLength: 20
+      },
+      subject: {
+        required: true,
+        requiredMessage: 'Subject is required',
+        minLength: 3,
+        maxLength: 200
+      },
+      message: {
+        required: true,
+        requiredMessage: 'Message is required',
+        minLength: 10,
+        maxLength: 2000
+      }
+    };
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone is required';
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const { errors: validationErrors } = sanitizeAndValidateForm(formData, validationRules);
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
@@ -67,8 +80,31 @@ const ContactForm = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Simulate API call
-    setTimeout(() => {
+    // Sanitize all form data before submission
+    const sanitizedData = {
+      name: sanitizeInput(formData.name),
+      email: sanitizeInput(formData.email),
+      phone: sanitizeInput(formData.phone),
+      subject: sanitizeInput(formData.subject),
+      message: sanitizeInput(formData.message)
+    };
+
+    try {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/applications/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sanitizedData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({
@@ -81,7 +117,12 @@ const ContactForm = () => {
       
       // Clear success message after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
   };
 
   return (
@@ -165,6 +206,12 @@ const ContactForm = () => {
           {submitStatus === 'success' && (
             <div className="success-message">
               ✓ Thank you! Your message has been sent successfully. We'll get back to you soon.
+            </div>
+          )}
+
+          {submitStatus === 'error' && (
+            <div className="error-message" style={{ padding: '16px', backgroundColor: '#fee', color: '#c33', borderRadius: '4px', marginBottom: '20px' }}>
+              ✗ There was an error sending your message. Please try again or contact us directly.
             </div>
           )}
 

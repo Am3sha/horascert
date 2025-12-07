@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { QRCodeSVG } from 'qrcode.react';
 import './ServiceDetail.css';
 
 const ServiceDetail = () => {
   const { serviceId } = useParams();
+  const [pageUrl, setPageUrl] = useState('');
+
+  // Map service IDs to certificate images
+  const certificateImages = {
+    'iso-9001': '/imges/ISO_9001-2015-1003x1024.jpg',
+    'iso-14001': '/imges/iso14001-1024x1024.png',
+    'iso-45001': '/imges/iso-45001.png',
+    'iso-22000': '/imges/ISO-22000-2018.jpg',
+    'haccp': '/imges/HACCP-Certification-Logo-for-News-webpage-1024x750.jpg',
+    'gmp': '/imges/gmp-good-manufacturing-practice-certified-round-stamp-on-white-background-vector-e1731932642480.jpg'
+  };
+
+  useEffect(() => {
+    // Get current page URL for QR code
+    const currentUrl = window.location.href;
+    setPageUrl(currentUrl);
+  }, [serviceId]);
 
   const serviceDetails = {
     'iso-9001': {
@@ -218,56 +236,155 @@ const ServiceDetail = () => {
 
   const service = serviceDetails[serviceId] || serviceDetails['iso-9001'];
 
+  const handleDownloadQR = () => {
+    try {
+      const svg = document.getElementById('qr-code-svg');
+      if (svg) {
+        const svgData = new XMLSerializer().serializeToString(svg);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = `${serviceId}-qr-code.png`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              URL.revokeObjectURL(url);
+            }
+          }, 'image/png');
+        };
+        
+        img.onerror = () => {
+          // Fallback: download SVG directly
+          const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
+          const url = URL.createObjectURL(svgBlob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `${serviceId}-qr-code.svg`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        };
+        
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+      }
+    } catch (error) {
+      console.error('Error downloading QR code:', error);
+      alert('Unable to download QR code. Please try right-clicking on the QR code and saving the image.');
+    }
+  };
+
+
   return (
     <div className="service-detail-page">
       <div className="page-header">
         <div className="container">
           <h1>{service.fullName}</h1>
+          <p className="page-subtitle">Professional certification services for {service.name}</p>
         </div>
       </div>
 
       <section className="section">
         <div className="container">
           <div className="service-detail-content">
-            <div className="service-intro">
-              <h2>What is {service.name}?</h2>
-              <p>{service.description}</p>
-            </div>
+            <div className="service-main-content">
+              <div className="service-intro">
+                <h2>About {service.name}</h2>
+                <p className="description-text">{service.description}</p>
+              </div>
 
-            <div className="service-benefits">
-              <h2>Benefits of Certification</h2>
-              <ul>
-                {service.benefits.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
-                ))}
-              </ul>
-            </div>
+              <div className="service-benefits">
+                <h2>Benefits of Certification</h2>
+                <ul className="benefits-list">
+                  {service.benefits.map((benefit, index) => (
+                    <li key={index}>
+                      <span className="check-icon">✓</span>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className="service-who">
-              <h2>Who Needs It?</h2>
-              <p>This certification is ideal for organizations in the following industries:</p>
-              <div className="industries-grid">
-                {service.industries.map((industry, index) => (
-                  <div key={index} className="industry-tag">{industry}</div>
-                ))}
+              <div className="service-who">
+                <h2>Who Needs It?</h2>
+                <p>This certification is ideal for organizations in the following industries:</p>
+                <div className="industries-grid">
+                  {service.industries.map((industry, index) => (
+                    <div key={index} className="industry-tag">{industry}</div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="service-requirements">
+                <h2>Key Requirements</h2>
+                <ul className="requirements-list">
+                  {service.requirements.map((requirement, index) => (
+                    <li key={index}>
+                      <span className="bullet-icon">•</span>
+                      {requirement}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            <div className="service-requirements">
-              <h2>Key Requirements</h2>
-              <ul>
-                {service.requirements.map((requirement, index) => (
-                  <li key={index}>{requirement}</li>
-                ))}
-              </ul>
-            </div>
+            <div className="service-sidebar">
+              <div className="qr-code-card">
+                <h3>Share This Page</h3>
+                <p className="qr-description">Scan this QR code to access this page on any device</p>
+                <div className="qr-code-container">
+                  <QRCodeSVG
+                    id="qr-code-svg"
+                    value={pageUrl}
+                    size={200}
+                    level="H"
+                    includeMargin={true}
+                  />
+                </div>
+                <div className="qr-actions">
+                  <button onClick={handleDownloadQR} className="btn btn-secondary qr-download-btn">
+                    Download QR Code
+                  </button>
+                </div>
+                <p className="qr-url-text">{pageUrl}</p>
+              </div>
 
-            <div className="service-cta">
-              <h2>Ready to Get Certified?</h2>
-              <p>Contact us today to learn more about our certification process and get a free quote.</p>
-              <div className="cta-buttons">
-                <Link to="/contact" className="btn btn-primary">Get Free Quote</Link>
-                <Link to="/application" className="btn btn-secondary">Apply Now</Link>
+              <div className="certificate-image-card">
+                <h3>Certificate</h3>
+                <div className="certificate-image-container">
+                  <img 
+                    src={certificateImages[serviceId] || certificateImages['iso-9001']} 
+                    alt={`${service.name} Certificate`}
+                    className="certificate-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <div className="certificate-image-fallback" style={{ display: 'none' }}>
+                    <span className="cert-icon">📜</span>
+                    <p>Certificate Image</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="service-cta-card">
+                <h3>Ready to Get Certified?</h3>
+                <p>Contact us today to learn more about our certification process and get a free quote.</p>
+                <div className="cta-buttons">
+                  <Link to="/contact" className="btn btn-primary">Get Free Quote</Link>
+                  <Link to="/application" className="btn btn-secondary">Apply Now</Link>
+                </div>
               </div>
             </div>
           </div>
@@ -278,4 +395,3 @@ const ServiceDetail = () => {
 };
 
 export default ServiceDetail;
-

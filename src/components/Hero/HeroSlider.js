@@ -8,29 +8,29 @@ const HeroSlider = () => {
   const slides = [
     {
       id: 1,
-      title: "Accredited ISO Certification Services",
-      subtitle: "Your Partner in Quality Excellence",
-      description: "Trusted certification body recognized by national and international accreditation organizations",
+      title: "HORAS-Cert: Your Trusted Certification Partner",
+      subtitle: "EGAC Accredited ISO Certification Services",
+      description: "Empowering organizations to achieve international standards through comprehensive quality, environmental, and safety management system certifications",
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80",
-      ctaText: "Get Free Quote",
+      ctaText: "Request Free Consultation",
       ctaLink: "/contact"
     },
     {
       id: 2,
-      title: "EGAC Accredited Organization",
-      subtitle: "Internationally Recognized Certifications",
-      description: "Delivering excellence in quality management, environmental, and safety certifications",
+      title: "Internationally Recognized Certifications",
+      subtitle: "Excellence in Quality Management Systems",
+      description: "Delivering world-class certification services for ISO 9001, ISO 14001, ISO 45001, and ISO 22000 standards across multiple industries",
       image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80",
-      ctaText: "View Our Services",
+      ctaText: "Explore Our Services",
       ctaLink: "/services"
     },
     {
       id: 3,
-      title: "Trusted by Leading Companies",
-      subtitle: "500+ Certified Organizations",
-      description: "Join hundreds of satisfied clients who have achieved international standards",
+      title: "Trusted by Leading Organizations",
+      subtitle: "500+ Certified Companies Across Industries",
+      description: "Join hundreds of satisfied clients who have achieved international recognition and enhanced operational excellence with HORAS-Cert",
       image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1920&q=80",
-      ctaText: "See Our Clients",
+      ctaText: "View Success Stories",
       ctaLink: "/clients"
     }
   ];

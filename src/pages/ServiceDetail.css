@@ -2,120 +2,318 @@
   min-height: 100vh;
 }
 
+.page-header {
+  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-teal) 100%);
+  color: var(--white);
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: var(--white);
+  margin: 0;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 12px;
+  font-weight: 400;
+}
+
 .service-detail-content {
-  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 40px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+
+.service-main-content {
+  min-width: 0;
 }
 
 .service-intro,
 .service-benefits,
 .service-who,
-.service-requirements,
-.service-cta {
-  margin-bottom: 60px;
+.service-requirements {
+  margin-bottom: 50px;
 }
 
 .service-intro h2,
 .service-benefits h2,
 .service-who h2,
-.service-requirements h2,
-.service-cta h2 {
+.service-requirements h2 {
   font-size: 2rem;
   margin-bottom: 24px;
   color: var(--primary-navy);
+  font-weight: 700;
 }
 
-.service-intro p {
+.description-text {
   font-size: 1.1rem;
-  line-height: 1.8;
+  line-height: 1.9;
   color: var(--text-gray);
 }
 
-.service-benefits ul,
-.service-requirements ul {
+.benefits-list,
+.requirements-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.service-benefits li,
-.service-requirements li {
-  padding: 16px 0;
-  padding-left: 32px;
+.benefits-list li,
+.requirements-list li {
+  padding: 14px 0 14px 36px;
   position: relative;
   color: var(--text-gray);
   line-height: 1.8;
   font-size: 1.05rem;
+  border-bottom: 1px solid var(--medium-gray);
 }
 
-.service-benefits li::before,
-.service-requirements li::before {
-  content: '✓';
+.benefits-list li:last-child,
+.requirements-list li:last-child {
+  border-bottom: none;
+}
+
+.check-icon {
   position: absolute;
   left: 0;
-  color: var(--accent-orange);
-  font-weight: bold;
-  font-size: 1.2rem;
+  color: var(--primary-teal);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.bullet-icon {
+  position: absolute;
+  left: 0;
+  color: var(--primary-teal);
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .service-who p {
   font-size: 1.1rem;
   color: var(--text-gray);
   margin-bottom: 24px;
+  line-height: 1.8;
 }
 
 .industries-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
+  margin-top: 24px;
 }
 
 .industry-tag {
-  background-color: var(--light-gray);
+  background-color: var(--white);
   padding: 12px 20px;
-  border-radius: 4px;
+  border-radius: 8px;
   text-align: center;
   color: var(--primary-navy);
   font-weight: 500;
-  border: 2px solid var(--primary-blue);
+  border: 2px solid var(--primary-teal);
   transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
 .industry-tag:hover {
-  background-color: var(--primary-blue);
+  background-color: var(--primary-teal);
   color: var(--white);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 122, 138, 0.3);
 }
 
-.service-cta {
-  background-color: var(--light-gray);
-  padding: 48px;
+/* Sidebar Styles */
+.service-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.qr-code-card,
+.certificate-image-card,
+.service-cta-card {
+  background-color: var(--white);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.08);
+  border: 1px solid var(--medium-gray);
+}
+
+.qr-code-card h3,
+.certificate-image-card h3,
+.service-cta-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: var(--primary-navy);
+  font-weight: 700;
+}
+
+.qr-description {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.qr-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--white);
+  border: 2px solid var(--medium-gray);
   border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.qr-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qr-download-btn {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+}
+
+.qr-url-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 16px;
+  word-break: break-all;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--light-gray);
+  border-radius: 6px;
+}
+
+/* Certificate Image Card */
+.certificate-image-card {
+  background-color: var(--white);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.08);
+  border: 1px solid var(--medium-gray);
+}
+
+.certificate-image-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: var(--primary-navy);
+  font-weight: 700;
   text-align: center;
 }
 
-.service-cta h2 {
-  margin-bottom: 16px;
+.certificate-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.service-cta p {
-  font-size: 1.1rem;
+.certificate-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(30, 58, 95, 0.08);
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.certificate-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(30, 58, 95, 0.15);
+}
+
+.certificate-image-fallback {
+  background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
+  border: 2px dashed var(--primary-teal);
+  border-radius: 12px;
+  padding: 60px 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.cert-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.certificate-image-fallback p {
   color: var(--text-gray);
-  margin-bottom: 32px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* CTA Card */
+.service-cta-card p {
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin-bottom: 24px;
+  line-height: 1.7;
 }
 
 .cta-buttons {
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cta-buttons .btn {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .service-detail-content {
+    grid-template-columns: 1fr 320px;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .service-detail-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .service-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .service-cta-card {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 768px) {
   .service-intro h2,
   .service-benefits h2,
   .service-who h2,
-  .service-requirements h2,
-  .service-cta h2 {
+  .service-requirements h2 {
     font-size: 1.75rem;
   }
 
@@ -123,8 +321,49 @@
     grid-template-columns: 1fr;
   }
 
-  .service-cta {
-    padding: 32px 24px;
+  .service-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-code-card,
+  .certificate-image-card,
+  .service-cta-card {
+    padding: 24px;
+  }
+
+  .certificate-image {
+    max-width: 300px;
+  }
+
+  .certificate-image-fallback {
+    max-width: 300px;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
   }
 }
 
+@media (max-width: 480px) {
+  .qr-code-container {
+    padding: 15px;
+  }
+
+  .qr-code-container svg {
+    width: 150px !important;
+    height: 150px !important;
+  }
+
+  .certificate-image {
+    max-width: 250px;
+  }
+
+  .certificate-image-fallback {
+    max-width: 250px;
+    padding: 40px 15px;
+  }
+
+  .cert-icon {
+    font-size: 3rem;
+  }
+}

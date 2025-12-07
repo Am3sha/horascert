@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroSlider from '../components/Hero/HeroSlider';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
-import TeamMember from '../components/TeamMember/TeamMember';
 import ContactForm from '../components/ContactForm/ContactForm';
 import './Home.css';
 
@@ -11,69 +10,65 @@ const Home = () => {
     {
       id: 'iso-9001',
       name: 'ISO 9001:2015',
-      tagline: 'Quality Management',
-      icon: 'https://via.placeholder.com/100x100/2c5aa0/ffffff?text=ISO+9001'
+      tagline: 'Quality Management System',
+      icon: '/imges/ISO_9001-2015-1003x1024.jpg',
+      description: 'Quality Management System'
     },
     {
       id: 'iso-14001',
       name: 'ISO 14001:2015',
-      tagline: 'Environmental Management',
-      icon: 'https://via.placeholder.com/100x100/2c5aa0/ffffff?text=ISO+14001'
+      tagline: 'Environmental Management System',
+      icon: '/imges/iso14001-1024x1024.png',
+      description: 'Environmental Management System'
     },
     {
       id: 'iso-45001',
       name: 'ISO 45001:2018',
       tagline: 'Occupational Health & Safety',
-      icon: 'https://via.placeholder.com/100x100/2c5aa0/ffffff?text=ISO+45001'
+      icon: '/imges/iso-45001.png',
+      description: 'Occupational Health & Safety'
     },
     {
       id: 'iso-22000',
       name: 'ISO 22000:2018',
-      tagline: 'Food Safety Management',
-      icon: 'https://via.placeholder.com/100x100/2c5aa0/ffffff?text=ISO+22000'
+      tagline: 'Food Safety Management System',
+      icon: '/imges/ISO-22000-2018.jpg',
+      description: 'Food Safety Management System'
     },
     {
       id: 'haccp',
       name: 'HACCP',
       tagline: 'Food Safety System',
-      icon: 'https://via.placeholder.com/100x100/2c5aa0/ffffff?text=HACCP'
+      icon: '/imges/HACCP-Certification-Logo-for-News-webpage-1024x750.jpg',
+      description: 'Food Safety System'
     },
     {
       id: 'gmp',
       name: 'GMP',
       tagline: 'Good Manufacturing Practice',
-      icon: 'https://via.placeholder.com/100x100/2c5aa0/ffffff?text=GMP'
+      icon: '/imges/gmp-good-manufacturing-practice-certified-round-stamp-on-white-background-vector-e1731932642480.jpg',
+      description: 'Good Manufacturing Practice'
     }
   ];
 
   const teamMembers = [
     {
       id: 1,
-      name: 'Eng. Ahmed Mohamed',
-      position: 'Chief Executive Officer',
-      bio: 'Over 20 years of experience in quality management and certification services.',
-      photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80'
+      name: 'ENG Waleed',
+      role: 'CEO',
+      photo: '/imgeteam/1b75fcec-a040-42eb-8c3a-0362ckjgku84676d21711063906.jpg'
     },
     {
       id: 2,
-      name: 'Eng. Sara Ali',
-      position: 'Quality Manager',
-      bio: 'Expert in ISO standards implementation and quality assurance systems.',
-      photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80'
+      name: 'ENG Tariq',
+      role: 'Quality Manager',
+      photo: '/imgeteam/ad9c523d-8c30-4d81-92c0-8726c170e24b1711063310.png'
     },
     {
       id: 3,
-      name: 'Eng. Mohamed Hassan',
-      position: 'Technical Director',
-      bio: 'Specialized in environmental and safety management systems.',
-      photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80'
-    },
-    {
-      id: 4,
-      name: 'Eng. Fatima Ibrahim',
-      position: 'Lead Auditor',
-      bio: 'Certified lead auditor with extensive experience in food safety standards.',
-      photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80'
+      name: 'ENG Daleea',
+      role: 'Technical Director',
+      photo: '/imgeteam/untitled11111711062952.png'
     }
   ];
 
@@ -81,112 +76,163 @@ const Home = () => {
     <div className="home-page">
       <HeroSlider />
 
-      {/* About Section */}
-      <section className="about-section section">
+      {/* Company Description Section */}
+      <section className="company-description-section section">
         <div className="container">
-          <div className="about-content">
-            <div className="about-text">
-              <h2 className="section-title">About Our Company</h2>
-              <p>
-                HORAS-Cert  Organization for Quality Systems and Certifications is the accredited accreditation body of the National Accreditation Council for the following standards. </p>
+          <div className="company-description-content">
+            <div className="company-description-text">
+              <h2 className="section-title">About HORAS-Cert</h2>
+              <p className="lead-text">
+                <strong>HORAS-Cert – Organization for Quality Systems and Certifications</strong> is an accredited certification body recognized by the Egyptian Accreditation Council (EGAC) for the following international standards:
+              </p>
+              <ul className="standards-list">
+                <p>Quality Management System ISO 9001:2015</p>
 
-              <p>1- Quality Management System ISO 9001: 2015 </p>
+                <p>Environmental Management System ISO 14001:2015</p>
 
-              <p>2- Environmental Management System ISO 14001: 2015 </p>
+                <p>Occupational Health and Safety Management System ISO 45001:2018</p>
 
-              <p>3- Occupational Health and Safety Management System ISO 45001:2018 </p>
-
-              <p>4- Food Safety Management Systems ISO 22000: 2018</p>
-
-
+                <p>Food Safety Management Systems ISO 22000:2018</p>
+              </ul>
+              <p className="description-text">
+                As a trusted partner in quality excellence, we provide comprehensive certification services that enable organizations to demonstrate their commitment to international standards, enhance operational efficiency, and achieve sustainable growth. Our team of experienced auditors and quality professionals ensures a rigorous yet supportive certification process tailored to your organization's unique needs.
+              </p>
               <Link to="/about" className="btn btn-secondary">
-                Read More About Us
+                Learn More About Us
               </Link>
             </div>
-            <div className="about-image">
+            <div className="company-description-image">
               <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80"
-                alt="Professional team meeting"
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&q=75"
+                alt="HORAS-Cert professional certification team"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section id="vision" className="vision-section section">
+      {/* Vision & Mission Combined Section */}
+      <section className="vision-mission-section section">
         <div className="container">
-          <div className="vision-card-full">
-            <div className="card-icon-large">👁️</div>
-            <h2 className="section-title">Our Vision</h2>
-            <p className="vision-text">
-              To be the leading certification body in the region, recognized for excellence, integrity, and innovation
-              in quality management systems certification. We aim to help organizations achieve sustainable growth and
-              international recognition through world-class certification services.
-            </p>
+          <div className="vision-mission-grid">
+            <div className="vision-card">
+              <div className="card-icon"></div>
+              <h2>Our Vision</h2>
+              <p>
+                To be the leading certification body in the region, recognized for excellence, integrity, and innovation in quality management systems certification. We aim to help organizations achieve sustainable growth and international recognition through world-class certification services.
+              </p>
+            </div>
+            <div className="mission-card">
+              <div className="card-icon"></div>
+              <h2>Our Mission</h2>
+              <p>
+                To provide reliable, impartial, and value-added certification services that enable organizations to demonstrate their commitment to quality, environmental responsibility, and occupational health and safety. We strive to build long-term partnerships with our clients based on trust and mutual success.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section id="mission" className="mission-section section" style={{ backgroundColor: 'var(--light-gray)' }}>
+      {/* Accreditation Section */}
+      <section className="accreditation-section section">
         <div className="container">
-          <div className="mission-card-full">
-            <div className="card-icon-large">🎯</div>
-            <h2 className="section-title">Our Mission</h2>
-            <p className="mission-text">
-              To provide reliable, impartial, and value-added certification services that enable organizations to
-              demonstrate their commitment to quality, environmental responsibility, and occupational health and safety.
-              We strive to build long-term partnerships with our clients based on trust and mutual success.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Standards Section */}
-      <section className="standards-section section">
-        <div className="container">
-          <h2 className="section-title">Horas Accredited Standards and Scopes from EGAC</h2>
+          <h2 className="section-title">Accreditations and Registrations</h2>
           <p className="section-subtitle">
-            Comprehensive ISO certification services to help your organization achieve international standards
+            HORAS-Cert is accredited by leading national and international accreditation bodies, ensuring the highest standards of certification services
+          </p>
+          <div className="accreditation-grid">
+            <div className="accreditation-card">
+              <div className="accreditation-image-container">
+                <img
+                  src="/imges/logo-capq.png"
+                  alt="EGAC Accredited"
+                  className="accreditation-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="accreditation-placeholder" style={{ display: 'none' }}>
+                  <span>EGAC</span>
+                </div>
+              </div>
+              <h3>EGAC Accredited</h3>
+              <p>Accredited by the Egyptian Accreditation Council (EGAC) for ISO certification services</p>
+            </div>
+            <div className="accreditation-card">
+              <div className="accreditation-image-container">
+                <img
+                  src="/imges/International_Accreditation_Forum_Logo.svg.png"
+                  alt="IAF Member"
+                  className="accreditation-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="accreditation-placeholder" style={{ display: 'none' }}>
+                  <span>IAF</span>
+                </div>
+              </div>
+              <h3>IAF Member</h3>
+              <p>Internationally recognized through IAF (International Accreditation Forum) membership</p>
+            </div>
+            <div className="accreditation-card">
+              <div className="accreditation-image-container">
+                <img
+                  src="/imges/download.png"
+                  alt="Accreditation"
+                  className="accreditation-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="accreditation-placeholder" style={{ display: 'none' }}>
+                  <span>Accreditation</span>
+                </div>
+              </div>
+              <h3>Accreditation</h3>
+              <p>Recognized accreditation for quality certification services</p>
+            </div>
+            <div className="accreditation-card">
+              <div className="accreditation-image-container">
+                <img
+                  src="/imges/img.png"
+                  alt="Certification Body"
+                  className="accreditation-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="accreditation-placeholder" style={{ display: 'none' }}>
+                  <span>Certification</span>
+                </div>
+              </div>
+              <h3>Certification Body</h3>
+              <p>Authorized certification body for international standards</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="services-section section">
+        <div className="container">
+          <h2 className="section-title">Our Accredited Standards</h2>
+          <p className="section-subtitle">
+            Comprehensive ISO certification services to help your organization achieve international standards and enhance operational excellence
           </p>
           <div className="services-grid">
             {services.map(service => (
               <ServiceCard key={service.id} service={service} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Geographical Coverage Section */}
-      <section id="geographical-coverage" className="geographical-section section" style={{ backgroundColor: 'var(--light-gray)' }}>
-        <div className="container">
-          <h2 className="section-title">Geographical Areas in which the CB Operates</h2>
-          <div className="geographical-content">
-            <div className="current-operating">
-              <h3>Currently Operating in 3 Countries:</h3>
-              <div className="countries-badges">
-                <span className="country-badge-primary">🇪🇬 Egypt</span>
-                <span className="country-badge-primary">🇸🇦 Saudi Arabia</span>
-                <span className="country-badge-primary">🇦🇪 United Arab Emirates</span>
-              </div>
-            </div>
-            <div className="expanding-soon">
-              <h3>Expanding Soon to:</h3>
-              <div className="countries-badges-expanding">
-                <span className="country-badge-secondary">Sudan</span>
-                <span className="country-badge-secondary">Jordan</span>
-                <span className="country-badge-secondary">Libya</span>
-                <span className="country-badge-secondary">Iraq</span>
-                <span className="country-badge-secondary">Kuwait</span>
-                <span className="country-badge-secondary">Oman</span>
-                <span className="country-badge-secondary">Tunisia</span>
-                <span className="country-badge-secondary">Algeria</span>
-                <span className="country-badge-secondary">Morocco</span>
-                <span className="country-badge-secondary">Kenya</span>
-                <span className="country-badge-secondary">Tanzania</span>
-              </div>
-            </div>
+          <div className="services-cta">
+            <Link to="/services" className="btn btn-primary">
+              View All Services
+            </Link>
           </div>
         </div>
       </section>
@@ -194,61 +240,79 @@ const Home = () => {
       {/* Certification Process Section */}
       <section id="certification-process" className="certification-process-section section">
         <div className="container">
-          <h2 className="section-title">Certification Process</h2>
+          <h2 className="section-title">Our Certification Process</h2>
           <p className="section-subtitle">
-            A clear, structured approach to help you achieve certification efficiently and effectively
+            A clear, structured approach designed to help you achieve certification efficiently and effectively
           </p>
           <div className="process-steps">
             <div className="process-step">
               <div className="step-number">1</div>
               <h3>Application</h3>
-              <p>Submit your application form with required documents</p>
+              <p>Submit your application form with required documentation for initial review</p>
             </div>
             <div className="process-step">
               <div className="step-number">2</div>
               <h3>Document Review</h3>
-              <p>Our experts review your documentation and management system</p>
+              <p>Our expert team reviews your documentation and management system</p>
             </div>
             <div className="process-step">
               <div className="step-number">3</div>
               <h3>On-site Audit</h3>
-              <p>Comprehensive audit of your facilities and processes</p>
+              <p>Comprehensive audit of your facilities, processes, and systems</p>
             </div>
             <div className="process-step">
               <div className="step-number">4</div>
               <h3>Certification Decision</h3>
-              <p>Review and approval by certification committee</p>
+              <p>Review and approval by our independent certification committee</p>
             </div>
             <div className="process-step">
               <div className="step-number">5</div>
               <h3>Surveillance Audits</h3>
-              <p>Regular audits to maintain certification compliance</p>
+              <p>Regular audits to ensure ongoing compliance and continuous improvement</p>
             </div>
+          </div>
+          <div className="process-cta">
+            <Link to="/application" className="btn btn-secondary">
+              Start Your Application
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="team-section section" style={{ backgroundColor: 'var(--light-gray)' }}>
+      {/* Team Members Section */}
+      <section className="team-members-section section">
         <div className="container">
-          <h2 className="section-title">Meet Our Experts</h2>
+          <h2 className="section-title">Our Team Members</h2>
           <p className="section-subtitle">
-            Our experienced team of auditors and quality professionals dedicated to your success
+            Our Creative Team
           </p>
-          <div className="team-grid">
+          <div className="team-members-grid">
             {teamMembers.map(member => (
-              <TeamMember key={member.id} member={member} />
+              <div key={member.id} className="team-member-card">
+                <div className="team-member-image-wrapper">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="team-member-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+                <h3 className="team-member-name">{member.name}</h3>
+                <p className="team-member-role">{member.role}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="contact-section">
+      {/* Contact CTA Section */}
+      <section className="contact-cta-section section">
         <div className="container">
-          <h2 className="section-title">Contact Us Today and Get a Free Quote</h2>
+          <h2 className="section-title">Get Started Today</h2>
           <p className="section-subtitle">
-            Fill out the form below and our team will get back to you within 24 hours
+            Contact us for a free consultation and quote. Our team is ready to help you achieve certification excellence.
           </p>
           <ContactForm />
         </div>
@@ -258,4 +322,3 @@ const Home = () => {
 };
 
 export default Home;
-

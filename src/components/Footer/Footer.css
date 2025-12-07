@@ -2,147 +2,201 @@
   background-color: var(--primary-navy);
   color: var(--white);
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-accreditation-section {
+.footer-main-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
   padding: 60px 0 40px;
-  text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-accreditation-section h3 {
-  color: var(--white);
+.footer-column h3 {
+  color: var(--accent-gold);
+  font-size: 1.25rem;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+/* Company Info Section */
+.footer-company {
+  max-width: 100%;
+}
+
+.footer-logo-section {
+  margin-bottom: 20px;
+}
+
+.footer-logo {
   font-size: 1.75rem;
-  margin-bottom: 16px;
-  font-weight: 600;
+  color: var(--white);
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  color: var(--accent-gold-light);
+  margin: 0 0 20px 0;
+  font-weight: 500;
 }
 
 .footer-description {
   color: rgba(255, 255, 255, 0.9);
-  font-size: 1.1rem;
   line-height: 1.8;
-  margin-bottom: 40px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.accreditation-logos-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.accreditation-logo-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-placeholder {
-  width: 120px;
-  height: 120px;
-  background-color: var(--white);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-navy);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.logo-placeholder:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.accreditation-logo-item span {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
   font-size: 0.95rem;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 48px;
-  padding: 60px 0;
-}
-
-.footer-column h3 {
-  color: var(--white);
-  font-size: 1.25rem;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.footer-column p {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.8;
   margin-bottom: 24px;
 }
 
-.footer-column ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-column ul li {
-  margin-bottom: 12px;
-}
-
-.footer-column ul li a {
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-}
-
-.footer-column ul li a:hover {
-  color: var(--accent-orange);
-  padding-left: 8px;
-}
-
-.accreditation-logos {
+/* Accreditation Badges */
+.accreditation-badges {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .accreditation-badge {
+  display: inline-block;
+  padding: 6px 12px;
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.gallery-item {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 4px;
-  text-align: center;
-  font-size: 0.875rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  border: 1px solid var(--accent-gold);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.gallery-item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.accreditation-badge:hover {
+  background-color: var(--accent-gold);
+  color: var(--primary-navy);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(201, 169, 97, 0.3);
 }
 
+.footer-social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--accent-gold);
+  border-radius: 50%;
+  color: var(--accent-gold);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background-color: var(--accent-gold);
+  color: var(--primary-navy);
+  border-color: var(--accent-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+}
+
+/* Services List */
+.footer-services {
+  max-width: 100%;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-list li {
+  margin-bottom: 12px;
+}
+
+.services-list li a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.services-list li a:hover {
+  color: var(--accent-gold);
+  padding-left: 8px;
+}
+
+/* Quick Links */
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 12px;
+}
+
+.footer-links ul li a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links ul li a:hover {
+  color: var(--accent-gold);
+  padding-left: 8px;
+}
+
+/* Contact Information */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.contact-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.contact-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.contact-item a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--accent-gold);
+}
+
+/* Footer Bottom */
 .footer-bottom {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 24px 0;
@@ -151,86 +205,64 @@
 
 .footer-bottom-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-contact {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.footer-social {
-  display: flex;
-  gap: 16px;
-}
-
-.footer-social a {
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-}
-
-.footer-social a:hover {
-  color: var(--accent-orange);
 }
 
 .footer-copyright {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.8);
+  text-align: center;
 }
 
-@media (max-width: 1024px) {
-  .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.footer-copyright p {
+  margin: 0;
+}
 
-  .accreditation-logos-grid {
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-main-content {
     grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .footer-content {
+  .footer-main-content {
     grid-template-columns: 1fr;
     gap: 32px;
-  }
-
-  .footer-accreditation-section {
     padding: 40px 0 30px;
   }
 
-  .footer-accreditation-section h3 {
+  .footer-social-icons {
+    justify-content: center;
+  }
+
+  .accreditation-badges {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-main-content {
+    gap: 24px;
+    padding: 32px 0 24px;
+  }
+
+  .footer-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo {
     font-size: 1.5rem;
   }
 
   .footer-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
-  .accreditation-logos-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-
-  .logo-placeholder {
-    width: 100px;
-    height: 100px;
-    font-size: 1.25rem;
-  }
-
-  .footer-bottom-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-contact {
-    flex-direction: column;
-    gap: 12px;
+  .contact-text {
+    font-size: 0.9rem;
   }
 }
-

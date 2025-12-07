@@ -3,13 +3,13 @@
   background-color: var(--white);
   padding: 32px 24px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(30, 58, 95, 0.1);
   transition: all 0.3s ease;
 }
 
 .team-member-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px rgba(30, 58, 95, 0.15);
 }
 
 .member-photo {
@@ -18,8 +18,8 @@
   margin: 0 auto 24px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid var(--primary-blue);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 4px solid var(--primary-teal);
+  box-shadow: 0 4px 12px rgba(45, 122, 138, 0.3);
 }
 
 .member-photo img {
@@ -35,7 +35,7 @@
 }
 
 .member-position {
-  color: var(--accent-orange);
+  color: var(--primary-teal);
   font-weight: 600;
   margin-bottom: 16px;
   font-size: 1rem;

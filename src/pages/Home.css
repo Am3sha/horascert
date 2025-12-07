@@ -3,163 +3,267 @@
   min-height: 100vh;
 }
 
-.about-section {
-  background-color: var(--white);
+/* Company Description Section */
+.company-description-section {
+  background-color: var(--black);
+  padding: 80px 0;
 }
 
-.about-content {
+.company-description-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
 }
 
-.about-text h2 {
+.company-description-text h2 {
   text-align: left;
   margin-bottom: 24px;
+  color: var(--primary-navy);
+  font-size: 2.5rem;
 }
 
-.about-text p {
+.lead-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-gray);
   margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.lead-text strong {
+  color: var(--primary-navy);
+  font-weight: 700;
+}
+
+.standards-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 28px;
+}
+
+.standards-list p {
+  padding: 10px 0 10px 28px;
+  position: relative;
+  color: var(--text-gray);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.standards-list p::before {
+  position: absolute;
+  left: 0;
+  color: var(--primary-teal);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.description-text {
+  margin: 28px 0;
   color: var(--text-gray);
   line-height: 1.8;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
-.about-image {
-  border-radius: 8px;
+.company-description-image {
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.12);
+  transition: transform 0.3s ease;
+  max-width: 100%;
 }
 
-.about-image img {
+.company-description-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(30, 58, 95, 0.18);
+}
+
+.company-description-image img {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
 }
 
-/* Vision Section */
-.vision-section {
-  background-color: var(--white);
-}
-
-.vision-card-full {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 60px 40px;
-  background-color: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-.card-icon-large {
-  font-size: 5rem;
-  margin-bottom: 32px;
-  display: inline-block;
-}
-
-.vision-text,
-.mission-text {
-  font-size: 1.15rem;
-  line-height: 1.9;
-  color: var(--text-gray);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* Mission Section */
-.mission-section {
-  background-color: var(--light-gray);
-}
-
-.mission-card-full {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 60px 40px;
-  background-color: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* Geographical Coverage Section */
-.geographical-section {
-  background-color: var(--light-gray);
-}
-
-.geographical-content {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.current-operating,
-.expanding-soon {
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-.current-operating h3,
-.expanding-soon h3 {
-  font-size: 1.5rem;
-  color: var(--primary-navy);
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.countries-badges {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-
-.country-badge-primary {
-  padding: 14px 28px;
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+/* Vision & Mission Section */
+.vision-mission-section {
+  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-teal) 100%);
   color: var(--white);
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 1.05rem;
+  padding: 80px 0;
+}
+
+.vision-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vision-card,
+.mission-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 40px 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.vision-card:hover,
+.mission-card:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.vision-card .card-icon,
+.mission-card .card-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.vision-card h2,
+.mission-card h2 {
+  color: var(--accent-gold);
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.vision-card p,
+.mission-card p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Accreditation Section */
+.accreditation-section {
+  background-color: #f9f9f9;
+  padding: 80px 0;
+}
+
+.section-title {
+  color: #222;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.accreditation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 50px;
+}
+
+.accreditation-card {
+  background-color: #ffffff;
+  padding: 32px 24px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.accreditation-card:hover {
+  transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
-.country-badge-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.countries-badges-expanding {
+.accreditation-image-container {
+  width: 100%;
+  max-width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-
-.country-badge-secondary {
-  padding: 12px 24px;
-  background: var(--white);
-  border: 2px solid var(--primary-blue);
-  color: var(--primary-blue);
-  border-radius: 25px;
-  font-weight: 500;
-  font-size: 0.95rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
   transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.country-badge-secondary:hover {
-  background: var(--primary-blue);
-  color: var(--white);
+.accreditation-card:hover .accreditation-image-container {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.accreditation-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.accreditation-card:hover .accreditation-image {
+  transform: scale(1.05);
+}
+
+.accreditation-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-navy) 100%);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.accreditation-card h3 {
+  color: #000000;
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.accreditation-card p {
+  color: #333;
+  line-height: 1.7;
+  font-size: 1rem;
+  flex-grow: 1;
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Services Section */
+.services-section {
+  background-color: var(--white);
+  padding: 80px 0;
+}
+
+.services-cta {
+  text-align: center;
+  margin-top: 50px;
 }
 
 /* Certification Process Section */
 .certification-process-section {
-  background-color: var(--white);
+  background-color: var(--light-gray);
+  padding: 80px 0;
 }
 
 .process-steps {
@@ -167,7 +271,7 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 24px;
   margin-top: 50px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -175,22 +279,22 @@
 .process-step {
   text-align: center;
   padding: 32px 20px;
-  background-color: var(--light-gray);
+  background-color: var(--white);
   border-radius: 12px;
   transition: all 0.3s ease;
   position: relative;
+  box-shadow: 0 2px 16px rgba(30, 58, 95, 0.08);
 }
 
 .process-step:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  background-color: var(--white);
+  transform: translateY(-6px);
+  box-shadow: 0 6px 24px rgba(30, 58, 95, 0.15);
 }
 
 .step-number {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-navy) 100%);
   color: var(--white);
   border-radius: 50%;
   display: flex;
@@ -199,14 +303,14 @@
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0 auto 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(45, 122, 138, 0.3);
 }
 
 .process-step h3 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--primary-navy);
   margin-bottom: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .process-step p {
@@ -216,23 +320,107 @@
   margin: 0;
 }
 
-.services-grid {
+.process-cta {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Team Members Section */
+.team-members-section {
+  background-color: #f9f9f9;
+  padding: 80px 0;
+}
+
+.team-members-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-  margin-top: 40px;
+.team-member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.contact-section {
-  padding: 80px 0;
+.team-member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.team-member-image-wrapper {
+  width: 100%;
+  max-width: 180px;
+  height: 180px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.team-member-card:hover .team-member-image-wrapper {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.team-member-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.team-member-name {
+  color: #222;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.team-member-role {
+  color: #333;
+  font-size: 0.95rem;
+  margin: 0;
+  text-align: center;
+}
+
+.team-members-section .section-subtitle {
+  color: #555;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Contact CTA Section */
+.contact-cta-section {
   background-color: var(--white);
+  padding: 80px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 1024px) {
@@ -240,46 +428,68 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .vision-mission-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
-  .process-steps {
-    grid-template-columns: repeat(3, 1fr);
+  .accreditation-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .team-members-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .about-content {
+  .company-description-content {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  .vision-card-full,
-  .mission-card-full {
-    padding: 40px 24px;
+  .accreditation-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .card-icon-large {
-    font-size: 4rem;
-    margin-bottom: 24px;
+  .accreditation-card {
+    padding: 24px 20px;
   }
 
-  .vision-text,
-  .mission-text {
-    font-size: 1.05rem;
+  .accreditation-image-container {
+    max-width: 100px;
+    height: 100px;
+    padding: 12px;
+  }
+
+  .company-description-text h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .company-description-image {
+    max-width: 100%;
+  }
+
+  .company-description-image img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .vision-card,
+  .mission-card {
+    padding: 32px 24px;
+  }
+
+  .vision-card h2,
+  .mission-card h2 {
+    font-size: 1.5rem;
   }
 
   .services-grid {
     grid-template-columns: 1fr;
-  }
-
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-text h2 {
-    text-align: center;
   }
 
   .process-steps {
@@ -287,18 +497,35 @@
     gap: 20px;
   }
 
-  .countries-badges {
-    flex-direction: column;
-    align-items: center;
+  .accreditation-grid {
+    grid-template-columns: 1fr;
   }
 
-  .country-badge-primary {
-    width: 100%;
-    max-width: 300px;
+  .team-members-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .countries-badges-expanding {
-    gap: 12px;
+  .team-member-card {
+    padding: 24px 20px;
+  }
+
+  .team-member-image-wrapper {
+    max-width: 150px;
+    height: 150px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .company-description-section,
+  .vision-mission-section,
+  .accreditation-section,
+  .services-section,
+  .certification-process-section,
+  .team-members-section,
+  .contact-cta-section {
+    padding: 60px 0;
   }
 }
-

@@ -16,7 +16,7 @@
 
 /* Page Header */
 .page-header {
-  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 100%);
+  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-teal) 100%);
   color: var(--white);
   padding: 80px 0 60px;
   text-align: center;
@@ -38,7 +38,7 @@
 
 .about-section h3 {
   font-size: 1.5rem;
-  color: var(--primary-blue);
+  color: var(--primary-teal);
   margin: 40px 0 20px;
   font-weight: 600;
   text-align: center;
@@ -145,12 +145,19 @@
 
 .country-badge {
   padding: 12px 24px;
-  background: var(--primary-blue);
-  color: var(--white);
+  background: var(--white);
+  color: var(--text-dark);
+  border: 2px solid var(--primary-teal);
   border-radius: 25px;
   font-weight: 500;
   font-size: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.country-badge:hover {
+  background: var(--primary-teal);
+  color: var(--white);
 }
 
 .expanding-countries {
@@ -164,8 +171,8 @@
 .expanding-countries span {
   padding: 10px 20px;
   background: var(--white);
-  border: 2px solid var(--primary-blue);
-  color: var(--primary-blue);
+  border: 2px solid var(--primary-teal);
+  color: var(--primary-teal);
   border-radius: 20px;
   font-size: 0.95rem;
   font-weight: 500;
@@ -173,69 +180,127 @@
 }
 
 .expanding-countries span:hover {
-  background: var(--primary-blue);
+  background: var(--primary-teal);
   color: var(--white);
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.accreditation-section-about {
+  background-color: #f9f9f9;
+  padding: 80px 0;
 }
 
 .accreditations-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 32px;
   margin-top: 40px;
 }
 
 .accreditation-card {
-  background-color: var(--white);
-  padding: 40px;
-  border-radius: 8px;
+  background-color: #ffffff;
+  padding: 32px 24px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .accreditation-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
-.accreditation-icon {
-  font-size: 4rem;
-  margin-bottom: 24px;
+.accreditation-image-container {
+  width: 100%;
+  max-width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.accreditation-card:hover .accreditation-image-container {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.accreditation-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.accreditation-card:hover .accreditation-image {
+  transform: scale(1.05);
+}
+
+.accreditation-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-navy) 100%);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px;
 }
 
 .accreditation-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-  color: var(--primary-navy);
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  color: #000000;
+  font-weight: 700;
+  text-align: center;
 }
 
 .accreditation-card p {
-  color: var(--text-gray);
-  line-height: 1.8;
-}
-
-.policies-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-
-.policy-card {
-  background-color: var(--light-gray);
-  padding: 32px;
-  border-radius: 8px;
-  border-left: 4px solid var(--primary-blue);
-}
-
-.policy-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-  color: var(--primary-navy);
-}
-
-.policy-card p {
-  color: var(--text-gray);
-  line-height: 1.8;
+  color: #333;
+  line-height: 1.7;
+  font-size: 1rem;
+  flex-grow: 1;
+  text-align: center;
+  font-weight: 400;
 }
 
 .why-choose-grid {
@@ -276,17 +341,30 @@
 }
 
 @media (max-width: 1024px) {
-  .accreditations-grid,
-  .policies-grid,
+  .accreditations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
   .why-choose-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .accreditations-grid,
-  .policies-grid {
+  .accreditations-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .accreditation-card {
+    padding: 24px 20px;
+  }
+
+  .accreditation-image-container {
+    max-width: 100px;
+    height: 100px;
+    padding: 12px;
   }
 
   .company-logo {

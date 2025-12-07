@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sanitizeInput, validateCertificateNumber } from '../utils/security';
 import './CertificateValidation.css';
 
 const CertificateValidation = () => {
@@ -9,7 +10,10 @@ const CertificateValidation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!certificateNumber.trim()) {
+    // Sanitize certificate number
+    const sanitizedCertNumber = sanitizeInput(certificateNumber);
+    
+    if (!sanitizedCertNumber.trim()) {
       setValidationResult({
         valid: false,
         message: 'Please enter a certificate number'
@@ -17,16 +21,27 @@ const CertificateValidation = () => {
       return;
     }
 
+    // Validate certificate number format
+    if (!validateCertificateNumber(sanitizedCertNumber)) {
+      setValidationResult({
+        valid: false,
+        message: 'Invalid certificate number format. Please check and try again.'
+      });
+      return;
+    }
+
     setIsValidating(true);
     setValidationResult(null);
 
-    // Simulate API call
+    // Simulate API call (in production, send sanitizedCertNumber to backend)
+    // TODO: Add CSRF token and rate limiting in production
     setTimeout(() => {
       setIsValidating(false);
       // Mock validation - in real app, this would call your backend API
+      // Always sanitize output to prevent XSS
       const mockResult = {
-        valid: certificateNumber.length >= 8,
-        certificateNumber: certificateNumber,
+        valid: sanitizedCertNumber.length >= 8,
+        certificateNumber: sanitizedCertNumber, // Already sanitized
         companyName: 'Sample Company Name',
         standard: 'ISO 9001:2015',
         issueDate: '2023-01-15',
@@ -62,7 +77,11 @@ const CertificateValidation = () => {
                     type="text"
                     id="certificateNumber"
                     value={certificateNumber}
-                    onChange={(e) => setCertificateNumber(e.target.value)}
+                    onChange={(e) => {
+                      // Sanitize input on change
+                      const sanitized = sanitizeInput(e.target.value);
+                      setCertificateNumber(sanitized);
+                    }}
                     placeholder="Enter certificate number (e.g., QC-2023-001234)"
                     className="certificate-input"
                   />
