@@ -80,19 +80,19 @@ const AddCertificateForm = ({ onSuccess }) => {
             if (data && data.success) {
                 const certificateUrl = `${window.location.origin}/certificate/${data.data.certificateId}`;
 
-                // Generate and download QR Code locally (no server call needed)
-                try {
-                    const filename = `QR_${data.data.certificateNumber}.png`;
-                    await generateAndDownloadQR(certificateUrl, filename);
-                } catch (qrErr) {
-                    // Silently handle QR code download errors
-                    console.error('QR download error:', qrErr);
-                }
+                // ✅ Show success message IMMEDIATELY - data is safely in database!
+                setSuccessMessage(`Certificate created successfully! Certificate Number: ${data.data.certificateNumber}, Certificate ID: ${data.data.certificateId}.`);
+                setLoading(false); // ← Clear loading state instantly for instant UX feedback
 
-                // Show success message
-                setSuccessMessage(`Certificate created successfully! Certificate Number: ${data.data.certificateNumber}, Certificate ID: ${data.data.certificateId}. Redirecting...`);
+                // 🔄 Generate and download QR Code in background (non-blocking)
+                // This doesn't block the UX from showing success
+                generateAndDownloadQR(certificateUrl, `QR_${data.data.certificateNumber}.png`)
+                    .catch(qrErr => {
+                        // Silently handle QR code download errors - don't disrupt UX
+                        console.error('QR download error:', qrErr);
+                    });
 
-                // Wait 2 seconds then redirect
+                // Optional: Redirect after success is visible (brief pause for UX clarity)
                 setTimeout(() => {
                     window.open(certificateUrl, '_blank');
 
@@ -114,15 +114,15 @@ const AddCertificateForm = ({ onSuccess }) => {
                         status: 'Active'
                     });
                     setSuccessMessage('');
-                }, 2000);
+                }, 1000);
 
             } else {
                 setError((data && (data.error || data.message)) || 'Failed to create certificate');
+                setLoading(false);
             }
 
         } catch (err) {
             setError(`Network error: ${err.message}`);
-        } finally {
             setLoading(false);
         }
     };

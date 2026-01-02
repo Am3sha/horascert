@@ -154,13 +154,11 @@ const ContactForm = () => {
         type: 'contact'
       };
 
-
-
       if (backendEnabled) {
-
         const responseData = await submitContactEmail(sanitizedData);
 
         if (responseData && responseData.success) {
+          // ✅ Show success immediately - message is in database!
           setSubmitStatus("success");
           setErrorMessage(null);
           setFormData({
@@ -170,6 +168,8 @@ const ContactForm = () => {
             subject: '',
             message: ''
           });
+          // ✅ Clear loading state instantly for instant UX feedback
+          setIsSubmitting(false);
         } else {
           const backendError =
             (responseData && (responseData.message || responseData.error)) ||
@@ -177,16 +177,17 @@ const ContactForm = () => {
             "Failed to send message. Please try again.";
           setErrorMessage(backendError);
           setSubmitStatus("error");
+          setIsSubmitting(false);
         }
       } else {
         // Fallback: show warning if backend is not enabled
         setErrorMessage(null);
         setSubmitStatus("warning");
+        setIsSubmitting(false);
       }
     } catch (error) {
       setErrorMessage(error.message || "An unexpected error occurred. Please try again.");
       setSubmitStatus("error");
-    } finally {
       setIsSubmitting(false);
     }
 
