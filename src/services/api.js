@@ -7,16 +7,22 @@ export const toApiUrl = (path) => `${API_BASE}${API_PREFIX}${path}`;
 const instance = axios.create({
     baseURL: API_BASE,
     headers: { 'Content-Type': 'application/json' },
-    withCredentials: true,
+    withCredentials: true, // CRITICAL: Send cookies in cross-domain requests
     timeout: 30000
 });
 
 // Add Authorization header from localStorage for all requests
+// This acts as fallback if cookies are not sent
 instance.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        // Only add Authorization header if not already present
+        if (!config.headers.Authorization) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
     }
+    // Ensure withCredentials is set on every request
+    config.withCredentials = true;
     return config;
 }, (error) => {
     return Promise.reject(error);
