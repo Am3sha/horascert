@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { adminLogout } from '../services/api';
 import ApplicationsTab from './admin/ApplicationsTab';
 import EmailsTab from './admin/EmailsTab';
@@ -7,7 +6,6 @@ import CertificatesTab from './admin/CertificatesTab';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('certificates');
     const [error, setError] = useState('');
 
