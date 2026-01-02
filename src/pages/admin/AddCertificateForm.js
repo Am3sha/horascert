@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { createCertificate, fetchCertificateQrBlob } from '../../services/api';
+import { createCertificate } from '../../services/api';
+import QRCode from 'qrcode';
 import './AddCertificateForm.css';
 
 const AddCertificateForm = ({ onSuccess }) => {
@@ -52,12 +53,19 @@ const AddCertificateForm = ({ onSuccess }) => {
         document.body.removeChild(link);
     };
 
-    const downloadQRCodeFromBlob = (blob, filename) => {
-        const url = URL.createObjectURL(blob);
+    const generateAndDownloadQR = async (certificateUrl, filename) => {
         try {
-            downloadQRCode(url, filename);
-        } finally {
-            URL.revokeObjectURL(url);
+            const dataUrl = await QRCode.toDataURL(certificateUrl, {
+                width: 200,
+                margin: 1,
+                color: {
+                    dark: '#000000',
+                    light: '#FFFFFF'
+                }
+            });
+            downloadQRCode(dataUrl, filename);
+        } catch (err) {
+            console.error('Failed to generate QR code:', err);
         }
     };
 
@@ -72,19 +80,13 @@ const AddCertificateForm = ({ onSuccess }) => {
             if (data && data.success) {
                 const certificateUrl = `${window.location.origin}/certificate/${data.data.certificateId}`;
 
-                // Download QR Code (new: backend-generated PNG). Backward compatible with stored qrCodeUrl.
+                // Generate and download QR Code locally (no server call needed)
                 try {
                     const filename = `QR_${data.data.certificateNumber}.png`;
-                    if (data.data.qrCodeUrl) {
-                        downloadQRCode(data.data.qrCodeUrl, filename);
-                    } else if (data.data.certificateId) {
-                        const blob = await fetchCertificateQrBlob(data.data.certificateId);
-                        if (blob) {
-                            downloadQRCodeFromBlob(blob, filename);
-                        }
-                    }
+                    await generateAndDownloadQR(certificateUrl, filename);
                 } catch (qrErr) {
                     // Silently handle QR code download errors
+                    console.error('QR download error:', qrErr);
                 }
 
                 // Show success message

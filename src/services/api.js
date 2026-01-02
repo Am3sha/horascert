@@ -234,6 +234,6 @@ export default {
     adminLogout,
     verifyAuth,
     submitApplication,
-    submitContactEmail,
-    fetchCertificateQrBlob
+    submitContactEmail
+    // fetchCertificateQrBlob - DEPRECATED: QR codes now generated in Frontend using qrcode.react and qrcode libraries
 };

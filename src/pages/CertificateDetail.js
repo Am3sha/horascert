@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { QRCodeSVG } from 'qrcode.react';
 import api from '../services/api';
 
 const API_BASE = process.env.REACT_APP_API_URL || '';
@@ -31,9 +32,8 @@ export default function CertificateDetail() {
     if (loading) return <div>Loading...</div>;
     if (!cert) return <div>Certificate not found</div>;
 
-    const qrSrc =
-        (cert.qrCodeUrl ? cert.qrCodeUrl : '') ||
-        `${API_BASE}${API_PREFIX}/certificates/${encodeURIComponent(cert.certificateId)}/qr`;
+    // Generate certificate URL dynamically using current domain
+    const certificateUrl = `${window.location.origin}/certificate/${cert.certificateId}`;
 
     const placeholderLogo =
         'data:image/svg+xml;utf8,' +
@@ -73,7 +73,12 @@ export default function CertificateDetail() {
                 {companyAddress ? <p><strong>Address:</strong> {companyAddress}</p> : null}
 
                 <div style={{ marginTop: 18 }}>
-                    <img src={qrSrc} alt="qr" style={{ width: 160, height: 160 }} />
+                    <QRCodeSVG
+                        value={certificateUrl}
+                        size={160}
+                        level="H"
+                        includeMargin={true}
+                    />
                 </div>
             </div>
         </div>
