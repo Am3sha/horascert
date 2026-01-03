@@ -27,11 +27,6 @@ const Navbar = () => {
     setIsAboutDropdownOpen(false);
   };
 
-  const toggleMobileDropdown = (e) => {
-    e.preventDefault();
-    setIsAboutDropdownOpen(!isAboutDropdownOpen);
-  };
-
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About Us', hasDropdown: true },
@@ -86,8 +81,10 @@ const Navbar = () => {
                       <Link
                         to={item.path}
                         className={location.pathname === item.path ? 'active' : ''}
-                        onClick={toggleMobileDropdown}
-                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          setIsAboutDropdownOpen(false);
+                          setIsMobileMenuOpen(false);
+                        }}
                       >
                         {item.label}
                       </Link>

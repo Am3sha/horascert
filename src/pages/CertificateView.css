@@ -39,21 +39,7 @@
   position: relative;
 }
 
-.certificate-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 460px;
-  max-width: 150%;
-  opacity: 0.6;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
 .certificate-content {
-  position: relative;
-  z-index: 1;
   padding: 40px;
 }
 

@@ -26,7 +26,6 @@ const AddCertificateForm = ({ onSuccess }) => {
         { value: 'ISO 9001:2015', desc: 'Quality Management System' },
         { value: 'ISO 14001:2015', desc: 'Environmental Management System' },
         { value: 'ISO 45001:2018', desc: 'Occupational Health and Safety' },
-        { value: 'ISO 27001:2013', desc: 'Information Security Management' },
         { value: 'ISO 22000:2018', desc: 'Food Safety Management System' }
     ];
 
@@ -74,18 +73,55 @@ const AddCertificateForm = ({ onSuccess }) => {
         setLoading(true);
         setError('');
 
+        // Basic validation
+        if (!formData.certificateNumber.trim()) {
+            setError('Certificate Number is required');
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.companyName.trim()) {
+            setError('Company Name is required');
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.companyAddress.trim()) {
+            setError('Company Address is required');
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.scope.trim()) {
+            setError('Scope of Registration is required');
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.issueDate) {
+            setError('Issue Date is required');
+            setLoading(false);
+            return;
+        }
+
+        if (!formData.expiryDate) {
+            setError('Expiry Date is required');
+            setLoading(false);
+            return;
+        }
+
         try {
             const data = await createCertificate({ ...formData });
 
-            if (data && data.success) {
+            if (data && data.success && data.data && data.data.certificateId) {
                 const certificateUrl = `${window.location.origin}/certificate/${data.data.certificateId}`;
 
-                // ✅ Show success message IMMEDIATELY - data is safely in database!
+                // Show success message IMMEDIATELY - data is safely in database!
                 setSuccessMessage(`Certificate created successfully! Certificate Number: ${data.data.certificateNumber}, Certificate ID: ${data.data.certificateId}.`);
-                setLoading(false); // ← Clear loading state instantly for instant UX feedback
+                setLoading(false); // Clear loading state instantly for instant UX feedback
 
-                // 🔄 Generate and download QR Code in background (non-blocking)
-                // This doesn't block the UX from showing success
+                // Generate and download QR Code in background (non-blocking)
+                // This doesn't block UX from showing success
                 generateAndDownloadQR(certificateUrl, `QR_${data.data.certificateNumber}.png`)
                     .catch(qrErr => {
                         // Silently handle QR code download errors - don't disrupt UX
@@ -117,12 +153,13 @@ const AddCertificateForm = ({ onSuccess }) => {
                 }, 1000);
 
             } else {
-                setError((data && (data.error || data.message)) || 'Failed to create certificate');
+                setError((data && (data.error || data.message)) || 'Failed to create certificate - Invalid response from server');
                 setLoading(false);
             }
 
         } catch (err) {
-            setError(`Network error: ${err.message}`);
+            console.error('Certificate creation error:', err);
+            setError(`Network error: ${err.message || 'Failed to connect to server'}`);
             setLoading(false);
         }
     };

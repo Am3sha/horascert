@@ -66,11 +66,6 @@ const CertificateView = () => {
     return (
         <div className="certificate-view-page">
             <div className="certificate-container" aria-hidden="false">
-                <img
-                    src="/imgeteam/d934bfba-7a10-4687-b59b-49d19a8147d2.png"
-                    className="certificate-watermark"
-                    alt="HORAS-CERT Watermark"
-                />
                 <div className="certificate-content">
                     {/* Status Section */}
                     <div className="section status-section">

@@ -2,10 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1a365d" />
-    
+
+    <!-- ✅ Favicon (اللوجو في التبويب) -->
+    <!-- PNG icons for standard browsers -->
+    <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/imgeteam/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/imgeteam/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/imgeteam/favicon-16x16.png" />
+
+    <!-- SVG icon for modern browsers -->
+    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/imgeteam/favicon.svg" />
+
+    <!-- ICO fallback for older browsers -->
+    <link rel="shortcut icon" href="%PUBLIC_URL%/imgeteam/favicon.ico" />
+
+    <!-- Apple Touch Icon for iOS devices -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/imgeteam/apple-touch-icon.png" />
+
+    <!-- Web Manifest for PWA support -->
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+
     <!-- SEO Meta Tags -->
     <meta 
       name="description" 
@@ -16,37 +31,35 @@
       content="HORAS-CERT, ISO Certification, Quality Management, EGAC, IAF, ISO 9001, ISO 14001, ISO 45001, Egypt Certification Body" 
     />
     <meta name="author" content="HORAS-CERT" />
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://horascert.com/" />
-    <meta property="og:title" content="HORAS-CERT - ISO Certification Body" />
+    <meta property="og:title" content="Horascert" />
     <meta 
       property="og:description" 
-      content="Welcome To HORAS-Cert – Organization for Quality Systems and Certifications recognized by EGAC for international ISO standards."
+      content="Welcome To HORAS-Cert – Organization for Quality Systems and Certifications recognized by IAF && EGAC for international ISO standards."
     />
-    <meta property="og:image" content="%PUBLIC_URL%/imges/horas-high-resolution-logo.png" />
+    <meta property="og:image" content="%PUBLIC_URL%/imgeteam/web-app-manifest-512x512.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://horascert.com/" />
-    <meta property="twitter:title" content="HORAS-CERT - ISO Certification Body" />
+    <meta property="twitter:title" content="HORASCERT - ISO Certification Body" />
     <meta 
       property="twitter:description" 
       content="Welcome To HORAS-Cert – Organization for Quality Systems and Certifications recognized by EGAC." 
     />
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <title>HORAS-CERT - ISO Certification Body | EGAC Accredited</title>
+    <title>horascert</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
-

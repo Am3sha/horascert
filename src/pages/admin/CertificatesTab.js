@@ -32,7 +32,6 @@ export default function CertificatesTab({ onError, onSuccess }) {
             { value: 'ISO 9001:2015', label: 'ISO 9001:2015 – Quality Management System' },
             { value: 'ISO 14001:2015', label: 'ISO 14001:2015 – Environmental Management System' },
             { value: 'ISO 45001:2018', label: 'ISO 45001:2018 – Occupational Health and Safety' },
-            { value: 'ISO 27001:2013', label: 'ISO 27001:2013 – Information Security Management' },
             { value: 'ISO 22000:2018', label: 'ISO 22000:2018 – Food Safety Management System' }
         ],
         []

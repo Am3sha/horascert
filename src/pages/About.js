@@ -7,7 +7,7 @@ const About = () => {
       <div className="page-header">
         <div className="container">
           <img
-            src="/horas-logo.png"
+            src="/imgeteam/horas-high-resolution-logo.png"
             alt="HORAS Cert Logo"
             className="company-logo"
             onError={(e) => {
@@ -91,9 +91,9 @@ const About = () => {
           <div className="accreditations-grid">
             <div className="accreditation-card">
               <div className="accreditation-image-container">
-                <img 
-                  src="/imges/logo-capq.png" 
-                  alt="EGAC Accredited" 
+                <img
+                  src="/imges/logo-capq.png"
+                  alt="EGAC Accredited"
                   className="accreditation-image"
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -109,9 +109,9 @@ const About = () => {
             </div>
             <div className="accreditation-card">
               <div className="accreditation-image-container">
-                <img 
-                  src="/imges/International_Accreditation_Forum_Logo.svg.png" 
-                  alt="IAF Member" 
+                <img
+                  src="/imges/International_Accreditation_Forum_Logo.svg.png"
+                  alt="IAF Member"
                   className="accreditation-image"
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -127,9 +127,9 @@ const About = () => {
             </div>
             <div className="accreditation-card">
               <div className="accreditation-image-container">
-                <img 
-                  src="/imges/download.png" 
-                  alt="Accreditation" 
+                <img
+                  src="/imges/download.png"
+                  alt="Accreditation"
                   className="accreditation-image"
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -145,9 +145,9 @@ const About = () => {
             </div>
             <div className="accreditation-card">
               <div className="accreditation-image-container">
-                <img 
-                  src="/imges/img.png" 
-                  alt="Certification Body" 
+                <img
+                  src="/imges/img.png"
+                  alt="Certification Body"
                   className="accreditation-image"
                   onError={(e) => {
                     e.target.style.display = 'none';
