@@ -120,7 +120,7 @@ const ContactForm = () => {
         required: true,
         requiredMessage: 'Message is required',
         minLength: 10,
-        maxLength: 2000
+        maxLength: 300
       }
     };
 
@@ -272,15 +272,15 @@ const ContactForm = () => {
                 className={errors.message ? 'error' : ''}
                 rows="6"
                 placeholder="Tell us about your requirements..."
-                maxLength="2000"
+                maxLength="300"
               ></textarea>
               <div style={{
                 fontSize: '12px',
-                color: formData.message.length >= 1800 ? '#dc2626' : '#6b7280',
+                color: formData.message.length >= 250 ? '#dc2626' : '#6b7280',
                 marginTop: '4px',
                 textAlign: 'right'
               }}>
-                {formData.message.length} / 2000 characters
+                {formData.message.length} / 300 characters
               </div>
             </div>
             {errors.message && <span className="error-message">{errors.message}</span>}
