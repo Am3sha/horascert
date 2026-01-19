@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,12 +26,13 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     setIsAboutDropdownOpen(false);
+    setIsServicesDropdownOpen(false);
   };
 
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About Us', hasDropdown: true },
-    { path: '/services', label: 'Services' },
+    { path: '/services', label: 'Services', hasDropdown: true },
     { path: '/clients', label: 'Our Clients' },
     { path: '/application', label: 'Applications' },
     { path: '/contact', label: 'Contact' }
@@ -45,6 +47,10 @@ const Navbar = () => {
     { path: '/about/confidentiality-policy', label: 'Confidentiality Policy' }
   ];
 
+  const servicesDropdownItems = [
+    { path: '/certification-validation', label: 'Certification Validation' }
+  ];
+
   return (
     <>
       <TopBar />
@@ -52,9 +58,12 @@ const Navbar = () => {
         <div className="container">
           <div className="navbar-content">
             <Link to="/" className="logo">
+              <div className="logo-icon">
+                <span>H</span>
+              </div>
               <div className="logo-text">
-                <h2>HORAS-Cert</h2>
-                <p>Organization for Quality Systems and Certifications</p>
+                <h2>HORAS Cert</h2>
+                <p className="footer-tagline">Quality Systems & Certifications</p>
               </div>
             </Link>
 
@@ -73,8 +82,14 @@ const Navbar = () => {
                 <li
                   key={item.path}
                   className={item.hasDropdown ? 'nav-dropdown' : ''}
-                  onMouseEnter={() => item.hasDropdown && setIsAboutDropdownOpen(true)}
-                  onMouseLeave={() => item.hasDropdown && setIsAboutDropdownOpen(false)}
+                  onMouseEnter={() => {
+                    if (item.path === '/about') setIsAboutDropdownOpen(true);
+                    if (item.path === '/services') setIsServicesDropdownOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    if (item.path === '/about') setIsAboutDropdownOpen(false);
+                    if (item.path === '/services') setIsServicesDropdownOpen(false);
+                  }}
                 >
                   {item.hasDropdown ? (
                     <>
@@ -83,23 +98,40 @@ const Navbar = () => {
                         className={location.pathname === item.path ? 'active' : ''}
                         onClick={() => {
                           setIsAboutDropdownOpen(false);
+                          setIsServicesDropdownOpen(false);
                           setIsMobileMenuOpen(false);
                         }}
                       >
                         {item.label}
                       </Link>
-                      <div className={`about-dropdown ${isAboutDropdownOpen ? 'open' : ''}`}>
-                        {aboutDropdownItems.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.path}
-                            to={dropdownItem.path}
-                            className="dropdown-item"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {dropdownItem.label}
-                          </Link>
-                        ))}
-                      </div>
+                      {item.path === '/about' && (
+                        <div className={`about-dropdown ${isAboutDropdownOpen ? 'open' : ''}`}>
+                          {aboutDropdownItems.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.path}
+                              to={dropdownItem.path}
+                              className="dropdown-item"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              {dropdownItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                      {item.path === '/services' && (
+                        <div className={`services-dropdown ${isServicesDropdownOpen ? 'open' : ''}`}>
+                          {servicesDropdownItems.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.path}
+                              to={dropdownItem.path}
+                              className="dropdown-item"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              {dropdownItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </>
                   ) : (
                     <Link

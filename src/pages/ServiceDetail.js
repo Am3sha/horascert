@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { QRCodeSVG } from 'qrcode.react';
 import './ServiceDetail.css';
 
 const ServiceDetail = () => {
   const { serviceId } = useParams();
-  const [pageUrl, setPageUrl] = useState('');
 
   // Map service IDs to certificate images
   const certificateImages = {
@@ -16,12 +14,6 @@ const ServiceDetail = () => {
     'haccp': '/imges/HACCP-Certification-Logo-for-News-webpage-1024x750.jpg',
     'gmp': '/imges/gmp-good-manufacturing-practice-certified-round-stamp-on-white-background-vector-e1731932642480.jpg'
   };
-
-  useEffect(() => {
-    // Get current page URL for QR code
-    const currentUrl = window.location.href;
-    setPageUrl(currentUrl);
-  }, [serviceId]);
 
   const serviceDetails = {
     'iso-9001': {
@@ -236,53 +228,6 @@ const ServiceDetail = () => {
 
   const service = serviceDetails[serviceId] || serviceDetails['iso-9001'];
 
-  const handleDownloadQR = () => {
-    try {
-      const svg = document.getElementById('qr-code-svg');
-      if (svg) {
-        const svgData = new XMLSerializer().serializeToString(svg);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-
-        img.onload = () => {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0);
-          canvas.toBlob((blob) => {
-            if (blob) {
-              const url = URL.createObjectURL(blob);
-              const link = document.createElement('a');
-              link.href = url;
-              link.download = `${serviceId}-qr-code.png`;
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-              URL.revokeObjectURL(url);
-            }
-          }, 'image/png');
-        };
-
-        img.onerror = () => {
-          // Fallback: download SVG directly
-          const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
-          const url = URL.createObjectURL(svgBlob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `${serviceId}-qr-code.svg`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-        };
-
-        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
-      }
-    } catch (error) {
-      alert('Unable to download QR code. Please try right-clicking on the QR code and saving the image.');
-    }
-  };
-
 
   return (
     <div className="service-detail-page">
@@ -338,26 +283,6 @@ const ServiceDetail = () => {
             </div>
 
             <div className="service-sidebar">
-              <div className="qr-code-card">
-                <h3>Share This Page</h3>
-                <p className="qr-description">Scan this QR code to access this page on any device</p>
-                <div className="qr-code-container">
-                  <QRCodeSVG
-                    id="qr-code-svg"
-                    value={pageUrl}
-                    size={200}
-                    level="H"
-                    includeMargin={true}
-                  />
-                </div>
-                <div className="qr-actions">
-                  <button onClick={handleDownloadQR} className="btn btn-secondary qr-download-btn">
-                    Download QR Code
-                  </button>
-                </div>
-                <p className="qr-url-text">{pageUrl}</p>
-              </div>
-
               <div className="certificate-image-card">
                 <h3>Certificate</h3>
                 <div className="certificate-image-container">

@@ -8,7 +8,7 @@ const Contact = () => {
       <div className="page-header">
         <div className="container">
           <h1>Contact Us</h1>
-          <li>Get in touch with us for inquiries, quotes, or support</li>
+          <p>Get in touch with us for inquiries, quotes, or support</p>
         </div>
       </div>
 

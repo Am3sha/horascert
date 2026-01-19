@@ -139,7 +139,6 @@
   height: fit-content;
 }
 
-.qr-code-card,
 .certificate-image-card,
 .service-cta-card {
   background-color: var(--white);
@@ -149,54 +148,12 @@
   border: 1px solid var(--medium-gray);
 }
 
-.qr-code-card h3,
 .certificate-image-card h3,
 .service-cta-card h3 {
   font-size: 1.5rem;
   margin-bottom: 16px;
   color: var(--primary-navy);
   font-weight: 700;
-}
-
-.qr-description {
-  font-size: 0.95rem;
-  color: var(--text-gray);
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-
-.qr-code-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: var(--white);
-  border: 2px solid var(--medium-gray);
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.qr-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.qr-download-btn {
-  width: 100%;
-  padding: 12px 24px;
-  font-size: 0.95rem;
-}
-
-.qr-url-text {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin-top: 16px;
-  word-break: break-all;
-  text-align: center;
-  padding: 12px;
-  background-color: var(--light-gray);
-  border-radius: 6px;
 }
 
 /* Certificate Image Card */
@@ -325,7 +282,6 @@
     grid-template-columns: 1fr;
   }
 
-  .qr-code-card,
   .certificate-image-card,
   .service-cta-card {
     padding: 24px;
@@ -345,15 +301,6 @@
 }
 
 @media (max-width: 480px) {
-  .qr-code-container {
-    padding: 15px;
-  }
-
-  .qr-code-container svg {
-    width: 150px !important;
-    height: 150px !important;
-  }
-
   .certificate-image {
     max-width: 250px;
   }

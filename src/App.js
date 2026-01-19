@@ -21,6 +21,7 @@ const AdminRequests = lazy(() => import('./pages/AdminRequests'));
 const AdminRequestDetail = lazy(() => import('./pages/AdminRequestDetail'));
 const CertificateDetail = lazy(() => import('./pages/CertificateDetail'));
 const CertificateView = lazy(() => import('./pages/CertificateView'));
+const CertificationValidation = lazy(() => import('./pages/CertificationValidation'));
 const HorasCertServices = lazy(() => import('./pages/HorasCertServices'));
 const AccreditationsRegistrations = lazy(() => import('./pages/AccreditationsRegistrations'));
 const IsoCertificationServices = lazy(() => import('./pages/IsoCertificationServices'));
@@ -130,6 +131,7 @@ function AppContent() {
             <Route path="/about/impartiality-policy" element={<ImpartialityPolicy />} />
             <Route path="/about/confidentiality-policy" element={<ConfidentialityPolicy />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/certification-validation" element={<CertificationValidation />} />
             <Route path="/services/:serviceId" element={<ServiceDetail />} />
             <Route path="/clients" element={<Clients />} />
             {/* Catch-all → redirect to home */}

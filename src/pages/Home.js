@@ -51,26 +51,7 @@ const Home = () => {
     }
   ];
 
-  const teamMembers = [
-    {
-      id: 1,
-      name: 'ENG Waleed',
-      role: 'CEO',
-      photo: '/imgeteam/1b75fcec-a040-42eb-8c3a-0362ckjgku84676d21711063906.jpg'
-    },
-    {
-      id: 2,
-      name: 'ENG Tariq',
-      role: 'Quality Manager',
-      photo: '/imgeteam/ad9c523d-8c30-4d81-92c0-8726c170e24b1711063310.png'
-    },
-    {
-      id: 3,
-      name: 'ENG Daleea',
-      role: 'Technical Director',
-      photo: '/imgeteam/untitled11111711062952.png'
-    }
-  ];
+  
 
   return (
     <div className="home-page">
@@ -81,9 +62,9 @@ const Home = () => {
         <div className="container">
           <div className="company-description-content">
             <div className="company-description-text">
-              <h2 className="section-title">About HORAS-Cert</h2>
+              <h2 className="section-title">About HORAS Cert</h2>
               <p className="lead-text">
-                <strong>HORAS-Cert – Organization for Quality Systems and Certifications</strong> is an accredited certification body recognized by the Egyptian Accreditation Council (EGAC) for the following international standards:
+                <strong>HORAS Cert Organization for Quality Systems and Certifications</strong> is an accredited certification body recognized by the Egyptian Accreditation Council (EGAC) for the following international standards:
               </p>
               <ul className="standards-list">
                 <p>Quality Management System ISO 9001:2015</p>
@@ -138,7 +119,7 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Accreditations and Registrations</h2>
           <p className="section-subtitle">
-            HORAS-Cert is accredited by leading national and international accreditation bodies, ensuring the highest standards of certification services
+            HORAS Cert is accredited by leading national and international accreditation bodies, ensuring the highest standards of certification services
           </p>
           <div className="accreditation-grid">
             <div className="accreditation-card">
@@ -279,33 +260,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Team Members Section */}
-      <section className="team-members-section section">
-        <div className="container">
-          <h2 className="section-title">Our Team Members</h2>
-          <p className="section-subtitle">
-            Our Creative Team
-          </p>
-          <div className="team-members-grid">
-            {teamMembers.map(member => (
-              <div key={member.id} className="team-member-card">
-                <div className="team-member-image-wrapper">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="team-member-image"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                </div>
-                <h3 className="team-member-name">{member.name}</h3>
-                <p className="team-member-role">{member.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     
 
       {/* Contact CTA Section */}
       <section className="contact-cta-section section">

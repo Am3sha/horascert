@@ -642,8 +642,7 @@ const Application = () => {
     <div className="application-page">
       <div className="page-header">
         <div className="container">
-          <h2>Certification Application</h2>
-
+          <h1>Certification Application</h1>
           <li>Apply for ISO certification services. Fill out the form below and our team will contact you.</li>
         </div>
       </div>

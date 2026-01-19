@@ -21,7 +21,7 @@ const TopBar = () => {
               <path d="M3.33337 5.83333L9.16671 9.58333C9.69537 9.91667 10.3047 9.91667 10.8334 9.58333L16.6667 5.83333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               <rect x="2.5" y="4.16667" width="15" height="11.6667" rx="2" stroke="currentColor" strokeWidth="1.5" />
             </svg>
-            <span>info@yourcompany.com</span>
+            <span>info@horascert.com</span>
           </div>
         </div>
       </div>

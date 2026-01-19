@@ -21,7 +21,7 @@ const About = () => {
       <section className="section about-section">
         <div className="container">
           <p className="about-description">
-            <strong>HORAS-Cert</strong> Organization for Quality Systems and Certifications is the accredited certification body recognized by the National Accreditation Council.
+            <strong>HORAS Cert</strong> Organization for Quality Systems and Certifications is the accredited certification body recognized by the National Accreditation Council.
           </p>
 
           <h3>Our Accredited Standards</h3>
@@ -57,7 +57,7 @@ const About = () => {
           <div className="countries-section">
             <h3>Our Global Presence</h3>
 
-            <h4>Currently Operating in 4 Countries:</h4>
+            <h4>Currently Operating in 3 Countries:</h4>
             <div className="current-countries">
               <span className="country-badge">🇪🇬 Egypt</span>
               <span className="country-badge">🇸🇦 Saudi Arabia</span>

@@ -61,7 +61,7 @@ instance.interceptors.response.use(
 // NO auth interceptor, NO redirect on 401
 // Allows public access without requiring authentication
 // ========================================================================
-const publicInstance = axios.create({
+export const publicInstance = axios.create({
     baseURL: API_BASE,
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true,
@@ -272,6 +272,7 @@ export default {
     adminLogout,
     verifyAuth,
     submitApplication,
-    submitContactEmail
+    submitContactEmail,
+    publicInstance
     // fetchCertificateQrBlob - DEPRECATED: QR codes now generated in Frontend using qrcode.react and qrcode libraries
 };

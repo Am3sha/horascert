@@ -35,11 +35,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="footer-column footer-company">
             <div className="footer-logo-section">
-              <h2 className="footer-logo">HORAS-Cert</h2>
+              <h2 className="footer-logo">HORAS Cert</h2>
               <p className="footer-tagline">Quality Systems & Certifications</p>
             </div>
             <p className="footer-description">
-              HORAS-Cert is an EGAC-accredited certification body providing internationally recognized ISO certification services. We help organizations achieve excellence through quality management systems.
+              HORAS Cert is an EGAC Accredited certification body providing internationally recognized ISO certification services. We help organizations achieve excellence through quality management systems.
             </p>
             <div className="accreditation-badges">
               {accreditations.map((acc, index) => (
