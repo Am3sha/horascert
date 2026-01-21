@@ -1,110 +1,12 @@
-
-2026-01-19 15:35:44 [[32MINFO[39M] Server is running on port 5001 
-2026-01-19 15:35:44 [[32MINFO[39M] Environment: development 
-2026-01-19 15:35:45 [[32MINFO[39M] ✅ MongoDB connected successfully 
-2026-01-19 15:55:28 [[32MINFO[39M] Server is running on port 5001 
-2026-01-19 15:55:28 [[32MINFO[39M] Environment: development 
-2026-01-19 15:55:29 [[32MINFO[39M] ✅ MongoDB connected successfully 
-2026-01-19 16:02:48 [[32MINFO[39M] Notification email sent for contact form {
-  "emailId": "696e3986530ffa15fa9b56fa"
+2026-01-21 14:09:59 [[31MERROR[39M] 404 - Certificate not found with number b093951437f04fa09b3342f2 - /api/v1/certificates/certificateId/b093951437f04fa09b3342f2 - GET - 127.0.0.1 {
+  "stack": "ApiError: Certificate not found with number b093951437f04fa09b3342f2\n    at getCertificate (D:\\Frist.c++\\H010\\server\\controllers\\certificateController.js:305:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
 }
-2026-01-19 16:05:02 [[32MINFO[39M] Application request created in database {
-  "requestId": "696e3a0e530ffa15fa9b56fc"
+2026-01-21 14:09:59 [[31MERROR[39M] 404 - Certificate not found with number b093951437f04fa09b3342f2 - /api/v1/certificates/certificateId/b093951437f04fa09b3342f2 - GET - 127.0.0.1 {
+  "stack": "ApiError: Certificate not found with number b093951437f04fa09b3342f2\n    at getCertificate (D:\\Frist.c++\\H010\\server\\controllers\\certificateController.js:305:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
 }
-2026-01-19 16:05:02 [[32MINFO[39M] Uploading file to Supabase {
-  "storageKey": "requests/696e3a0e530ffa15fa9b56fc/1768831502943_Assembly_Chapter_03_P1_SI.pdf",
-  "originalName": "Assembly Chapter 03 [P1] SI.pdf",
-  "safeName": "Assembly_Chapter_03_P1_SI.pdf",
-  "mimeType": "application/pdf",
-  "size": 7138610,
-  "requestId": "696e3a0e530ffa15fa9b56fc",
-  "bucket": "certificates"
+2026-01-21 14:10:58 [[31MERROR[39M] 404 - Certificate not found with number b093951437f04fa09b3342f2 - /api/v1/certificates/certificateId/b093951437f04fa09b3342f2 - GET - 127.0.0.1 {
+  "stack": "ApiError: Certificate not found with number b093951437f04fa09b3342f2\n    at getCertificate (D:\\Frist.c++\\H010\\server\\controllers\\certificateController.js:305:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
 }
-2026-01-19 16:05:06 [[32MINFO[39M] File uploaded successfully {
-  "storageKey": "requests/696e3a0e530ffa15fa9b56fc/1768831502943_Assembly_Chapter_03_P1_SI.pdf",
-  "bucket": "certificates",
-  "size": 7138610
+2026-01-21 14:10:59 [[31MERROR[39M] 404 - Certificate not found with number b093951437f04fa09b3342f2 - /api/v1/certificates/certificateId/b093951437f04fa09b3342f2 - GET - 127.0.0.1 {
+  "stack": "ApiError: Certificate not found with number b093951437f04fa09b3342f2\n    at getCertificate (D:\\Frist.c++\\H010\\server\\controllers\\certificateController.js:305:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
 }
-2026-01-19 16:05:06 [[32MINFO[39M] File uploaded for application {
-  "requestId": "696e3a0e530ffa15fa9b56fc",
-  "fileName": "Assembly Chapter 03 [P1] SI.pdf",
-  "size": 7138610
-}
-2026-01-19 16:05:06 [[32MINFO[39M] Files metadata saved to application {
-  "requestId": "696e3a0e530ffa15fa9b56fc",
-  "fileCount": 1
-}
-2026-01-19 16:05:08 [[32MINFO[39M] Notification email sent for application {
-  "requestId": "696e3a0e530ffa15fa9b56fc"
-}
-2026-01-19 16:34:44 [[32MINFO[39M] Application request created in database {
-  "requestId": "696e4104530ffa15fa9b572c"
-}
-2026-01-19 16:34:44 [[32MINFO[39M] Uploading file to Supabase {
-  "storageKey": "requests/696e4104530ffa15fa9b572c/1768833284385_4_5852705875029925232.pdf",
-  "originalName": "4_5852705875029925232.pdf",
-  "safeName": "4_5852705875029925232.pdf",
-  "mimeType": "application/pdf",
-  "size": 169853,
-  "requestId": "696e4104530ffa15fa9b572c",
-  "bucket": "certificates"
-}
-2026-01-19 16:34:45 [[32MINFO[39M] File uploaded successfully {
-  "storageKey": "requests/696e4104530ffa15fa9b572c/1768833284385_4_5852705875029925232.pdf",
-  "bucket": "certificates",
-  "size": 169853
-}
-2026-01-19 16:34:45 [[32MINFO[39M] File uploaded for application {
-  "requestId": "696e4104530ffa15fa9b572c",
-  "fileName": "4_5852705875029925232.pdf",
-  "size": 169853
-}
-2026-01-19 16:34:45 [[32MINFO[39M] Files metadata saved to application {
-  "requestId": "696e4104530ffa15fa9b572c",
-  "fileCount": 1
-}
-2026-01-19 16:34:47 [[32MINFO[39M] Notification email sent for application {
-  "requestId": "696e4104530ffa15fa9b572c"
-}
-2026-01-19 16:35:43 [[32MINFO[39M] File deleted successfully from Supabase {
-  "bucket": "certificates",
-  "storageKey": "requests/696e3a0e530ffa15fa9b56fc/1768831502943_Assembly_Chapter_03_P1_SI.pdf",
-  "attempt": 1
-}
-2026-01-19 16:35:43 [[32MINFO[39M] Deleted Supabase file for application {
-  "applicationId": "696e3a0e530ffa15fa9b56fc",
-  "bucket": "certificates",
-  "storageKey": "requests/696e3a0e530ffa15fa9b56fc/1768831502943_Assembly_Chapter_03_P1_SI.pdf"
-}
-2026-01-19 20:26:43 [[33MWARN[39M] ⚠️ MongoDB disconnected. Waiting for reconnection... 
-2026-01-19 21:23:57 [[32MINFO[39M] ✅ MongoDB reconnected successfully 
-2026-01-19 23:14:14 [[33MWARN[39M] ⚠️ MongoDB disconnected. Waiting for reconnection... 
-2026-01-19 23:14:25 [[32MINFO[39M] ✅ MongoDB reconnected successfully 
-2026-01-20 00:16:22 [[31MERROR[39M] 401 - Please log in to access this route - /api/v1/auth/logout - POST - 127.0.0.1 {
-  "stack": "ApiError: Please log in to access this route\n    at auth (D:\\Frist.c++\\H010\\server\\middleware\\auth.js:24:25)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\route.js:149:13)\n    at Route.dispatch (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\route.js:119:3)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:47:12)"
-}
-2026-01-20 00:53:08 [[32MINFO[39M] Server is running on port 5001 
-2026-01-20 00:53:08 [[32MINFO[39M] Environment: development 
-2026-01-20 00:53:09 [[32MINFO[39M] ✅ MongoDB connected successfully 
-2026-01-20 01:03:41 [[32MINFO[39M] Notification email sent for contact form {
-  "emailId": "696eb84ba8d8dfa94538a4c0"
-}
-2026-01-20 01:08:51 [[32MINFO[39M] Notification email sent for contact form {
-  "emailId": "696eb980a8d8dfa94538a4c2"
-}
-2026-01-21 13:10:19 [[32MINFO[39M] Server is running on port 5001 
-2026-01-21 13:10:19 [[32MINFO[39M] Environment: development 
-2026-01-21 13:10:20 [[32MINFO[39M] ✅ MongoDB connected successfully 
-2026-01-21 13:13:23 [[31MERROR[39M] 401 - Please log in to access this route - /api/v1/admin/applications/696e4104530ffa15fa9b572c/files/0?t=1768994003831 - GET - 127.0.0.1 {
-  "stack": "ApiError: Please log in to access this route\n    at auth (D:\\Frist.c++\\H010\\server\\middleware\\auth.js:24:25)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:328:13)"
-}
-2026-01-21 13:18:33 [[31MERROR[39M] 401 - Please log in to access this route - /api/v1/admin/applications/696e4104530ffa15fa9b572c/files/0?t=1768994313366 - GET - 127.0.0.1 {
-  "stack": "ApiError: Please log in to access this route\n    at auth (D:\\Frist.c++\\H010\\server\\middleware\\auth.js:24:25)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:328:13)"
-}
-2026-01-21 13:18:33 [[31MERROR[39M] 401 - Please log in to access this route - /api/v1/admin/applications/696e4104530ffa15fa9b572c/files/0?t=1768994313533 - GET - 127.0.0.1 {
-  "stack": "ApiError: Please log in to access this route\n    at auth (D:\\Frist.c++\\H010\\server\\middleware\\auth.js:24:25)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handle [as handle_request] (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (D:\\Frist.c++\\H010\\server\\node_modules\\express\\lib\\router\\index.js:328:13)"
-}
-2026-01-21 13:22:29 [[32MINFO[39M] Notification email sent for contact form {
-  "emailId": "6970b6f21d1da0d42e3d095c"
-}
-2026-01-21 13:32:55 [[32MINFO[39M] Notification email sent for certificate WER7777777 
