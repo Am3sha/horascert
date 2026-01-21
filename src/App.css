@@ -2,3 +2,38 @@ main {
   flex: 1;
 }
 
+
+ .home-page .services-grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 32px;
+ }
+ 
+ .home-page .process-steps {
+   display: grid;
+   grid-template-columns: repeat(5, 1fr);
+   gap: 24px;
+ }
+ 
+ @media (max-width: 1200px) {
+   .home-page .process-steps {
+     grid-template-columns: repeat(3, 1fr);
+   }
+ }
+ 
+ @media (max-width: 1024px) {
+   .home-page .services-grid {
+     grid-template-columns: repeat(2, 1fr);
+   }
+ }
+ 
+ @media (max-width: 768px) {
+   .home-page .services-grid {
+     grid-template-columns: 1fr;
+   }
+ 
+   .home-page .process-steps {
+     grid-template-columns: 1fr;
+     gap: 20px;
+   }
+ }
