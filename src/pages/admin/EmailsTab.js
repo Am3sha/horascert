@@ -3,7 +3,6 @@ import { toast } from 'react-hot-toast';
 import {
     deleteEmail,
     fetchEmails,
-    replyToEmail,
     updateEmailStatus
 } from '../../services/api';
 
@@ -11,7 +10,6 @@ export default function EmailsTab({ onError, onSuccess }) {
     const [emails, setEmails] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
-    const [replyingId, setReplyingId] = useState(null);
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -63,27 +61,6 @@ export default function EmailsTab({ onError, onSuccess }) {
             load();
         } catch (err) {
             if (onError) onError((err && err.message) || 'Failed to update email');
-        }
-    };
-
-    const handleReply = async (emailId) => {
-        if (!emailId) return;
-        const replyMessage = window.prompt('Reply message:');
-        if (!replyMessage) return;
-
-        setReplyingId(emailId);
-        try {
-            const res = await replyToEmail(emailId, replyMessage);
-            if (!res || !res.success) {
-                if (onError) onError((res && (res.message || res.error)) || 'Failed to send reply');
-                return;
-            }
-            if (onSuccess) onSuccess('Reply sent');
-            load();
-        } catch (err) {
-            if (onError) onError((err && err.message) || 'Failed to send reply');
-        } finally {
-            setReplyingId(null);
         }
     };
 
@@ -211,14 +188,6 @@ export default function EmailsTab({ onError, onSuccess }) {
                                             <option value="replied">Replied</option>
                                             <option value="archived">Archived</option>
                                         </select>
-                                        <button
-                                            type="button"
-                                            className="btn-action btn-edit"
-                                            onClick={() => handleReply(email._id)}
-                                            disabled={replyingId === email._id}
-                                        >
-                                            {replyingId === email._id ? 'Replying...' : 'Reply'}
-                                        </button>
                                         <button
                                             type="button"
                                             className="btn-action btn-delete"

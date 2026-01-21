@@ -38,7 +38,7 @@ instance.interceptors.response.use(
     (res) => res,
     (err) => {
         const status = err && err.response ? err.response.status : undefined;
-        if (status === 401 || status === 403) {
+        if (status === 401) {
             // Clear token from localStorage on auth failure
             localStorage.removeItem('token');
 
@@ -106,6 +106,10 @@ export async function fetchApplications(params = {}) {
 
 export async function fetchApplicationById(id) {
     return handle(instance.get(`${API_PREFIX}/admin/applications/${id}`));
+}
+
+export async function fetchApplicationFileUrl(id, fileIndex, params = {}) {
+    return handle(instance.get(`${API_PREFIX}/admin/applications/${id}/files/${fileIndex}`, { params }));
 }
 
 export async function updateApplicationStatus(id, status) {
@@ -205,10 +209,6 @@ export async function deleteEmail(id) {
     return handle(instance.delete(`${API_PREFIX}/admin/emails/${id}`));
 }
 
-export async function replyToEmail(emailId, replyMessage) {
-    return handle(instance.post(`${API_PREFIX}/admin/emails/${emailId}/reply`, { replyMessage }));
-}
-
 export async function adminLogin(email, password) {
     try {
         const response = await instance.post(`${API_PREFIX}/auth/login`, { email, password });
@@ -256,6 +256,7 @@ export default {
     fetchEmails,
     fetchApplications,
     fetchApplicationById,
+    fetchApplicationFileUrl,
     updateApplicationStatus,
     updateApplication,
     updateEmailStatus,
@@ -267,7 +268,6 @@ export default {
     deleteCertificateById,
     updateCertificateById,
     deleteEmail,
-    replyToEmail,
     adminLogin,
     adminLogout,
     verifyAuth,

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchApplicationById, toApiUrl, updateApplication } from '../services/api';
+import { fetchApplicationById, fetchApplicationFileUrl, updateApplication } from '../services/api';
 import StatusBadge from './admin/StatusBadge';
 import './AdminDashboard.css';
 
@@ -60,39 +60,13 @@ export default function AdminRequestDetail() {
             // New format: storageKey present
             if (file.storageKey) {
                 try {
-                    const endpoint = toApiUrl(`/admin/applications/${id}/files/${i}`);
-                    const response = await fetch(`${endpoint}?t=${Date.now()}`, {
-                        credentials: 'include',
-                        cache: 'no-store',
-                        headers: {
-                            Accept: 'application/json'
-                        }
-                    });
-
-                    if (response.status === 401 || response.status === 403) {
-                        if (typeof window !== 'undefined') {
-                            window.location.replace('/login');
-                        }
-                        urls[i] = null;
-                        urlErrors[i] = 'Session expired. Please log in again.';
-                        continue;
-                    }
-
-                    let result = null;
-                    try {
-                        result = await response.json();
-                    } catch (parseErr) {
-                        urls[i] = null;
-                        urlErrors[i] = `Invalid response from server (HTTP ${response.status})`;
-                        continue;
-                    }
-
-                    if (result.success && result.data?.url) {
+                    const result = await fetchApplicationFileUrl(id, i, { t: Date.now() });
+                    if (result && result.success && result.data?.url) {
                         urls[i] = result.data.url;
                         urlErrors[i] = '';
                     } else {
                         urls[i] = null;
-                        urlErrors[i] = result.message || result.error || `Failed to load file URL (HTTP ${response.status})`;
+                        urlErrors[i] = (result && (result.message || result.error)) || 'Failed to load file URL';
                     }
                 } catch (err) {
                     urls[i] = null;
