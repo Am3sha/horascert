@@ -69,3 +69,12 @@
   "bucket": "certificates",
   "storageKey": "requests/695d04849aaa57543fbd2e08/1767703684557_ASS4DISC.pdf"
 }
+2026-01-21 15:06:46 [[33MWARN[39M] ⚠️ MongoDB disconnected. Waiting for reconnection... 
+2026-01-21 15:06:49 [[32MINFO[39M] ✅ MongoDB reconnected successfully 
+2026-01-21 15:11:12 [[33MWARN[39M] ⚠️ MongoDB disconnected. Waiting for reconnection... 
+2026-01-21 15:11:12 [[32MINFO[39M] ✅ MongoDB reconnected successfully 
+2026-01-21 16:04:03 [[33MWARN[39M] ⚠️ MongoDB disconnected. Waiting for reconnection... 
+2026-01-21 16:04:04 [[32MINFO[39M] ✅ MongoDB reconnected successfully 
+2026-01-21 16:58:22 [[32MINFO[39M] Notification email sent for contact form {
+  "emailId": "6970e98b1d1da0d42e3d0aa7"
+}
