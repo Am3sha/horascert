@@ -11,18 +11,22 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  opacity: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.slide-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .slide.active {
-  opacity: 1;
   z-index: 1;
 }
 
@@ -46,15 +50,15 @@
   text-align: center;
   color: var(--white);
   width: 100%;
-  animation: fadeInUp 1s ease-out;
+  animation: none;
 }
 
- .hero-content-wrapper {
+.hero-content-wrapper {
   max-width: 980px;
   margin: 0 auto;
- }
+}
 
- .hero-badge {
+.hero-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -67,34 +71,50 @@
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.02em;
- }
+}
 
- .hero-cta-group {
+.hero-cta-group {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
- }
+}
 
- .slide-cta {
+.slide-cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
- }
+}
 
- .slide-cta-secondary {
+.slide-cta-secondary {
   padding: 16px 32px;
- }
+}
 
-@keyframes fadeInUp {
+.hero-slider.is-hydrated .slide-content {
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-slider.is-hydrated .slide-image {
+  animation: heroImageFadeIn 450ms ease-out;
+}
+
+@keyframes heroImageFadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slider.is-hydrated .slide-content {
+    animation: none;
+  }
+
+  .hero-slider.is-hydrated .slide-image {
+    animation: none;
   }
 }
 
@@ -191,13 +211,13 @@
 .dot:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+
 .hero-stats {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(22, 38, 66, 0.95) 100%);
-  backdrop-filter: blur(10px);
   padding: 28px 0;
   z-index: 10;
   display: flex;
