@@ -620,7 +620,6 @@ const Application = () => {
         throw new Error(composed);
       }
 
-      setIsSubmitting(false);
       setSubmitStatus('success');
       setSubmitError('');
 
@@ -682,10 +681,11 @@ const Application = () => {
 
       setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
-      setIsSubmitting(false);
       setSubmitStatus('error');
       setSubmitError(error && error.message ? error.message : 'Failed to submit application');
       setTimeout(() => setSubmitStatus(null), 5000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
