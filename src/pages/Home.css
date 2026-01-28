@@ -42,7 +42,7 @@
   margin: 20px 0 28px;
 }
 
-.standards-list p {
+.standards-list li {
   padding: 10px 0 10px 28px;
   position: relative;
   color: var(--text-gray);
@@ -50,7 +50,7 @@
   line-height: 1.7;
 }
 
-.standards-list p::before {
+.standards-list li::before {
   position: absolute;
   left: 0;
   color: var(--primary-teal);

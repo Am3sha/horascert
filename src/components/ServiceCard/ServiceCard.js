@@ -21,7 +21,11 @@ const ServiceCard = ({ service }) => {
       {service.description && (
         <p className="service-description">{service.description}</p>
       )}
-      <Link to={`/services/${service.id}`} className="btn btn-secondary service-link">
+      <Link
+        to={`/services/${service.id}`}
+        className="btn btn-secondary service-link"
+        aria-label={`Learn more about ${service.name}`}
+      >
         Learn More
       </Link>
     </div>

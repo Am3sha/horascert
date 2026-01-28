@@ -65,7 +65,7 @@ const CertificateView = () => {
 
     return (
         <div className="certificate-view-page">
-            <div className="certificate-container" aria-hidden="false">
+            <div className="certificate-container">
                 <div className="certificate-content">
                     {/* Status Section */}
                     <div className="section status-section">
