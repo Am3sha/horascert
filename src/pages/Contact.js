@@ -72,11 +72,10 @@ const Contact = () => {
           </div>
           <h3 className="contact-map-title">Our Location</h3>
           <div className="contact-map-wrapper">
-            <iframe
-              title="Company Location"
-              src="https://www.google.com/maps?q=Building+No+74+First+District+Sheikh+Zayed+6th+of+October+City+Egypt&output=embed"
-              loading="lazy"
-              allowFullScreen
+            <iframe loading="lazy"
+              src="https://maps.google.com/maps?q=Building%20%20No%20%2074%20%20-%20%20First%20District%20-%20Sheikh%20Zayed%20-%206th%20of%20October%20City%20-%20Egypt%20&#038;t=m&#038;z=15&#038;output=embed&#038;iwloc=near"
+              title="Building  No  74  -  First District - Sheikh Zayed - 6th of October City - Egypt "
+              aria-label="Building  No  74  -  First District - Sheikh Zayed - 6th of October City - Egypt "
             ></iframe>
           </div>
         </div>
