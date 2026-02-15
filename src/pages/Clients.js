@@ -1,7 +1,13 @@
 import React from 'react';
+import PageHero from '../components/PageHero/PageHero';
 import './Clients.css';
 
 const Clients = () => {
+  const breadcrumb = [
+    { path: '/', label: 'Home' },
+    { path: '/clients', label: 'Our Clients', isCurrent: true }
+  ];
+
   const clients = [
     { id: 1, name: 'MEDITERRANEAN AGRICUTURAL PRODUCTSCO (MAPCO)', logo: '/imgesclinet/8787687.jpg' },
     { id: 2, name: 'ZAD For Export', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.33.48-AM.jpeg' },
@@ -18,11 +24,11 @@ const Clients = () => {
 
   return (
     <div className="clients-page">
-      <div className="page-header">
-        <div className="container">
-          <h1>Our Clients</h1>
-        </div>
-      </div>
+      <PageHero
+        title="Our Clients"
+        subtitle="Trusted by leading organizations across various industries"
+        breadcrumb={breadcrumb}
+      />
 
       <section className="section clients-section">
         <div className="container">

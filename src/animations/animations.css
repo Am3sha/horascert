@@ -1,0 +1,733 @@
+/* ================================================
+   HorasCert — Professional Animation System
+   Philosophy: Subtle, purposeful, GPU-accelerated
+   ================================================ */
+
+/* -----------------------------------------------
+   KEYFRAMES LIBRARY
+   ----------------------------------------------- */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -800px 0; }
+  100% { background-position:  800px 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.3); }
+  50%       { box-shadow: 0 0 0 8px rgba(33, 150, 243, 0); }
+}
+
+@keyframes navbarSlideDown {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroTextReveal {
+  from { opacity: 0; transform: translateY(40px) skewY(2deg); }
+  to   { opacity: 1; transform: translateY(0) skewY(0); }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-6px) rotate(0.5deg); }
+  66%       { transform: translateY(-3px) rotate(-0.5deg); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* -----------------------------------------------
+   SCROLL REVEAL — Base classes
+   (JS IntersectionObserver adds .is-visible)
+   ----------------------------------------------- */
+
+.anim-fade-up,
+.anim-fade-down,
+.anim-fade-left,
+.anim-fade-right,
+.anim-fade-in,
+.anim-scale-up,
+.anim-slide-left,
+.anim-slide-right {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Triggered state */
+.anim-fade-up.is-visible {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-fade-down.is-visible {
+  animation: fadeDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-fade-left.is-visible {
+  animation: fadeLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-fade-right.is-visible {
+  animation: fadeRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-fade-in.is-visible {
+  animation: fadeIn 0.6s ease forwards;
+}
+.anim-scale-up.is-visible {
+  animation: scaleUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-slide-left.is-visible {
+  animation: slideInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.anim-slide-right.is-visible {
+  animation: slideInRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* -----------------------------------------------
+   STAGGER DELAYS — for children in a group
+   Usage: <div className="anim-stagger">
+            <div className="anim-fade-up">1</div>
+            <div className="anim-fade-up">2</div>
+          </div>
+   ----------------------------------------------- */
+
+.anim-stagger .anim-fade-up:nth-child(1),
+.anim-stagger .anim-fade-in:nth-child(1),
+.anim-stagger .anim-scale-up:nth-child(1) { animation-delay: 0ms; }
+
+.anim-stagger .anim-fade-up:nth-child(2),
+.anim-stagger .anim-fade-in:nth-child(2),
+.anim-stagger .anim-scale-up:nth-child(2) { animation-delay: 100ms; }
+
+.anim-stagger .anim-fade-up:nth-child(3),
+.anim-stagger .anim-fade-in:nth-child(3),
+.anim-stagger .anim-scale-up:nth-child(3) { animation-delay: 200ms; }
+
+.anim-stagger .anim-fade-up:nth-child(4),
+.anim-stagger .anim-fade-in:nth-child(4),
+.anim-stagger .anim-scale-up:nth-child(4) { animation-delay: 300ms; }
+
+.anim-stagger .anim-fade-up:nth-child(5),
+.anim-stagger .anim-fade-in:nth-child(5),
+.anim-stagger .anim-scale-up:nth-child(5) { animation-delay: 400ms; }
+
+.anim-stagger .anim-fade-up:nth-child(6),
+.anim-stagger .anim-fade-in:nth-child(6),
+.anim-stagger .anim-scale-up:nth-child(6) { animation-delay: 500ms; }
+
+/* Manual delays */
+.anim-delay-0   { animation-delay: 0ms !important; }
+.anim-delay-100 { animation-delay: 100ms !important; }
+.anim-delay-200 { animation-delay: 200ms !important; }
+.anim-delay-300 { animation-delay: 300ms !important; }
+.anim-delay-400 { animation-delay: 400ms !important; }
+.anim-delay-500 { animation-delay: 500ms !important; }
+.anim-delay-600 { animation-delay: 600ms !important; }
+.anim-delay-700 { animation-delay: 700ms !important; }
+.anim-delay-800 { animation-delay: 800ms !important; }
+
+/* -----------------------------------------------
+   NAVBAR ANIMATION
+   ----------------------------------------------- */
+
+.navbar {
+  animation: navbarSlideDown 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.navbar-link {
+  position: relative;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--primary-500, #2196F3);
+  border-radius: 2px;
+  transition: left 0.25s ease, right 0.25s ease;
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+  left: 16px;
+  right: 16px;
+}
+
+/* Navbar scroll effect */
+.navbar {
+  transition: background 0.3s ease, box-shadow 0.3s ease,
+              backdrop-filter 0.3s ease;
+}
+
+/* -----------------------------------------------
+   HERO SECTION ANIMATIONS
+   (Auto-play on page load, no observer needed)
+   ----------------------------------------------- */
+
+.hero-badge {
+  opacity: 0;
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.hero-title {
+  opacity: 0;
+  animation: heroTextReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+.hero-subtitle {
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
+}
+
+.hero-btns,
+.hero-actions {
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+}
+
+/* Hero scroll indicator */
+.hero-scroll-indicator {
+  opacity: 0;
+  animation: fadeIn 1s ease 1.2s forwards,
+             float 3s ease-in-out 2s infinite;
+}
+
+/* -----------------------------------------------
+   SECTION TITLES (Page headers)
+   ----------------------------------------------- */
+
+.section-tag {
+  /* Applied via JS observer */
+  opacity: 0;
+}
+
+.section-tag.is-visible {
+  animation: fadeDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--primary-500, #2196F3);
+  border-radius: 3px;
+  margin: 12px auto 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-title.is-visible::after {
+  transform: scaleX(1);
+}
+
+/* -----------------------------------------------
+   CARDS HOVER ANIMATIONS (Global)
+   ----------------------------------------------- */
+
+.service-card,
+.feature-card,
+.value-card,
+.mv-card,
+.stat-card,
+.contact-info-card,
+.contact-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 48px -8px rgba(10, 36, 99, 0.12);
+}
+
+.feature-card:hover,
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px -4px rgba(10, 36, 99, 0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.contact-info-card:hover,
+.contact-card:hover {
+  transform: translateX(6px);
+}
+
+/* -----------------------------------------------
+   BUTTON ANIMATIONS
+   ----------------------------------------------- */
+
+button,
+.btn-primary,
+.btn-secondary,
+.dbtn,
+.cta-btn,
+.hero-btn-main,
+.hero-btn-outline,
+a[class*="btn"] {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.2s ease,
+              background 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ripple effect on click */
+button::after,
+.btn-primary::after,
+.dbtn-primary::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+button:active::after,
+.btn-primary:active::after,
+.dbtn-primary:active::after {
+  transform: scaleX(1);
+}
+
+/* Primary button lift */
+.btn-primary:hover,
+.dbtn-primary:hover,
+.cta-btn:hover,
+.hero-btn-main:hover,
+.svc-apply-btn:hover,
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(21, 101, 192, 0.3);
+}
+
+.btn-primary:active,
+.dbtn-primary:active {
+  transform: translateY(-1px);
+}
+
+/* -----------------------------------------------
+   FORM ANIMATIONS
+   ----------------------------------------------- */
+
+.form-input,
+.form-textarea,
+.login-input,
+.dash-form input,
+.dash-form select,
+.dash-form textarea,
+.contact-form input,
+.contact-form textarea {
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              background 0.2s ease;
+}
+
+/* Label float effect visual */
+.form-group {
+  transition: transform 0.2s ease;
+}
+
+/* Error shake animation */
+.form-input.error,
+.login-input.error {
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+/* Success checkmark */
+.form-success {
+  animation: scaleIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* -----------------------------------------------
+   PAGE HERO ANIMATIONS (About, Services, Contact)
+   ----------------------------------------------- */
+
+.page-hero-title {
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.page-hero-subtitle {
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+/* -----------------------------------------------
+   HOME STATS COUNTER ANIMATION
+   ----------------------------------------------- */
+
+.home-stat-num.is-visible {
+  animation: countUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* -----------------------------------------------
+   SIDEBAR NAV ITEMS (Dashboard)
+   ----------------------------------------------- */
+
+.sidebar-nav-item {
+  transition: background 0.2s ease,
+              color 0.2s ease,
+              padding-left 0.2s ease;
+}
+
+.sidebar-nav-item:hover {
+  padding-left: 1.25rem;
+}
+
+.sidebar-nav-item.active {
+  padding-left: 1.25rem;
+}
+
+/* -----------------------------------------------
+   DASHBOARD MODAL ANIMATION
+   ----------------------------------------------- */
+
+.modal-overlay {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.modal-box {
+  animation: scaleIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* -----------------------------------------------
+   TABLE ROW ANIMATIONS
+   ----------------------------------------------- */
+
+.data-table tbody tr {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.data-table tbody tr:hover {
+  transform: scaleY(1.005);
+}
+
+/* -----------------------------------------------
+   BADGE ANIMATIONS
+   ----------------------------------------------- */
+
+.badge {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* Active badge pulse */
+.badge-active {
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+
+/* -----------------------------------------------
+   CERTIFICATE VIEW ANIMATIONS
+   ----------------------------------------------- */
+
+.cert-card {
+  animation: scaleUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.cert-company {
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+.cert-standard {
+  opacity: 0;
+  animation: scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+
+.cert-details {
+  opacity: 0;
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+}
+
+.cert-status-badge {
+  opacity: 0;
+  animation: scaleIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+}
+
+.cert-qr {
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.8s forwards;
+}
+
+/* -----------------------------------------------
+   LOGIN PAGE ANIMATIONS
+   ----------------------------------------------- */
+
+.login-card {
+  animation: scaleUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.login-logo {
+  opacity: 0;
+  animation: fadeDown 0.5s ease 0.2s forwards;
+}
+
+.login-title {
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.35s forwards;
+}
+
+.login-subtitle {
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.45s forwards;
+}
+
+.login-field {
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.login-field:nth-child(1) { animation-delay: 0.5s; }
+.login-field:nth-child(2) { animation-delay: 0.6s; }
+.login-field:nth-child(3) { animation-delay: 0.7s; }
+
+.login-btn {
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.75s forwards;
+}
+
+/* -----------------------------------------------
+   LINK HOVER UNDERLINE EFFECT
+   ----------------------------------------------- */
+
+.footer a,
+.navbar-link {
+  position: relative;
+  display: inline-block;
+}
+
+.footer a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+
+.footer a:hover::after {
+  width: 100%;
+}
+
+/* -----------------------------------------------
+   LOADING STATES
+   ----------------------------------------------- */
+
+.spinner {
+  animation: spin 0.7s linear infinite;
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+    #eeeeee 25%, #f5f5f5 50%, #eeeeee 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 0.5rem;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* -----------------------------------------------
+   FLOATING DECORATION ELEMENTS
+   ----------------------------------------------- */
+
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+.float-anim-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-anim-delay {
+  animation: float 4s ease-in-out 2s infinite;
+}
+
+/* -----------------------------------------------
+   ICON HOVER SPIN
+   ----------------------------------------------- */
+
+.icon-hover-spin {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.icon-hover-spin:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* -----------------------------------------------
+   QR CODE GLOW
+   ----------------------------------------------- */
+
+.cert-qr img {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.cert-qr img:hover {
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.3);
+  transform: scale(1.05);
+}
+
+/* -----------------------------------------------
+   PAGE TRANSITION WRAPPER
+   ----------------------------------------------- */
+
+.page-transition {
+  animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* -----------------------------------------------
+   SCROLL PROGRESS INDICATOR (optional)
+   ----------------------------------------------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1565C0, #2196F3);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  transform-origin: left;
+}
+
+/* -----------------------------------------------
+   ACCESSIBILITY — Respect user preferences
+   ----------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .anim-fade-up,
+  .anim-fade-down,
+  .anim-fade-left,
+  .anim-fade-right,
+  .anim-fade-in,
+  .anim-scale-up,
+  .anim-slide-left,
+  .anim-slide-right,
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-btns,
+  .page-hero-title,
+  .page-hero-subtitle,
+  .login-card,
+  .login-logo,
+  .login-title,
+  .login-field,
+  .login-btn,
+  .cert-card,
+  .cert-company,
+  .cert-standard,
+  .cert-details {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

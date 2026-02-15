@@ -167,7 +167,7 @@ const ContactForm = () => {
       const responseData = await submitContactEmail(sanitizedData);
 
       if (responseData && responseData.success) {
-        // ✅ Show success only after API success (saved in DB)
+        // Show success only after API success (saved in DB)
         setSubmitStatus("success");
         setErrorMessage(null);
         setFormData({

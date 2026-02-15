@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { fetchCertificateByNumber } from '../services/api';
+import PageHero from '../components/PageHero/PageHero';
 import './CertificationValidation.css';
 
 const CertificationValidation = () => {
@@ -7,6 +8,11 @@ const CertificationValidation = () => {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
+
+    const breadcrumb = [
+        { path: '/', label: 'Services' },
+        { path: '/certification-validation', label: 'Certification Validation', isCurrent: true }
+    ];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -59,12 +65,11 @@ const CertificationValidation = () => {
 
     return (
         <div className="certification-validation-page">
-            <div className="page-header">
-                <div className="container">
-                    <h1>Certification Validation</h1>
-                    <p>Verify the authenticity of a certificate issued by HORAS CERT</p>
-                </div>
-            </div>
+            <PageHero
+                title="Certification Validation"
+                subtitle="Verify the authenticity of a certificate issued by HORAS CERT"
+                breadcrumb={breadcrumb}
+            />
 
             <section className="section">
                 <div className="container">

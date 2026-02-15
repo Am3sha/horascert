@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import PageHero from '../components/PageHero/PageHero';
 import './Application.css';
 
 // Country list
@@ -39,6 +40,10 @@ const COUNTRIES = [
 const isNumericOnly = (value) => /^[0-9]*$/.test(value);
 
 const Application = () => {
+  const breadcrumb = [
+    { path: '/', label: 'Home' },
+    { path: '/application', label: 'Certification Application', isCurrent: true }
+  ];
   const MAX_FILES = 3;
 
   const [step, setStep] = useState(1);
@@ -691,12 +696,11 @@ const Application = () => {
 
   return (
     <div className="application-page">
-      <div className="page-header">
-        <div className="container">
-          <h1>Certification Application</h1>
-          <li>Apply for ISO certification services. Fill out the form below and our team will contact you.</li>
-        </div>
-      </div>
+      <PageHero
+        title="Certification Application"
+        subtitle="Apply for ISO certification services. Fill out the form below and our team will contact you."
+        breadcrumb={breadcrumb}
+      />
 
       <section className="section">
         <div className="container">

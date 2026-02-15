@@ -3,27 +3,6 @@
   background: white;
 }
 
-.page-header {
-  background: linear-gradient(500deg, var(--primary-navy) 0%, var(--primary-teal) 100%) ;
-  color: white;
-  padding: 4rem 0;
-  text-align: center;
-}
-
-.page-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.page-header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 .validation-container {
   max-width: 600px;
   margin: 0 auto;

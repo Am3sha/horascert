@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import TopBar from './TopBar';
+import { useNavbarScroll } from '../../hooks/useScrollReveal';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -9,6 +10,8 @@ const Navbar = () => {
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const location = useLocation();
+
+  useNavbarScroll();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,11 +60,10 @@ const Navbar = () => {
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="navbar-content">
-            <Link to="/" className="logo">
-             
+            <Link to="/" className="navbar-logo">
               <div className="logo-text">
-                <h2>HORAS Cert</h2>
-                <p className="footer-tagline">Quality Systems & Certifications</p>
+                <h1>HORAS Cert</h1>
+                <span>QUALITY SYSTEMS & CERTIFICATIONS</span>
               </div>
             </Link>
 

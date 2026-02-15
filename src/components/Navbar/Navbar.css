@@ -1,6 +1,7 @@
 .navbar {
-  background-color: var(--primary-navy);
-  color: var(--white);
+  background-color: #F8F9FB;
+  height: 80px;
+  border-bottom: 1px solid #E6E9EE;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -8,23 +9,28 @@
 }
 
 .navbar.scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  background-color: var(--navy-dark);
+  background-color: #F8F9FB;
+  border-bottom: 1px solid #E6E9EE;
 }
 
 .navbar-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 0;
+  height: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.logo {
+.navbar-logo {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: var(--white);
+  color: var(--primary-navy);
+  text-decoration: none;
 }
+
 .logo-icon {
   width: 55px;
   height: 58px;
@@ -52,73 +58,66 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
 }
 
-.logo-icon span {
-  font-size: 2.5rem;
+.logo-text h1 {
+  font-size: 22px;
   font-weight: 700;
-  color: var(--primary-navy);
-  font-family: 'Poppins', sans-serif;
-}
-.logo-text h2 {
-  font-size: 1.35rem;
+  color: #0A2463;
   margin: 0;
-  color: var(--white);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.5px;
 }
 
-.logo-text p {
-  font-size: 0.7rem;
-  margin: 0;
-  color: var(--accent-gold);
+.logo-text span {
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  color: #6B7280;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  display: block;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 8px;
+  gap: 28px;
   align-items: center;
   margin: 0;
   padding: 0;
 }
 
 .nav-links li a {
-  color: rgba(255, 255, 255, 0.9);
+  color: #6B7280;
   font-weight: 500;
-  padding: 10px 16px;
-  position: relative;
-  transition: all 0.3s ease;
+  font-size: 15px;
   text-decoration: none;
-  display: block;
-  font-size: 0.95rem;
-  border-radius: 4px;
-}
-
-.nav-links li a::after {
-  display: none;
-}
-
-.nav-links li a:hover::after,
-.nav-links li a.active::after {
-  transform: scaleX(1);
+  transition: color 200ms ease;
+  position: relative;
 }
 
 .nav-links li a:hover {
-  color: var(--white);
-  background-color: rgba(201, 169, 97, 0.15);
+  color: #0A2463;
 }
 
 .nav-links li a.active {
-  color: var(--accent-gold);
+  color: #0A2463;
 }
 
- .nav-links li a:focus-visible {
+.nav-links li a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: 30px;
+  height: 3px;
+  background: #1565C0;
+  border-radius: 5px;
+}
+
+.nav-links li a:focus-visible {
   outline: 2px solid var(--accent-gold);
   outline-offset: 2px;
-  border-radius: 6px;
- }
+  border-radius: 4px;
+}
 
 .nav-dropdown {
   position: relative;
@@ -258,7 +257,7 @@
 .mobile-menu-toggle span {
   width: 25px;
   height: 3px;
-  background-color: var(--white);
+  background-color: var(--primary-navy);
   transition: all 0.3s ease;
 }
 

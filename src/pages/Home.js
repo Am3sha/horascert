@@ -3,9 +3,23 @@ import { Link } from 'react-router-dom';
 import HeroSlider from '../components/Hero/HeroSlider';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
 import ContactForm from '../components/ContactForm/ContactForm';
+import { useScrollReveal, useScrollProgress } from '../hooks/useScrollReveal';
 import './Home.css';
 
 const Home = () => {
+  useScrollReveal([
+    '.trust-logo',
+    '.home-stat-item',
+    '.home-stat-num',
+    '.section-header',
+    '.service-card',
+    '.feature-card',
+    '.home-why-text',
+    '.home-why-features-wrap',
+    '.home-cta',
+  ]);
+  useScrollProgress();
+
   const services = [
     {
       id: 'iso-9001',
@@ -55,6 +69,7 @@ const Home = () => {
 
   return (
     <article className="home-page">
+      <div className="scroll-progress" aria-hidden="true" />
       <header>
         <HeroSlider />
       </header>
@@ -64,22 +79,22 @@ const Home = () => {
         <div className="container">
           <div className="company-description-content">
             <div className="company-description-text">
-              <h2 className="section-title">About HORAS Cert</h2>
+              <h2 className="section-title anim-fade-up">About HORAS</h2>
               <p className="lead-text">
                 <strong>HORAS Cert Organization for Quality Systems and Certifications</strong> is an accredited certification body recognized by the Egyptian Accreditation Council (EGAC) for the following international standards:
               </p>
               <ul className="standards-list">
-                <li>Quality Management System ISO 9001:2015</li>
-                <li>Environmental Management System ISO 14001:2015</li>
-                <li>Occupational Health and Safety Management System ISO 45001:2018</li>
-                <li>Food Safety Management Systems ISO 22000:2018</li>
+                <p>ISO 9001:2015 - Quality Management System</p><br />
+                <p>ISO 14001:2015 - Environmental Management System</p><br />
+                <p>ISO 45001:2018 - Occupational Health and Safety Management System</p><br />
+                <p>ISO 22000:2018 - Food Safety Management System</p>
               </ul>
 
-              <Link to="/about" className="btn btn-secondary">
+              <Link to="/about" className="btn btn-secondary anim-fade-up anim-delay-200">
                 Learn More About Us
               </Link>
             </div>
-            <div className="company-description-image">
+            <div className="company-description-image anim-slide-right">
               <img
                 src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&q=75&fm=webp"
                 alt="HORAS-Cert professional certification team"
@@ -94,15 +109,15 @@ const Home = () => {
       {/* Vision & Mission Combined Section */}
       <section className="vision-mission-section section">
         <div className="container">
-          <div className="vision-mission-grid">
-            <div className="vision-card">
+          <div className="vision-mission-grid anim-stagger">
+            <div className="vision-card anim-scale-up">
               <div className="card-icon"></div>
               <h2>Our Vision</h2>
               <p>
                 To be the leading certification body in the region, recognized for excellence, integrity, and innovation in quality management systems certification. We aim to help organizations achieve sustainable growth and international recognition through world-class certification services.
               </p>
             </div>
-            <div className="mission-card">
+            <div className="mission-card anim-scale-up">
               <div className="card-icon"></div>
               <h2>Our Mission</h2>
               <p>

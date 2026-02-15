@@ -7,6 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { verifyAuth } from './services/api';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
+import './animations/animations.css';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));

@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
+import PageHero from '../components/PageHero/PageHero';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Services.css';
 
 const Services = () => {
+  useScrollReveal();
+  const breadcrumb = [
+    { path: '/', label: 'Home' },
+    { path: '/services', label: 'Services', isCurrent: true }
+  ];
   const services = [
     {
       id: 'iso-9001',
@@ -51,12 +58,11 @@ const Services = () => {
 
   return (
     <div className="services-page">
-      <div className="page-header">
-        <div className="container">
-          <h1>Our Certification Services</h1>
-          <p>Comprehensive ISO certification services to help your organization achieve international standards</p>
-        </div>
-      </div>
+      <PageHero
+        title="Our Certification Services"
+        subtitle="Comprehensive ISO certification services to help your organization achieve international standards"
+        breadcrumb={breadcrumb}
+      />
 
       <section className="section">
         <div className="container">

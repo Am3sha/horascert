@@ -10,11 +10,11 @@ const TopBar = () => {
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M18.3333 14.1V16.6C18.3333 17.1523 17.8856 17.6 17.3333 17.6H17.1667C9.34234 17.6 3 11.2577 3 3.43333V3.26667C3 2.71438 3.44772 2.26667 4 2.26667H6.5C6.96024 2.26667 7.35775 2.58034 7.46358 3.02775L8.15385 5.79231C8.24872 6.19178 8.09615 6.60833 7.76289 6.85833L6.5 7.8C7.5 10.3 9.7 12.5 12.2 13.5L13.1417 12.2371C13.3917 11.9038 13.8082 11.7513 14.2077 11.8462L16.9723 12.5364C17.4197 12.6423 17.7333 13.0398 17.7333 13.5V14.1H18.3333Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span>+20 123 456 7890</span>
+            <span>+20 1066672250</span>
             <span className="separator">|</span>
-            <span>+20 123 456 7891</span>
+            <span>+20 1009551633</span>
             <span className="separator">|</span>
-            <span>+20 123 456 7892</span>
+            <span>+20 1009610880</span>
           </div>
           <div className="top-bar-item">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

@@ -1,24 +1,22 @@
 import React from 'react';
+import PageHero from '../components/PageHero/PageHero';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
 
 const About = () => {
+  useScrollReveal();
+  const breadcrumb = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About Us', isCurrent: true }
+  ];
+
   return (
     <div className="about-page">
-      <div className="page-header">
-        <div className="container">
-          <div className="about-header-row">
-            <h1 className="about-header-title">About Us</h1>
-            <img
-              src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png"
-              alt="HORAS Cert Logo"
-              className="company-logo about-header-logo"
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-          </div>
-        </div>
-      </div>
+      <PageHero
+        title="About Us"
+        subtitle="Learn more about our certification expertise and global presence"
+        breadcrumb={breadcrumb}
+      />
 
       <section className="section about-section">
         <div className="container">
@@ -28,10 +26,10 @@ const About = () => {
 
           <h3>Our Accredited Standards</h3>
           <ul className="standards-list">
-            <li>ISO 9001:2015 - Quality Management System</li>
-            <li>ISO 14001:2015 - Environmental Management System</li>
-            <li>ISO 45001:2018 - Occupational Health and Safety Management System</li>
-            <li>ISO 22000:2018 - Food Safety Management System</li>
+            <p>ISO 9001:2015 - Quality Management System</p><br />
+            <p>ISO 14001:2015 - Environmental Management System</p><br />
+            <p>ISO 45001:2018 - Occupational Health and Safety Management System</p><br />
+            <p>ISO 22000:2018 - Food Safety Management System</p>
           </ul>
 
           <h3>Industries We Serve</h3>
