@@ -15,7 +15,8 @@ const HeroSlider = () => {
         subtitle: "Excellence in Quality Systems",
         description:
           "HORAS Cert is your trusted partner for internationally recognized ISO certification services, accredited by the Egyptian Accreditation Council (EGAC) and recognized through IAF MLA.",
-        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1280&q=75&fm=webp",
+        image: "imges/About-home.jpeg",
+        imageAlt: "HORAS Cert International ISO Certification Services",
         ctaPrimary: { text: "Get Started", link: "/application" },
         ctaSecondary: { text: "Our Services", link: "/services" }
       },
@@ -26,7 +27,8 @@ const HeroSlider = () => {
         subtitle: "ISO 9001 | ISO 14001 | ISO 45001",
         description:
           "Comprehensive certification services for quality, environmental, and occupational health & safety management systems to help your organization achieve global recognition.",
-        image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1280&q=75&fm=webp",
+        image: "imges/About-home.jpeg",
+        imageAlt: "HORAS Cert International ISO Certification Services",
         ctaPrimary: { text: "Apply Now", link: "/application" },
         ctaSecondary: { text: "View Standards", link: "/services" }
       },
@@ -37,7 +39,8 @@ const HeroSlider = () => {
         subtitle: "Building Trust Through Certification",
         description:
           "Join hundreds of successful organizations across Egypt, Saudi Arabia, and UAE who have achieved international standards with HORAS Cert certification.",
-        image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1280&q=75&fm=webp",
+        image: "imges/abb0.jpg.jpeg",
+        imageAlt: "HORAS Cert Trusted Certification Services",
         ctaPrimary: { text: "Contact Us", link: "/contact" },
         ctaSecondary: { text: "Our Clients", link: "/clients" }
       }
@@ -97,7 +100,7 @@ const HeroSlider = () => {
           key={activeSlide.id}
           className="slide-image"
           src={activeSlide.image}
-          alt=""
+          alt={activeSlide.imageAlt || activeSlide.title}
           aria-hidden="true"
           decoding="async"
           loading={currentSlide === 0 ? 'eager' : 'lazy'}

@@ -29,6 +29,7 @@ const IsoCertificationServices = lazy(() => import('./pages/IsoCertificationServ
 const QualityPolicy = lazy(() => import('./pages/QualityPolicy'));
 const ImpartialityPolicy = lazy(() => import('./pages/ImpartialityPolicy'));
 const ConfidentialityPolicy = lazy(() => import('./pages/ConfidentialityPolicy'));
+const ComplaintsAppealsProcedure = lazy(() => import('./pages/ComplaintsAppealsProcedure'));
 
 function Loading() {
   return (
@@ -148,6 +149,7 @@ function AppContent() {
             <Route path="/about/quality-policy" element={<QualityPolicy />} />
             <Route path="/about/impartiality-policy" element={<ImpartialityPolicy />} />
             <Route path="/about/confidentiality-policy" element={<ConfidentialityPolicy />} />
+            <Route path="/about/complaints-appeals-procedure" element={<ComplaintsAppealsProcedure />} />
             <Route path="/services" element={<Services />} />
             <Route path="/certification-validation" element={<CertificationValidation />} />
             <Route path="/services/:serviceId" element={<ServiceDetail />} />

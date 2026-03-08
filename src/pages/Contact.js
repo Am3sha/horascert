@@ -36,7 +36,7 @@ const Contact = () => {
             <div>
               <div className="info-title">Email Us</div>
               <div className="info-value">
-                <a href="mailto:info@horascert.com">info@horascert.com </a> <br /> <a href="mailto:tarik@horascert.com">tarik@horascert.com</a>
+                <a href="mailto:info@horascert.com">info@horascert.com</a> <br /> <a href="mailto:tarik@horascert.com"> tarik@horascert.com</a>
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@ const Contact = () => {
             <div>
               <div className="info-title">Call Us</div>
               <div className="info-value">
-                <p>+20 1066672250 <br /> +20 1009551633 </p>
+                <p><a href="tel:+201066672250">+20 106 667 2250</a><br /> <a href="tel:+201009551633">+20 100 955 1633</a><br /> <a href="tel:+201009610880">+20 100 961 0880</a></p>
 
               </div>
             </div>
@@ -66,7 +66,7 @@ const Contact = () => {
             <div>
               <div className="info-title">Visit Us</div>
               <div className="info-value">
-                Building No 74 First District Sheikh Zayed -6th of October City-Egypt
+                <a href="https://www.google.com/maps/search/Building++No++74++-++First+District+-+Sheikh+Zayed+-+6th+of+October+City+-+Egypt/@29.997198,30.95466,14z?hl=en&entry=ttu&g_ep=EgoyMDI2MDMwNC4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Building No 74 First District Sheikh Zayed -6th of October City-Egypt</a>
               </div>
             </div>
           </div>

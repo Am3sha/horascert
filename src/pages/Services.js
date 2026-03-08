@@ -16,28 +16,28 @@ const Services = () => {
       id: 'iso-9001',
       name: 'ISO 9001:2015',
       tagline: 'Quality Management System',
-      icon: '/imges/ISO_9001-2015-1003x1024.jpg',
+      icon: '/imges/iso 9001-2015 .jpeg',
       description: 'International standard for quality management systems that helps organizations demonstrate their ability to consistently provide products and services that meet customer and regulatory requirements.'
     },
     {
       id: 'iso-14001',
       name: 'ISO 14001:2015',
       tagline: 'Environmental Management System',
-      icon: '/imges/iso14001-1024x1024.png',
+      icon: '/imges/iso 14001.jpeg',
       description: 'Framework for an effective environmental management system, helping organizations improve their environmental performance through more efficient use of resources and reduction of waste.'
     },
     {
       id: 'iso-45001',
       name: 'ISO 45001:2018',
       tagline: 'Occupational Health & Safety',
-      icon: '/imges/iso-45001.png',
+      icon: '/imges/iso 45001-2018.jpeg',
       description: 'International standard for occupational health and safety management systems, providing a framework to improve employee safety, reduce workplace risks, and create better working conditions.'
     },
     {
       id: 'iso-22000',
       name: 'ISO 22000:2018',
       tagline: 'Food Safety Management System',
-      icon: '/imges/ISO-22000-2018.jpg',
+      icon: '/imges/2200.jpeg',
       description: 'Specifies requirements for a food safety management system to ensure food is safe at the time of human consumption, covering the entire food chain from farm to fork.'
     },
     {

@@ -47,7 +47,8 @@ const Navbar = () => {
     { path: '/about/iso-certification-services', label: 'ISO Certification Services' },
     { path: '/about/quality-policy', label: 'Quality Policy' },
     { path: '/about/impartiality-policy', label: 'Impartiality Policy' },
-    { path: '/about/confidentiality-policy', label: 'Confidentiality Policy' }
+    { path: '/about/confidentiality-policy', label: 'Confidentiality Policy' },
+    { path: '/about/complaints-appeals-procedure', label: 'Complaints & Appeals' }
   ];
 
   const servicesDropdownItems = [

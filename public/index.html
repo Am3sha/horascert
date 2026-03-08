@@ -5,6 +5,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+
     <!-- ✅ Favicon (اللوجو في التبويب) -->
     <link rel="icon" href="%PUBLIC_URL%/imgeteam/favicon.ico" />
 
@@ -40,11 +45,18 @@
       content="Welcome To HORASCert – Organization for Quality Systems and Certifications recognized by EGAC." 
     />
 
-    <!-- Fonts -->
+    <!-- Fonts with performance optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1280&q=75&fm=webp" crossorigin>
+    
+    <!-- Critical font preload -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fonts.gstatic.com/s/opensans/v18/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2">
+    
+    <link rel="preload" as="image" href="/imges/About-home.jpeg" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
