@@ -23,6 +23,8 @@ const AdminRequestDetail = lazy(() => import('./pages/AdminRequestDetail'));
 const CertificateDetail = lazy(() => import('./pages/CertificateDetail'));
 const CertificateView = lazy(() => import('./pages/CertificateView'));
 const CertificationValidation = lazy(() => import('./pages/CertificationValidation'));
+const TrainingValidation = lazy(() => import('./pages/TrainingValidation'));
+const TrainingCertificateView = lazy(() => import('./pages/TrainingCertificateView'));
 const HorasCertServices = lazy(() => import('./pages/HorasCertServices'));
 const AccreditationsRegistrations = lazy(() => import('./pages/AccreditationsRegistrations'));
 const IsoCertificationServices = lazy(() => import('./pages/IsoCertificationServices'));
@@ -140,6 +142,7 @@ function AppContent() {
             />
             <Route path="/certificates/:certificateNumber" element={<CertificateDetail />} />
             <Route path="/certificate/:certificateId" element={<CertificateView />} />
+            <Route path="/verify/training/:qrCode" element={<TrainingCertificateView />} />
             <Route path="/application" element={<Application />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
@@ -152,6 +155,7 @@ function AppContent() {
             <Route path="/about/complaints-appeals-procedure" element={<ComplaintsAppealsProcedure />} />
             <Route path="/services" element={<Services />} />
             <Route path="/certification-validation" element={<CertificationValidation />} />
+            <Route path="/training-validation" element={<TrainingValidation />} />
             <Route path="/services/:serviceId" element={<ServiceDetail />} />
             <Route path="/clients" element={<Clients />} />
             {/* Catch-all → redirect to home */}

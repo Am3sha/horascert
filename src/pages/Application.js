@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import PageHero from '../components/PageHero/PageHero';
+import { submitApplication } from '../services/api';
 import './Application.css';
 
 // Country list
@@ -597,100 +598,20 @@ const Application = () => {
     });
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
-      const response = await fetch(`${API_URL}/api/applications`, {
-        method: 'POST',
-        body: payload,
-      });
+      const result = await submitApplication(payload);
 
-      let data = null;
-      let rawText = '';
-      try {
-        rawText = await response.text();
-        data = rawText ? JSON.parse(rawText) : null;
-      } catch {
-        data = null;
+      if (result.success) {
+        setSubmitStatus('success');
+        setSubmitMessage('Application submitted successfully! We will contact you soon.');
+      } else {
+        setSubmitStatus('error');
+        setSubmitMessage(result.error || 'Failed to submit application');
       }
-
-      if (!response.ok) {
-        const backendMessage = (data && (data.message || data.error))
-          ? (data.message || data.error)
-          : (rawText || 'Failed to submit application');
-
-        const validationDetails = (data && Array.isArray(data.errors) && data.errors.length)
-          ? data.errors.map((e2) => e2.msg).filter(Boolean).join(' | ')
-          : '';
-
-        const composed = validationDetails ? `${backendMessage} (${validationDetails})` : backendMessage;
-        throw new Error(composed);
-      }
-
-      setSubmitStatus('success');
-      setSubmitError('');
-
-      // Reset form
-      setFormData({
-        companyName: '',
-        telephone: '',
-        fax: '',
-        email: '',
-        website: '',
-        addressLine1: '',
-        addressLine2: '',
-        city: '',
-        state: '',
-        postalCode: '',
-        country: '',
-
-        executiveManagerName: '',
-        executiveManagerMobile: '',
-        executiveManagerEmail: '',
-
-        contactPersonName: '',
-        contactPersonPosition: '',
-        contactPersonMobile: '',
-        contactPersonEmail: '',
-
-        workforceTotalEmployees: '',
-        workforceEmployeesPerShift: '',
-        workforceNumberOfShifts: '',
-        workforceSeasonalEmployees: '',
-
-        desiredStandards: [],
-        certificationProgramme: '',
-        transferReason: '',
-        transferExpiringDate: '',
-
-        iso9001DesignAndDevelopment: '',
-        iso9001OtherNonApplicableClauses: '',
-        iso9001OtherNonApplicableClausesText: '',
-
-        iso14001SitesManaged: '',
-        iso14001RegisterOfSignificantAspects: '',
-        iso14001EnvironmentalManagementManual: '',
-        iso14001InternalAuditProgramme: '',
-        iso14001InternalAuditImplemented: '',
-
-        iso22000HaccpImplementation: '',
-        iso22000HaccpStudies: '',
-        iso22000Sites: '',
-        iso22000ProcessLines: '',
-        iso22000ProcessingType: '',
-
-        iso45001HazardsIdentified: '',
-        iso45001CriticalRisks: ''
-      });
-
-      setAttachedFiles([]);
-      setStep(1);
-
-      setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitError(error && error.message ? error.message : 'Failed to submit application');
-      setTimeout(() => setSubmitStatus(null), 5000);
+      setSubmitMessage(error.message || 'Failed to submit application');
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 

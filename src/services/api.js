@@ -168,14 +168,6 @@ export async function fetchCertificateByNumber(certificateNumber) {
     return handle(publicInstance.get(`${API_PREFIX}/certificates/${encoded}`));
 }
 
-export async function fetchCertificateQrBlob(certificateId) {
-    const encoded = encodeURIComponent((certificateId || '').trim());
-    const res = await publicInstance.get(`${API_PREFIX}/certificates/${encoded}/qr`, {
-        responseType: 'blob'
-    });
-    return res.data;
-}
-
 export async function deleteCertificateById(certificateId) {
     return handle(instance.delete(`${API_PREFIX}/certificates/certificateId/${certificateId}`));
 }
@@ -238,6 +230,34 @@ export async function submitContactEmail(payload) {
     return handle(publicInstance.post(`${API_PREFIX}/emails`, payload));
 }
 
+// ========================================================================
+// TRAINING CERTIFICATES
+// ========================================================================
+
+export async function getTrainingCertificates(filters = {}) {
+    return handle(instance.get(`${API_PREFIX}/training-certificates`, { params: filters }));
+}
+
+export async function getTrainingCertificateById(id) {
+    return handle(instance.get(`${API_PREFIX}/training-certificates/${id}`));
+}
+
+export async function createTrainingCertificate(data) {
+    return handle(instance.post(`${API_PREFIX}/training-certificates`, data));
+}
+
+export async function updateTrainingCertificate(id, data) {
+    return handle(instance.put(`${API_PREFIX}/training-certificates/${id}`, data));
+}
+
+export async function deleteTrainingCertificate(id) {
+    return handle(instance.delete(`${API_PREFIX}/training-certificates/${id}`));
+}
+
+export async function verifyTrainingCertificate(qrCode) {
+    return handle(publicInstance.get(`${API_PREFIX}/training-certificates/verify/${qrCode}`));
+}
+
 export default {
     fetchEmails,
     fetchApplications,
@@ -259,6 +279,11 @@ export default {
     verifyAuth,
     submitApplication,
     submitContactEmail,
-    publicInstance
-    // fetchCertificateQrBlob - DEPRECATED: QR codes now generated in Frontend using qrcode.react and qrcode libraries
+    publicInstance,
+    getTrainingCertificates,
+    getTrainingCertificateById,
+    createTrainingCertificate,
+    updateTrainingCertificate,
+    deleteTrainingCertificate,
+    verifyTrainingCertificate
 };

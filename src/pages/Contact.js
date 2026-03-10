@@ -36,9 +36,13 @@ const Contact = () => {
             <div>
               <div className="info-title">Email Us</div>
               <div className="info-value">
-                <a href="mailto:info@horascert.com">info@horascert.com</a> <br /> <a href="mailto:tarik@horascert.com"> tarik@horascert.com</a>
+                <ul className="email-list">
+                  <li><a href="mailto:info@horascert.com">info@horascert.com</a></li>
+                  <li><a href="mailto:tarik@horascert.com">tarik@horascert.com</a></li>
+                </ul>
               </div>
             </div>
+
           </div>
 
           <div className="contact-info-card">
@@ -50,8 +54,11 @@ const Contact = () => {
             <div>
               <div className="info-title">Call Us</div>
               <div className="info-value">
-                <p><a href="tel:+201066672250">+20 106 667 2250</a><br /> <a href="tel:+201009551633">+20 100 955 1633</a><br /> <a href="tel:+201009610880">+20 100 961 0880</a></p>
-
+                <ul>
+                  <li><a href="tel:+201066672250">+20 106 667 2250</a></li>
+                  <li><a href="tel:+201009551633">+20 100 955 1633</a></li>
+                  <li><a href="tel:+201009610880">+20 100 961 0880</a></li>
+                </ul>
               </div>
             </div>
           </div>

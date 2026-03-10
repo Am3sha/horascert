@@ -3,6 +3,7 @@ import { adminLogout } from '../services/api';
 import ApplicationsTab from './admin/ApplicationsTab';
 import EmailsTab from './admin/EmailsTab';
 import CertificatesTab from './admin/CertificatesTab';
+import TrainingCertificatesTab from './admin/TrainingCertificatesTab';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -66,12 +67,20 @@ const AdminDashboard = () => {
                 >
                     Emails
                 </button>
+                <button
+                    type="button"
+                    className={`tab-btn ${activeTab === 'training' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('training')}
+                >
+                    Training Certificates
+                </button>
             </div>
 
             <div className="dashboard-content">
                 {activeTab === 'certificates' && <CertificatesTab onError={setError} />}
                 {activeTab === 'applications' && <ApplicationsTab onError={setError} />}
                 {activeTab === 'emails' && <EmailsTab onError={setError} />}
+                {activeTab === 'training' && <TrainingCertificatesTab onError={setError} />}
             </div>
         </div>
     );

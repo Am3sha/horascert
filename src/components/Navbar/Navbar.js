@@ -52,7 +52,8 @@ const Navbar = () => {
   ];
 
   const servicesDropdownItems = [
-    { path: '/certification-validation', label: 'Certification Validation' }
+    { path: '/certification-validation', label: 'Certification Validation' },
+    { path: '/training-validation', label: 'Training Certificate Validation' }
   ];
 
   return (

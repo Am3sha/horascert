@@ -176,7 +176,10 @@
   padding: 10px 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .delete-confirm-btn:disabled {
@@ -647,7 +650,8 @@
 
 .status-cancelled,
 .status-withdrawn,
-.status-expired {
+.status-expired,
+.status-revoked {
   background: #fee2e2;
   color: #991b1b;
 }
