@@ -1,214 +1,200 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { verifyTrainingCertificate } from '../services/api';
-// REUSE Certificates CSS
-import './CertificateView.css';
+import './TrainingCertificateView.css';
 
 function TrainingCertificateView() {
-    const { qrCode } = useParams();
-    const [cert, setCert] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [verified, setVerified] = useState(false);
+  const { qrCode } = useParams();
+  const [cert, setCert] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [verified, setVerified] = useState(false);
 
-    useEffect(() => {
-        fetchCertificate();
-    }, [qrCode]);
+  useEffect(() => {
+    fetchCertificate();
+  }, [qrCode]);
 
-    const fetchCertificate = async () => {
-        try {
-            const res = await verifyTrainingCertificate(qrCode);
-            if (res && res.verified) {
-                setCert(res.data);
-                setVerified(true);
-            }
-        } catch (error) {
-            // Error handling - certificate verification failed
-        } finally {
-            setLoading(false);
-        }
-    };
+  const fetchCertificate = async () => {
+    try {
+      const res = await verifyTrainingCertificate(qrCode);
+      if (res.verified) {
+        setCert(res.data);
+        setVerified(true);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    if (loading) return (
-        <div className="certificate-view-page">
-            <p className="loading">Verifying Training Certificate...</p>
-        </div>
-    );
-    if (!verified || !cert) return (
-        <div className="certificate-view-page">
-            <p className="error">Training Certificate not found or invalid</p>
-        </div>
-    );
-
-    const isExpired = new Date() > new Date(cert.expiryDate);
-
+  if (loading) {
     return (
-        <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)', padding: '60px 20px' }}>
-            <div style={{ maxWidth: 800, margin: '0 auto' }}>
-                {/* Header Badge */}
-                <div style={{ textAlign: 'center', marginBottom: 40 }}>
-                    <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 8,
-                        background: '#10b981',
-                        color: 'white',
-                        padding: '8px 16px',
-                        borderRadius: 8,
-                        fontSize: 13,
-                        fontWeight: 600,
-                        letterSpacing: 0.5
-                    }}>
-                        <span style={{ fontSize: 18 }}>✓</span>
-                        VERIFIED CERTIFICATE
-                    </div>
-                </div>
-
-                {/* Main Certificate Card */}
-                <div style={{
-                    background: 'white',
-                    borderRadius: 12,
-                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
-                    overflow: 'hidden'
-                }}>
-                    {/* Header Section */}
-                    <div style={{
-                        background: 'linear-gradient(135deg, #0066cc 0%, #0052a3 100%)',
-                        color: 'white',
-                        padding: 40,
-                        textAlign: 'center'
-                    }}>
-                        <h1 style={{ margin: 0, fontSize: 32, fontWeight: 300, letterSpacing: 2 }}>TRAINING CERTIFICATE</h1>
-                        <div style={{ marginTop: 20, fontSize: 28, fontWeight: 700, letterSpacing: 1 }}>
-                            {cert.certificateNumber}
-                        </div>
-                    </div>
-
-                    {/* Content Section */}
-                    <div style={{ padding: 50 }}>
-                        {/* Trainee Info */}
-                        <div style={{ marginBottom: 40 }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: 20, alignItems: 'start' }}>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: '#0066cc', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Trainee Name
-                                </div>
-                                <div style={{ fontSize: 20, fontWeight: 700, color: '#111' }}>
-                                    {cert.traineeName}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Organization */}
-                        <div style={{ marginBottom: 40 }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: 20, alignItems: 'start' }}>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: '#0066cc', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Organization
-                                </div>
-                                <div style={{ fontSize: 16, color: '#333' }}>
-                                    {cert.organization}
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr style={{ border: 'none', borderTop: '2px solid #e5e7eb', margin: '40px 0' }} />
-
-                        {/* Training Details */}
-                        <div style={{ marginBottom: 40 }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: 20, alignItems: 'start' }}>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: '#0066cc', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Course
-                                </div>
-                                <div style={{ fontSize: 16, fontWeight: 600, color: '#111' }}>
-                                    {cert.courseName}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Training Info Grid */}
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 30, marginBottom: 40 }}>
-                            <div>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: '#666', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Trainer
-                                </div>
-                                <div style={{ fontSize: 15, color: '#333' }}>
-                                    {cert.training?.trainer || 'Not specified'}
-                                </div>
-                            </div>
-                            <div>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: '#666', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Training Hours
-                                </div>
-                                <div style={{ fontSize: 15, color: '#333' }}>
-                                    {cert.hours} Hours
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr style={{ border: 'none', borderTop: '2px solid #e5e7eb', margin: '40px 0' }} />
-
-                        {/* Dates Grid */}
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20, marginBottom: 40 }}>
-                            <div>
-                                <div style={{ fontSize: 12, fontWeight: 600, color: '#666', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Training Date
-                                </div>
-                                <div style={{ fontSize: 15, fontWeight: 600, color: '#0066cc' }}>
-                                    {new Date(cert.trainingDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                </div>
-                            </div>
-                            <div>
-                                <div style={{ fontSize: 12, fontWeight: 600, color: '#666', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Issue Date
-                                </div>
-                                <div style={{ fontSize: 15, fontWeight: 600, color: '#0066cc' }}>
-                                    {new Date(cert.issueDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                </div>
-                            </div>
-                            <div>
-                                <div style={{ fontSize: 12, fontWeight: 600, color: '#666', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Expiry Date
-                                </div>
-                                <div style={{ fontSize: 15, fontWeight: 600, color: isExpired ? '#dc2626' : '#0066cc' }}>
-                                    {new Date(cert.expiryDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr style={{ border: 'none', borderTop: '2px solid #e5e7eb', margin: '40px 0' }} />
-
-                        {/* Status Section */}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', background: isExpired ? '#fee2e2' : '#ecfdf5', borderRadius: 8 }}>
-                            <div>
-                                <div style={{ fontSize: 12, fontWeight: 600, color: '#666', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    Status
-                                </div>
-                                <div style={{ fontSize: 18, fontWeight: 700, color: isExpired ? '#dc2626' : '#10b981' }}>
-                                    {isExpired ? '❌ EXPIRED' : '✓ ACTIVE'}
-                                </div>
-                            </div>
-                            <div style={{ fontSize: 40, opacity: 0.2 }}>
-                                {isExpired ? '⚠' : '✓'}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div style={{
-                        background: '#f9fafb',
-                        padding: 30,
-                        textAlign: 'center',
-                        borderTop: '1px solid #e5e7eb'
-                    }}>
-                        <div style={{ fontSize: 13, color: '#666', marginBottom: 8 }}>
-                            Issued by HORAS CERT
-                        </div>
-                        <div style={{ fontSize: 12, color: '#999' }}>
-                            This certificate verifies the completion of the specified training course.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div className="training-cert-loading">
+        <div className="spinner"></div>
+        <p>Verifying certificate...</p>
+      </div>
     );
+  }
+
+  if (!verified) {
+    return (
+      <div className="training-cert-error">
+        <h2>Certificate Not Found</h2>
+        <p>The certificate you're looking for doesn't exist or has been revoked.</p>
+        <Link to="/" className="btn-primary">Back to Home</Link>
+      </div>
+    );
+  }
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+  };
+
+  const isExpired = new Date() > new Date(cert.expiryDate);
+
+  return (
+    <div className="training-cert-view-page">
+      <div className="training-cert-card">
+        {/* Top gradient bar */}
+        <div className="training-cert-top-bar"></div>
+
+        {/* Logo */}
+        <div className="training-cert-logo">
+                  <img src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png" alt="HORAS-Cert" />
+        </div>
+
+        {/* Status badge */}
+        <div className="training-cert-status">
+          <span className={`training-cert-badge ${isExpired ? 'expired' : cert.status}`}>
+            {isExpired ? 'Expired' : cert.status}
+          </span>
+        </div>
+
+        {/* Main content */}
+        <div className="training-cert-content">
+          {/* Title */}
+          <div className="training-cert-title">
+            <h1>CERTIFICATE OF</h1>
+            <div className="training-cert-subtitle">REGISTRATION</div>
+          </div>
+
+          {/* Certify text */}
+          <div className="training-cert-certify">
+            HORAS Cert hereby certify that
+          </div>
+
+          {/* Trainee name (BIG RED) */}
+          <div className="training-cert-trainee-name">
+            {cert.traineeName}
+          </div>
+
+          {/* Organization (BLUE) */}
+          <div className="training-cert-organization">
+            {cert.organization}
+          </div>
+
+          {/* Address */}
+          <div className="training-cert-address">
+            {cert.address || 'Egypt'}
+          </div>
+
+          {/* Completion text */}
+          <div className="training-cert-completion">
+            Has Successfully completed the
+          </div>
+
+          {/* Course name (BLUE) */}
+          <div className="training-cert-course">
+            {cert.courseName}
+          </div>
+
+          {/* Date & Hours */}
+          <div className="training-cert-date-hours">
+            {formatDate(cert.trainingDate)} - {cert.hours} Training Hours
+          </div>
+
+          {/* Certificate details + QR */}
+          <div className="training-cert-details">
+            <div className="training-cert-info">
+              <div className="training-cert-info-row">
+                <div className="training-cert-info-label">
+                  Certificate Number:
+                </div>
+                <div className="training-cert-info-value">
+                  {cert.certificateNumber}
+                </div>
+              </div>
+              <div className="training-cert-info-row">
+                <div className="training-cert-info-label">
+                  Original Issued Date
+                </div>
+                <div className="training-cert-info-value">
+                  {formatDate(cert.issueDate)}
+                </div>
+              </div>
+              <div className="training-cert-info-row">
+                <div className="training-cert-info-label">
+                  Issue Date
+                </div>
+                <div className="training-cert-info-value">
+                  {formatDate(cert.issueDate)}
+                </div>
+              </div>
+              <div className="training-cert-info-row">
+                <div className="training-cert-info-label">
+                  Validity Date
+                </div>
+                <div className="training-cert-info-value">
+                  {formatDate(cert.expiryDate)}
+                </div>
+              </div>
+            </div>
+
+            {/* QR Code */}
+            <div className="training-cert-qr">
+              <img 
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${window.location.href}`}
+                alt="QR Code"
+              />
+            </div>
+          </div>
+
+          {/* Signatures */}
+          <div className="training-cert-signatures">
+            {/* Managing Director */}
+            <div className="training-cert-signature">
+              <div className="training-cert-sig-title">Managing Director</div>
+              <div className="training-cert-sig-name">Waleed Amasha</div>
+              {/* Signature image or placeholder */}
+              <div className="training-cert-sig-placeholder">
+                Waleed M.Amasha
+              </div>
+            </div>
+
+            {/* Trainer */}
+            <div className="training-cert-signature">
+              <div className="training-cert-sig-title">Trainer</div>
+              <div className="training-cert-sig-name">
+                {cert.trainer || 'Tarik Moussa'}
+              </div>
+              <div className="training-cert-sig-placeholder">
+                {cert.trainer || 'Tarik Moussa'}
+              </div>
+            </div>
+          </div>
+
+          {/* Company Stamp */}
+          { <div className="training-cert-stamp">
+            <img src="/imgeteam/Designer.png" alt="Company Stamp" />
+          </div> }
+        </div>
+        </div>
+      </div>
+  );
 }
 
 export default TrainingCertificateView;

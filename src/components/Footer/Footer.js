@@ -110,7 +110,7 @@ const Footer = () => {
                   <path d="M10 10.5C11.3807 10.5 12.5 9.38071 12.5 8C12.5 6.61929 11.3807 5.5 10 5.5C8.61929 5.5 7.5 6.61929 7.5 8C7.5 9.38071 8.61929 10.5 10 10.5Z" stroke="currentColor" strokeWidth="1.5" />
                   <path d="M10 17.5C10 17.5 16.25 12.5 16.25 8C16.25 4.5 13.5 2.5 10 2.5C6.5 2.5 3.75 4.5 3.75 8C3.75 12.5 10 17.5 10 17.5Z" stroke="currentColor" strokeWidth="1.5" />
                 </svg>
-                <span className="contact-text">  
+                <span className="contact-text">
                   <a href="https://www.google.com/maps/search/Building++No++74++-++First+District+-+Sheikh+Zayed+-+6th+of+October+City+-+Egypt/@29.997198,30.95466,14z?hl=en&entry=ttu&g_ep=EgoyMDI2MDMwNC4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Building No 74 First District Sheikh Zayed -6th of October City-Egypt</a></span>
               </div>
               <div className="contact-item">

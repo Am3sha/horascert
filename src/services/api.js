@@ -168,6 +168,12 @@ export async function fetchCertificateByNumber(certificateNumber) {
     return handle(publicInstance.get(`${API_PREFIX}/certificates/${encoded}`));
 }
 
+// PUBLIC: Verify certificate by number (no auth required)
+export async function verifyCertificate(certificateNumber) {
+    const encoded = encodeURIComponent((certificateNumber || '').trim());
+    return handle(publicInstance.get(`${API_PREFIX}/certificates/verify/${encoded}`));
+}
+
 export async function deleteCertificateById(certificateId) {
     return handle(instance.delete(`${API_PREFIX}/certificates/certificateId/${certificateId}`));
 }
@@ -180,6 +186,10 @@ export async function updateCertificateById(certificateId, payload) {
         }));
     }
     return handle(instance.put(`${API_PREFIX}/certificates/certificateId/${certificateId}`, payload));
+}
+
+export async function getCertificateStats() {
+    return handle(instance.get(`${API_PREFIX}/certificates/stats`));
 }
 
 export async function deleteApplicationById(applicationId) {
@@ -258,6 +268,10 @@ export async function verifyTrainingCertificate(qrCode) {
     return handle(publicInstance.get(`${API_PREFIX}/training-certificates/verify/${qrCode}`));
 }
 
+export async function getTrainingCertificateStats() {
+    return handle(instance.get(`${API_PREFIX}/training-certificates/stats`));
+}
+
 export default {
     fetchEmails,
     fetchApplications,
@@ -271,8 +285,10 @@ export default {
     createCertificate,
     fetchCertificateById,
     fetchCertificateByNumber,
+    verifyCertificate,
     deleteCertificateById,
     updateCertificateById,
+    getCertificateStats,
     deleteEmail,
     adminLogin,
     adminLogout,
@@ -285,5 +301,6 @@ export default {
     createTrainingCertificate,
     updateTrainingCertificate,
     deleteTrainingCertificate,
-    verifyTrainingCertificate
+    verifyTrainingCertificate,
+    getTrainingCertificateStats
 };

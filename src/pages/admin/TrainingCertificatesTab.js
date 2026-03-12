@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import QRCode from 'qrcode';
 import {
     getTrainingCertificates,
+    getTrainingCertificateStats,
     createTrainingCertificate,
     updateTrainingCertificate,
     deleteTrainingCertificate,
@@ -14,6 +15,18 @@ export default function TrainingCertificatesTab({ onError }) {
     const [certificates, setCertificates] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
+    const [search, setSearch] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
+
+    // Real stats from server
+    const [stats, setStats] = useState({
+        total: 0,
+        active: 0,
+        expired: 0,
+        revoked: 0,
+        thisMonth: 0,
+        expiringSoon: 0
+    });
 
     const [showAddCertificate, setShowAddCertificate] = useState(false);
     const [editingCertificate, setEditingCertificate] = useState(null);
@@ -27,19 +40,19 @@ export default function TrainingCertificatesTab({ onError }) {
         expiryDate: '',
     });
 
-    const trainingCategories = [
-        'ISO 9001',
-        'ISO 14001',
-        'ISO 45001',
-        'HACCP',
-        'GMP',
-        'Other'
-    ];
-
     const load = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await getTrainingCertificates({});
+            // Fetch stats
+            const statsRes = await getTrainingCertificateStats();
+            if (statsRes && statsRes.success) {
+                setStats(statsRes.stats);
+            }
+
+            // Fetch certificates with optional status filter
+            const res = await getTrainingCertificates({
+                ...(statusFilter && { status: statusFilter })
+            });
             if (res && res.success) {
                 setCertificates(res.data || []);
             } else {
@@ -52,7 +65,7 @@ export default function TrainingCertificatesTab({ onError }) {
         } finally {
             setLoading(false);
         }
-    }, [onError]);
+    }, [onError, statusFilter]);
 
     useEffect(() => {
         load();
@@ -292,224 +305,216 @@ export default function TrainingCertificatesTab({ onError }) {
         }
     };
 
+    // Filter certificates for search
+    const filteredCertificates = certificates.filter(cert => {
+        if (!search) return true;
+        const s = search.toLowerCase();
+        return (
+            (cert.certificateNumber && cert.certificateNumber.toLowerCase().includes(s)) ||
+            (cert.trainee && cert.trainee.name && cert.trainee.name.toLowerCase().includes(s)) ||
+            (cert.training && cert.training.courseName && cert.training.courseName.toLowerCase().includes(s))
+        );
+    });
+
     return (
         <div className="tab-panel">
-            <div className="panel-header">
-                <h2>Training Certificates Management</h2>
-                <button
-                    onClick={handleAddNew}
-                    className="btn-primary"
-                    type="button"
+            <div className="stats-grid">
+                <div className="stat-card">
+                    <div className="stat-icon stat-icon-blue">📜</div>
+                    <div className="stat-value">{stats.total}</div>
+                    <div className="stat-label">Total Certificates</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon stat-icon-green">✓</div>
+                    <div className="stat-value">{stats.active}</div>
+                    <div className="stat-label">Active</div>
+                </div>
+                <div
+                    className="stat-card"
+                    onClick={() => setStatusFilter(statusFilter === 'expired' ? '' : 'expired')}
+                    style={{ cursor: 'pointer', opacity: statusFilter === 'expired' ? 0.7 : 1 }}
                 >
-                    + Create New Training Certificate
-                </button>
+                    <div className="stat-icon stat-icon-orange">⏰</div>
+                    <div className="stat-value">{stats.expired}</div>
+                    <div className="stat-label">Expired</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon stat-icon-purple">📊</div>
+                    <div className="stat-value">{stats.thisMonth}</div>
+                    <div className="stat-label">This Month</div>
+                </div>
             </div>
 
+            <div className="dash-page-title" style={{ marginTop: '2rem' }}>Training Certificates Management</div>
+            <div className="dash-page-sub">Manage and verify training certificates</div>
+
             {showAddCertificate && (
-                <div className="modal-overlay">
-                    <div className="modal-content" style={{ maxWidth: 750, padding: 30 }}>
-                        <h2 style={{ marginTop: 0 }}>
-                            {editingCertificate ? 'Edit Training Certificate' : 'Create Training Certificate'}
-                        </h2>
-
-                        <form onSubmit={handleSaveForm} style={{ display: 'grid', gap: 20 }}>
-                            {/* Certificate Number */}
-                            <div style={{ display: 'grid', gap: 6 }}>
-                                <label style={{ fontWeight: 600, color: '#333' }}>Certificate Number * {editingCertificate && '(Read-only)'}</label>
-                                <input
-                                    className="status-select"
-                                    type="text"
-                                    placeholder="e.g., TRAIN-001 or HOR-TR-2025-09"
-                                    value={formData.certificateNumber}
-                                    onChange={(e) => setFormData(f => ({ ...f, certificateNumber: e.target.value }))}
-                                    disabled={!!editingCertificate}
-                                    required
-                                    style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
-                                />
-                            </div>
-
-                            {/* Trainee Section - 2 column layout */}
-                            <div>
-                                <h3 style={{ fontSize: 13, fontWeight: 700, marginBottom: 12, color: '#0066cc', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    TRAINEE INFORMATION
-                                </h3>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Name *</label>
-                                        <input
-                                            className="status-select"
-                                            placeholder="Full name"
-                                            value={formData.trainee.name}
-                                            onChange={(e) => setFormData(f => ({
-                                                ...f,
-                                                trainee: { ...f.trainee, name: e.target.value }
-                                            }))}
-                                            required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
-                                        />
-                                    </div>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Organization *</label>
-                                        <input
-                                            className="status-select"
-                                            placeholder="Organization name"
-                                            value={formData.trainee.organization}
-                                            onChange={(e) => setFormData(f => ({
-                                                ...f,
-                                                trainee: { ...f.trainee, organization: e.target.value }
-                                            }))}
-                                            required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
-                                        />
-                                    </div>
-                                </div>
-                                <div style={{ display: 'grid', gap: 6, marginTop: 12 }}>
-                                    <label style={{ fontWeight: 500, color: '#333' }}>Address *</label>
+                <div className="modal-overlay" onClick={() => setShowAddCertificate(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-head">
+                            <h3>{editingCertificate ? 'Edit' : 'Create'} Training Certificate</h3>
+                            <button type="button" className="modal-close" onClick={() => setShowAddCertificate(false)}>×</button>
+                        </div>
+                        <form className="dash-form" onSubmit={handleSaveForm}>
+                            <div className="modal-body">
+                                {/* Certificate Number - EDITABLE */}
+                                <div className="fg">
+                                    <label>Certificate Number</label>
                                     <input
-                                        className="status-select"
+                                        type="text"
+                                        placeholder="TRAIN-001"
+                                        value={formData.certificateNumber || ''}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            certificateNumber: e.target.value
+                                        })}
+                                    />
+                                    <small style={{ color: '#757575', fontSize: '0.75rem' }}>
+                                        Leave empty to auto-generate
+                                    </small>
+                                </div>
+
+                                {/* Trainee Information */}
+                                <h4>Trainee Information</h4>
+
+                                <div className="fg">
+                                    <label>Trainee Name *</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Full name"
+                                        value={formData.trainee.name}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            trainee: { ...formData.trainee, name: e.target.value }
+                                        })}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="fg">
+                                    <label>Organization *</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Company or organization"
+                                        value={formData.trainee.organization}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            trainee: { ...formData.trainee, organization: e.target.value }
+                                        })}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="fg">
+                                    <label>Address *</label>
+                                    <input
+                                        type="text"
                                         placeholder="Full address"
                                         value={formData.trainee.address}
-                                        onChange={(e) => setFormData(f => ({
-                                            ...f,
-                                            trainee: { ...f.trainee, address: e.target.value }
-                                        }))}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            trainee: { ...formData.trainee, address: e.target.value }
+                                        })}
                                         required
-                                        style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
                                     />
                                 </div>
-                            </div>
 
-                            {/* Training Section - 2 column layout */}
-                            <div>
-                                <h3 style={{ fontSize: 13, fontWeight: 700, marginBottom: 12, color: '#0066cc', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    TRAINING INFORMATION
-                                </h3>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Course Name *</label>
-                                        <input
-                                            className="status-select"
-                                            placeholder="e.g., ISO 9001:2015 Internal Auditor"
-                                            value={formData.training.courseName}
-                                            onChange={(e) => setFormData(f => ({
-                                                ...f,
-                                                training: { ...f.training, courseName: e.target.value }
-                                            }))}
-                                            required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
-                                        />
-                                    </div>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Category</label>
+                                {/* Training Details */}
+                                <h4>Training Details</h4>
+
+                                <div className="fg">
+                                    <label>Course Name *</label>
+                                    <input
+                                        type="text"
+                                        placeholder="ISO 9001:2015 Awareness and Implementation"
+                                        value={formData.training.courseName}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            training: { ...formData.training, courseName: e.target.value }
+                                        })}
+                                        required
+                                    />
+                                </div>
+
+                                <div className="form-row-2">
+                                    <div className="fg">
+                                        <label>Category</label>
                                         <select
-                                            className="status-select"
                                             value={formData.training.category}
-                                            onChange={(e) => setFormData(f => ({
-                                                ...f,
-                                                training: { ...f.training, category: e.target.value }
-                                            }))}
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
+                                            onChange={(e) => setFormData({
+                                                ...formData,
+                                                training: { ...formData.training, category: e.target.value }
+                                            })}
                                         >
-                                            {trainingCategories.map(cat => (
-                                                <option key={cat} value={cat}>{cat}</option>
-                                            ))}
+                                            <option value="ISO 9001">ISO 9001</option>
+                                            <option value="ISO 14001">ISO 14001</option>
+                                            <option value="ISO 45001">ISO 45001</option>
+                                            <option value="HACCP">HACCP</option>
+                                            <option value="GMP">GMP</option>
+                                            <option value="Other">Other</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 12 }}>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Training Date *</label>
+                                    <div className="fg">
+                                        <label>Training Hours *</label>
                                         <input
-                                            className="status-select"
-                                            type="date"
-                                            value={formData.training.date}
-                                            onChange={(e) => setFormData(f => ({
-                                                ...f,
-                                                training: { ...f.training, date: e.target.value }
-                                            }))}
-                                            required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
-                                        />
-                                    </div>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Training Hours *</label>
-                                        <input
-                                            className="status-select"
                                             type="number"
-                                            min="1"
                                             placeholder="8"
+                                            min="1"
                                             value={formData.training.hours}
-                                            onChange={(e) => setFormData(f => ({
-                                                ...f,
-                                                training: { ...f.training, hours: parseInt(e.target.value) || 0 }
-                                            }))}
+                                            onChange={(e) => setFormData({
+                                                ...formData,
+                                                training: { ...formData.training, hours: e.target.value }
+                                            })}
                                             required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
                                         />
                                     </div>
                                 </div>
-                                <div style={{ display: 'grid', gap: 6, marginTop: 12 }}>
-                                    <label style={{ fontWeight: 500, color: '#333' }}>Trainer</label>
+
+                                <div className="fg">
+                                    <label>Training Date *</label>
                                     <input
-                                        className="status-select"
-                                        placeholder="Trainer name (optional)"
-                                        value={formData.training.trainer}
-                                        onChange={(e) => setFormData(f => ({
-                                            ...f,
-                                            training: { ...f.training, trainer: e.target.value }
-                                        }))}
-                                        style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
+                                        type="date"
+                                        value={formData.training.date}
+                                        onChange={(e) => setFormData({
+                                            ...formData,
+                                            training: { ...formData.training, date: e.target.value }
+                                        })}
+                                        required
                                     />
                                 </div>
-                            </div>
 
-                            {/* Certificate Dates Section */}
-                            <div>
-                                <h3 style={{ fontSize: 13, fontWeight: 700, marginBottom: 12, color: '#0066cc', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                                    CERTIFICATE DATES
-                                </h3>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Issue Date *</label>
+                                {/* Certificate Dates */}
+                                <h4>Certificate Dates</h4>
+
+                                <div className="form-row-2">
+                                    <div className="fg">
+                                        <label>Issue Date *</label>
                                         <input
-                                            className="status-select"
                                             type="date"
                                             value={formData.issueDate}
-                                            onChange={(e) => setFormData(f => ({ ...f, issueDate: e.target.value }))}
+                                            onChange={(e) => setFormData({ ...formData, issueDate: e.target.value })}
                                             required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
                                         />
                                     </div>
-                                    <div style={{ display: 'grid', gap: 6 }}>
-                                        <label style={{ fontWeight: 500, color: '#333' }}>Expiry Date *</label>
+                                    <div className="fg">
+                                        <label>Expiry Date *</label>
                                         <input
-                                            className="status-select"
                                             type="date"
                                             value={formData.expiryDate}
-                                            onChange={(e) => setFormData(f => ({ ...f, expiryDate: e.target.value }))}
+                                            onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
                                             required
-                                            style={{ padding: '10px 12px', borderRadius: 6, border: '1px solid #ddd', fontSize: 14 }}
                                         />
                                     </div>
                                 </div>
-                            </div>
 
-                            {/* Buttons */}
-                            <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16, paddingTop: 16, borderTop: '1px solid #eee' }}>
-                                <button
-                                    type="button"
-                                    className="btn-action"
-                                    onClick={() => setShowAddCertificate(false)}
-                                    disabled={savingEdit}
-                                >
+
+                            </div>
+                            <div className="modal-foot">
+                                <button type="button" className="dbtn dbtn-secondary btn-action" onClick={() => setShowAddCertificate(false)}>
                                     Cancel
                                 </button>
-                                <button
-                                    type="submit"
-                                    className="btn-primary"
-                                    disabled={savingEdit}
-                                >
-                                    {savingEdit ? 'Saving...' : (editingCertificate ? 'Save Changes' : 'Create Certificate')}
+                                <button type="submit" className="dbtn dbtn-primary btn-primary" disabled={savingEdit}>
+                                    {savingEdit ? 'Saving...' : editingCertificate ? 'Update' : 'Create'}
                                 </button>
                             </div>
                         </form>
@@ -519,69 +524,107 @@ export default function TrainingCertificatesTab({ onError }) {
 
             {loading ? (
                 <div className="loading">Loading training certificates...</div>
-            ) : certificates.length === 0 ? (
-                <div className="empty-state">
-                    <p>No training certificates found</p>
-                    <button onClick={handleAddNew} className="btn-primary" type="button">
-                        Create First Training Certificate
-                    </button>
-                </div>
             ) : (
-                <div className="data-table-container">
-                    <table className="data-table">
-                        <thead>
-                            <tr>
-                                <th>Certificate Number</th>
-                                <th>Trainee Name</th>
-                                <th>Training Name</th>
-                                <th>Issue Date</th>
-                                <th>Expiry Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {certificates.map((cert) => (
-                                <tr key={cert._id}>
-                                    <td className="cert-number">{cert.certificateNumber}</td>
-                                    <td>{cert.trainee?.name || 'N/A'}</td>
-                                    <td>{cert.training?.courseName || 'N/A'}</td>
-                                    <td>{formatDate(cert.issueDate)}</td>
-                                    <td>{formatDate(cert.expiryDate)}</td>
-                                    <td>
-                                        <span className={`status-badge status-${(cert.status || 'active').toLowerCase()}`}>
-                                            {cert.status || 'active'}
-                                        </span>
-                                    </td>
-                                    <td className="actions-cell">
-                                        <button
-                                            onClick={() => handleView(cert)}
-                                            className="btn-action btn-view"
-                                            type="button"
-                                        >
-                                            View
-                                        </button>
-                                        <button
-                                            onClick={() => handleEdit(cert)}
-                                            className="btn-action btn-edit"
-                                            title="Edit Certificate"
-                                            type="button"
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            onClick={() => handleDelete(cert._id)}
-                                            className="btn-action btn-delete"
-                                            disabled={deletingId === cert._id}
-                                            type="button"
-                                        >
-                                            {deletingId === cert._id ? 'Deleting...' : 'Delete'}
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                <div className="table-container">
+                    <div className="table-toolbar">
+                        <div className="table-search">
+                            <input
+                                type="text"
+                                placeholder="Search certificates..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </div>
+                        <select
+                            value={statusFilter}
+                            onChange={(e) => setStatusFilter(e.target.value)}
+                            style={{
+                                padding: '0.75rem 1rem',
+                                borderRadius: '8px',
+                                border: '2px solid #E0E0E0',
+                                fontSize: '0.875rem',
+                                fontFamily: 'inherit'
+                            }}
+                        >
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="expired">Expired</option>
+                            <option value="revoked">Revoked</option>
+                        </select>
+                        <button className="dbtn dbtn-primary" onClick={handleAddNew} type="button">
+                            + Create Certificate
+                        </button>
+                    </div>
+
+                    {filteredCertificates.length === 0 ? (
+                        <div className="empty-state">
+                            <div className="empty-state-icon">🔍</div>
+                            <div className="empty-state-title">No certificates found</div>
+                            <div className="empty-state-text">{search ? 'Try adjusting your search' : 'Start by creating your first training certificate'}</div>
+                            {!search && (
+                                <button onClick={handleAddNew} className="dbtn dbtn-primary" type="button">
+                                    + Create Certificate
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="data-table-container">
+                            <table className="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Certificate Number</th>
+                                        <th>Trainee Name</th>
+                                        <th>Training Name</th>
+                                        <th>Issue Date</th>
+                                        <th>Expiry Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filteredCertificates.map((cert) => (
+                                        <tr key={cert._id}>
+                                            <td className="cert-number">{cert.certificateNumber}</td>
+                                            <td>{cert.trainee?.name || 'N/A'}</td>
+                                            <td>{cert.training?.courseName || 'N/A'}</td>
+                                            <td>{formatDate(cert.issueDate)}</td>
+                                            <td>{formatDate(cert.expiryDate)}</td>
+                                            <td>
+                                                <span className={`status-badge status-${(cert.displayStatus || cert.status || 'active').toLowerCase()}`}>
+                                                    {cert.displayStatus ? cert.displayStatus.charAt(0).toUpperCase() + cert.displayStatus.slice(1) : (cert.status || 'active')}
+                                                </span>
+                                            </td>
+                                            <td className="actions-cell">
+                                                <button
+                                                    onClick={() => handleView(cert)}
+                                                    className="action-btn action-btn-view"
+                                                    type="button"
+                                                >
+                                                    View
+                                                </button>
+                                                <button
+                                                    onClick={() => handleEdit(cert)}
+                                                    className="action-btn action-btn-edit"
+                                                    title="Edit Certificate"
+                                                    type="button"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(cert._id)}
+                                                    className="action-btn action-btn-del"
+                                                    disabled={deletingId === cert._id}
+                                                    type="button"
+                                                >
+                                                    {deletingId === cert._id ? 'Deleting...' : 'Delete'}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

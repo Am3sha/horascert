@@ -1,0 +1,467 @@
+/* ================================================
+   TRAINING CERTIFICATE VIEW — MATCH WORD TEMPLATE
+   Gold border, professional styling
+   ================================================ */
+
+.training-cert-view-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Certificate Card */
+.training-cert-card {
+  background: #ffffff;
+  max-width: 850px;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: 0 20px 60px rgba(10, 36, 99, 0.15);
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  animation: certSlideIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes certSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Gold Decorative Border */
+.training-cert-card::before {
+  content: '';
+  position: absolute;
+  inset: 15px;
+  border: 3px solid #D4AF37;
+  /* Gold */
+  border-radius: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.training-cert-card::after {
+  content: '';
+  position: absolute;
+  inset: 25px;
+  border: 1px solid #D4AF37;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top gradient bar */
+.training-cert-top-bar {
+  height: 8px;
+  background: linear-gradient(90deg, #0A2463, #2196F3, #0A2463);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  animation: barGrow 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  transform-origin: center;
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Content wrapper (inside borders) */
+.training-cert-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 3rem;
+  text-align: center;
+}
+
+/* Logo */
+.training-cert-logo {
+  position: absolute;
+  top: 50px;
+  left: 60px;
+  width: 80px;
+  height: 80px;
+  z-index: 3;
+}
+
+.training-cert-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Title */
+.training-cert-title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.training-cert-title h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: 2px;
+  margin: 0 0 0.5rem;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.training-cert-subtitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #00AA00;
+  /* Green */
+  letter-spacing: 2px;
+  margin: 0;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+/* Certify text */
+.training-cert-certify {
+  font-size: 14px;
+  color: #333;
+  margin: 2.5rem 0 1.5rem;
+  font-weight: 500;
+}
+
+/* Trainee name (BIG RED) */
+.training-cert-trainee-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: #8B0000;
+  /* Maroon/Red */
+  margin: 1rem 0;
+  line-height: 1.2;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+/* Organization (BLUE) */
+.training-cert-organization {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0066CC;
+  /* Blue */
+  margin: 0.75rem 0;
+  line-height: 1.4;
+}
+
+/* Address */
+.training-cert-address {
+  font-size: 12px;
+  color: #333;
+  margin: 0.5rem 0 2rem;
+  line-height: 1.5;
+}
+
+/* Completion text */
+.training-cert-completion {
+  font-size: 13px;
+  color: #333;
+  margin: 2rem 0 1rem;
+  font-weight: 500;
+}
+
+/* Course name (BLUE, BIG) */
+.training-cert-course {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0066CC;
+  margin: 1rem 0;
+  line-height: 1.4;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+/* Training date & hours */
+.training-cert-date-hours {
+  font-size: 13px;
+  color: #333;
+  margin: 1.5rem 0 2rem;
+  font-weight: 500;
+}
+
+/* Certificate details section */
+.training-cert-details {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  margin: 2rem 0;
+  text-align: left;
+  padding: 0 2rem;
+}
+
+.training-cert-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.training-cert-info-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1rem;
+  font-size: 11px;
+}
+
+.training-cert-info-label {
+  font-weight: 700;
+  color: #333;
+}
+
+.training-cert-info-value {
+  color: #555;
+  font-weight: 500;
+}
+
+/* QR Code */
+.training-cert-qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.training-cert-qr img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #E0E0E0;
+  border-radius: 4px;
+  padding: 4px;
+  background: #fff;
+}
+
+/* Signatures section */
+.training-cert-signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 3rem 2rem 2rem;
+  text-align: center;
+}
+
+.training-cert-signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.training-cert-sig-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.training-cert-sig-name {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.training-cert-sig-image {
+  width: 120px;
+  height: 50px;
+  margin-bottom: 0.5rem;
+}
+
+.training-cert-sig-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Placeholder signature (italic) */
+.training-cert-sig-placeholder {
+  font-size: 18px;
+  font-style: italic;
+  color: #666;
+  font-family: 'Brush Script MT', cursive, 'Times New Roman', serif;
+}
+
+/* Company stamp */
+.training-cert-stamp {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.training-cert-stamp img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+/* Footer */
+.training-cert-footer {
+  border-top: 1px solid #E0E0E0;
+  padding: 1.5rem 2rem 2rem;
+  text-align: center;
+}
+
+.training-cert-website {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0066CC;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+}
+
+.training-cert-website:hover {
+  text-decoration: underline;
+}
+
+.training-cert-verify-text {
+  font-size: 9px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.training-cert-contact {
+  font-size: 9px;
+  font-weight: 700;
+  color: #333;
+  margin: 0.25rem 0;
+}
+
+.training-cert-address-ar {
+  font-size: 9px;
+  color: #666;
+  margin-top: 0.75rem;
+  direction: rtl;
+}
+
+/* Status badge */
+.training-cert-status {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 3;
+}
+
+.training-cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.training-cert-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.training-cert-badge.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.training-cert-badge.expired {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.training-cert-badge.revoked {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* Loading state */
+.training-cert-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Error state */
+.training-cert-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.training-cert-error h2 {
+  font-size: 24px;
+  color: #b91c1c;
+  margin-bottom: 1rem;
+}
+
+.training-cert-error p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .training-cert-content {
+    padding: 3rem 1.5rem;
+  }
+
+  .training-cert-logo {
+    top: 35px;
+    left: 40px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .training-cert-title h1 {
+    font-size: 24px;
+  }
+
+  .training-cert-subtitle {
+    font-size: 24px;
+  }
+
+  .training-cert-trainee-name {
+    font-size: 22px;
+  }
+
+  .training-cert-course {
+    font-size: 16px;
+  }
+
+  .training-cert-details {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .training-cert-qr {
+    order: -1;
+  }
+
+  .training-cert-signatures {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

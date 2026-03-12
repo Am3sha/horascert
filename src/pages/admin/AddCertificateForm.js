@@ -3,7 +3,7 @@ import { createCertificate } from '../../services/api';
 import QRCode from 'qrcode';
 import './AddCertificateForm.css';
 
-const AddCertificateForm = ({ onSuccess }) => {
+const AddCertificateForm = ({ onSuccess, onCancel }) => {
 
     const [formData, setFormData] = useState({
         certificateNumber: '',
@@ -296,13 +296,23 @@ const AddCertificateForm = ({ onSuccess }) => {
                 </div>
 
                 <div className="form-actions">
-                    <div className="form-actions-row">
+                    <div className="form-actions-row" style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                        {onCancel && (
+                            <button
+                                type="button"
+                                className="dbtn dbtn-secondary"
+                                onClick={onCancel}
+                                disabled={loading}
+                            >
+                                Cancel
+                            </button>
+                        )}
                         <button
                             type="submit"
-                            className="btn-create"
+                            className="dbtn dbtn-primary"
                             disabled={loading}
                         >
-                            {loading ? 'Creating Certificate...' : 'Create Certificate'}
+                            {loading ? 'Creating...' : 'Create Certificate'}
                         </button>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast';
 import {
     deleteCertificateById,
     fetchCertificates,
+    getCertificateStats,
     updateCertificateById
 } from '../../services/api';
 import AddCertificateForm from './AddCertificateForm';
@@ -11,6 +12,18 @@ export default function CertificatesTab({ onError, onSuccess }) {
     const [certificates, setCertificates] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
+    const [search, setSearch] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
+
+    // Real stats from server
+    const [stats, setStats] = useState({
+        total: 0,
+        active: 0,
+        expired: 0,
+        revoked: 0,
+        thisMonth: 0,
+        expiringSoon: 0
+    });
 
     const [showAddCertificate, setShowAddCertificate] = useState(false);
 
@@ -49,7 +62,18 @@ export default function CertificatesTab({ onError, onSuccess }) {
     const load = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetchCertificates({ page: 1, limit: 100 });
+            // Fetch stats
+            const statsRes = await getCertificateStats();
+            if (statsRes && statsRes.success) {
+                setStats(statsRes.stats);
+            }
+
+            // Fetch certificates with optional status filter
+            const res = await fetchCertificates({
+                page: 1,
+                limit: 100,
+                ...(statusFilter && { status: statusFilter })
+            });
             if (res && res.success) {
                 setCertificates(res.data || []);
             } else {
@@ -62,7 +86,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
         } finally {
             setLoading(false);
         }
-    }, [onError]);
+    }, [onError, statusFilter]);
 
     useEffect(() => {
         load();
@@ -202,16 +226,87 @@ export default function CertificatesTab({ onError, onSuccess }) {
         }
     };
 
+    // Filter certificates for search
+    const filteredCertificates = certificates.filter(cert => {
+        if (!search) return true;
+        const s = search.toLowerCase();
+        return (
+            (cert.certificateNumber && cert.certificateNumber.toLowerCase().includes(s)) ||
+            (cert.companyName && cert.companyName.toLowerCase().includes(s)) ||
+            (cert.standard && cert.standard.toLowerCase().includes(s))
+        );
+    });
+
     return (
         <div className="tab-panel">
-            <div className="panel-header">
-                <h2>Certificates Management</h2>
-                <button
-                    onClick={() => setShowAddCertificate(true)}
-                    className="btn-primary"
-                    type="button"
+            <div className="stats-grid">
+                <div className="stat-card">
+                    <div className="stat-icon stat-icon-blue">🏆</div>
+                    <div className="stat-value">{stats.total}</div>
+                    <div className="stat-label">Total ISO</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon stat-icon-green">✓</div>
+                    <div className="stat-value">{stats.active}</div>
+                    <div className="stat-label">Active</div>
+                </div>
+                <div
+                    className="stat-card"
+                    onClick={() => setStatusFilter(statusFilter === 'expired' ? '' : 'expired')}
+                    style={{ cursor: 'pointer', opacity: statusFilter === 'expired' ? 0.7 : 1 }}
                 >
-                    + Create New Certificate
+                    <div className="stat-icon stat-icon-orange">⏰</div>
+                    <div className="stat-value">{stats.expired}</div>
+                    <div className="stat-label">Expired</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-icon stat-icon-purple">📊</div>
+                    <div className="stat-value">{stats.thisMonth}</div>
+                    <div className="stat-label">This Month</div>
+                </div>
+            </div>
+
+            <div className="dash-page-title" style={{ marginTop: '2rem' }}>Certificates Management</div>
+            <div className="dash-page-sub">Manage and verify ISO certificates</div>
+
+            <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <input
+                    type="text"
+                    placeholder="Search by certificate number, company, or standard..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    style={{
+                        flex: 1,
+                        padding: '0.75rem 1rem',
+                        borderRadius: '8px',
+                        border: '2px solid #E0E0E0',
+                        fontSize: '0.875rem',
+                        fontFamily: 'inherit'
+                    }}
+                />
+
+                <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    style={{
+                        padding: '0.75rem 1rem',
+                        borderRadius: '8px',
+                        border: '2px solid #E0E0E0',
+                        fontSize: '0.875rem',
+                        fontFamily: 'inherit'
+                    }}
+                >
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="expired">Expired</option>
+                    <option value="revoked">Revoked</option>
+                </select>
+
+                <button
+                    className="dbtn dbtn-primary"
+                    onClick={() => setShowAddCertificate(true)}
+                >
+                    + Create
                 </button>
             </div>
 
@@ -340,69 +435,94 @@ export default function CertificatesTab({ onError, onSuccess }) {
                 </div>
             )}
 
-            {loading ? (
-                <div className="loading">Loading certificates...</div>
-            ) : certificates.length === 0 ? (
-                <div className="empty-state">
-                    <p>No certificates found</p>
-                    <button onClick={() => setShowAddCertificate(true)} className="btn-primary" type="button">
-                        Create First Certificate
+            <div className="table-container">
+                <div className="table-toolbar">
+                    <div className="table-search">
+                        <input
+                            type="text"
+                            placeholder="Search ISO certificates..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </div>
+                    <button className="dbtn dbtn-primary" onClick={() => setShowAddCertificate(true)}>
+                        + Create Certificate
                     </button>
                 </div>
-            ) : (
-                <div className="data-table-container">
-                    <table className="data-table">
-                        <thead>
-                            <tr>
-                                <th>Certificate Number</th>
-                                <th>Company Name</th>
-                                <th>Standard</th>
-                                <th>Issue Date</th>
-                                <th>Expiry Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {certificates.map((cert) => (
-                                <tr key={cert._id}>
-                                    <td className="cert-number">{cert.certificateNumber}</td>
-                                    <td>{cert.companyName}</td>
-                                    <td>{cert.standard}</td>
-                                    <td>{formatDate(cert.issueDate)}</td>
-                                    <td>{formatDate(cert.expiryDate)}</td>
-                                    <td>{cert.status}</td>
-                                    <td className="actions-cell">
-                                        <button
-                                            onClick={() => handleView(cert.certificateId)}
-                                            className="btn-action btn-view"
-                                            type="button"
-                                        >
-                                            View
-                                        </button>
-                                        <button
-                                            onClick={() => handleEdit(cert.certificateId)}
-                                            className="btn-action btn-edit"
-                                            title="Edit Certificate"
-                                            type="button"
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            onClick={() => handleDelete(cert.certificateId)}
-                                            className="btn-action btn-delete"
-                                            disabled={deletingId === cert.certificateId}
-                                            type="button"
-                                        >
-                                            {deletingId === cert.certificateId ? 'Deleting...' : 'Delete'}
-                                        </button>
-                                    </td>
+
+                {loading ? (
+                    <div className="loading">Loading certificates...</div>
+                ) : filteredCertificates.length === 0 ? (
+                    <div className="empty-state">
+                        <div className="empty-state-icon">🏆</div>
+                        <div className="empty-state-title">No Certificates Found</div>
+                        <div className="empty-state-text">
+                            {search ? 'Try adjusting your search' : 'Create your first ISO certificate to get started'}
+                        </div>
+                        {!search && (
+                            <button className="dbtn dbtn-primary" onClick={() => setShowAddCertificate(true)}>
+                                + Create Certificate
+                            </button>
+                        )}
+                    </div>
+                ) : (
+                    <div className="data-table-container">
+                        <table className="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Certificate #</th>
+                                    <th>Company</th>
+                                    <th>Standard</th>
+                                    <th>Issue Date</th>
+                                    <th>Expiry</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                            </thead>
+                            <tbody>
+                                {filteredCertificates.map((cert) => (
+                                    <tr key={cert._id}>
+                                        <td className="cert-number">{cert.certificateNumber}</td>
+                                        <td>{cert.companyName}</td>
+                                        <td>{cert.standard}</td>
+                                        <td>{formatDate(cert.issueDate)}</td>
+                                        <td>{formatDate(cert.expiryDate)}</td>
+                                        <td>
+                                            <span className={`status-badge status-${(cert.displayStatus || cert.status || 'active').toLowerCase()}`}>
+                                                {cert.displayStatus ? cert.displayStatus.charAt(0).toUpperCase() + cert.displayStatus.slice(1) : cert.status}
+                                            </span>
+                                        </td>
+                                        <td className="actions-cell">
+                                            <button
+                                                className="btn-action btn-view"
+                                                onClick={() => handleView(cert.certificateId)}
+                                                title="View"
+                                            >
+                                                👁️
+                                            </button>
+                                            <button
+                                                className="btn-action btn-edit"
+                                                onClick={() => handleEdit(cert.certificateId)}
+                                                title="Edit"
+                                            >
+                                                ✏️
+                                            </button>
+                                            <button
+                                                className="btn-action btn-delete"
+                                                onClick={() => handleDelete(cert.certificateId)}
+                                                disabled={deletingId === cert.certificateId}
+                                                title="Delete"
+                                            >
+                                                {deletingId === cert.certificateId ? '...' : '🗑️'}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

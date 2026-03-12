@@ -10,6 +10,12 @@ const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('certificates');
     const [error, setError] = useState('');
 
+    // Placeholder counts for UX (in a real app, you would fetch these from the backend)
+    const certCount = 0;
+    const trainingCount = 0;
+    const appCount = 0;
+    const msgCount = 0;
+
     // No auth check here - App.js already protects this route
     // App.js redirects to /login if not authenticated before rendering AdminDashboard
 
@@ -45,35 +51,42 @@ const AdminDashboard = () => {
                 </div>
             )}
 
-            <div className="dashboard-tabs">
-                <button
-                    type="button"
-                    className={`tab-btn ${activeTab === 'certificates' ? 'active' : ''}`}
+            <div className="dash-tabs">
+                <div
+                    className={`dash-tab ${activeTab === 'certificates' ? 'active' : ''}`}
                     onClick={() => setActiveTab('certificates')}
                 >
-                    Certificates
-                </button>
-                <button
-                    type="button"
-                    className={`tab-btn ${activeTab === 'applications' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('applications')}
-                >
-                    Applications
-                </button>
-                <button
-                    type="button"
-                    className={`tab-btn ${activeTab === 'emails' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('emails')}
-                >
-                    Emails
-                </button>
-                <button
-                    type="button"
-                    className={`tab-btn ${activeTab === 'training' ? 'active' : ''}`}
+                    <span className="dash-tab-icon">🏆</span>
+                    ISO Certificates
+                    <span className="tab-count">{certCount}</span>
+                </div>
+
+                <div
+                    className={`dash-tab ${activeTab === 'training' ? 'active' : ''}`}
                     onClick={() => setActiveTab('training')}
                 >
+                    <span className="dash-tab-icon">📜</span>
                     Training Certificates
-                </button>
+                    <span className="tab-count">{trainingCount}</span>
+                </div>
+
+                <div
+                    className={`dash-tab ${activeTab === 'applications' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('applications')}
+                >
+                    <span className="dash-tab-icon">📋</span>
+                    Applications
+                    <span className="tab-count">{appCount}</span>
+                </div>
+
+                <div
+                    className={`dash-tab ${activeTab === 'emails' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('emails')}
+                >
+                    <span className="dash-tab-icon">✉️</span>
+                    Messages
+                    <span className="tab-count">{msgCount}</span>
+                </div>
             </div>
 
             <div className="dashboard-content">
