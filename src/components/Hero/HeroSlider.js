@@ -103,8 +103,8 @@ const HeroSlider = () => {
           alt={activeSlide.imageAlt || activeSlide.title}
           aria-hidden="true"
           decoding="async"
-          loading={currentSlide === 0 ? 'eager' : 'lazy'}
-          fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
+          loading="eager"
+          fetchPriority="high"
           width="1280"
           height="720"
           sizes="100vw"

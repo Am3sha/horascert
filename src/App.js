@@ -5,7 +5,6 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { verifyAuth } from './services/api';
-import { Toaster } from 'react-hot-toast';
 import './App.css';
 import './animations/animations.css';
 
@@ -175,30 +174,6 @@ function App() {
       <ErrorBoundary>
         <AppContent />
       </ErrorBoundary>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-          },
-          success: {
-            duration: 3000,
-            iconTheme: {
-              primary: '#4ade80',
-              secondary: '#fff',
-            },
-          },
-          error: {
-            duration: 5000,
-            iconTheme: {
-              primary: '#ef4444',
-              secondary: '#fff',
-            },
-          },
-        }}
-      />
     </Router>
   );
 }

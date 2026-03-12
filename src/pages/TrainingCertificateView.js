@@ -64,7 +64,7 @@ function TrainingCertificateView() {
 
         {/* Logo */}
         <div className="training-cert-logo">
-                  <img src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png" alt="HORAS-Cert" />
+          <img src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png" alt="HORAS-Cert" />
         </div>
 
         {/* Status badge */}
@@ -156,7 +156,7 @@ function TrainingCertificateView() {
 
             {/* QR Code */}
             <div className="training-cert-qr">
-              <img 
+              <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${window.location.href}`}
                 alt="QR Code"
               />
@@ -186,14 +186,9 @@ function TrainingCertificateView() {
               </div>
             </div>
           </div>
-
-          {/* Company Stamp */}
-          { <div className="training-cert-stamp">
-            <img src="/imgeteam/Designer.png" alt="Company Stamp" />
-          </div> }
-        </div>
         </div>
       </div>
+    </div>
   );
 }
 

@@ -290,21 +290,6 @@
   color: #666;
   font-family: 'Brush Script MT', cursive, 'Times New Roman', serif;
 }
-
-/* Company stamp */
-.training-cert-stamp {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-.training-cert-stamp img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  opacity: 0.9;
-}
-
 /* Footer */
 .training-cert-footer {
   border-top: 1px solid #E0E0E0;
