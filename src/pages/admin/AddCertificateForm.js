@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { createCertificate } from '../../services/api';
-import QRCode from 'qrcode';
 import './AddCertificateForm.css';
 
 const AddCertificateForm = ({ onSuccess, onCancel }) => {
@@ -54,17 +53,22 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
 
     const generateAndDownloadQR = async (certificateUrl, filename) => {
         try {
-            const dataUrl = await QRCode.toDataURL(certificateUrl, {
-                width: 200,
-                margin: 1,
-                color: {
-                    dark: '#000000',
-                    light: '#FFFFFF'
-                }
+            // Use external QR code service for frontend compatibility
+            const qrServiceUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(certificateUrl)}`;
+
+            // Convert to data URL
+            const response = await fetch(qrServiceUrl);
+            const blob = await response.blob();
+            const dataUrl = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(blob);
             });
+
             downloadQRCode(dataUrl, filename);
         } catch (err) {
             // Silently handle QR code generation errors
+            console.error('QR generation failed:', err);
         }
     };
 
