@@ -156,10 +156,14 @@ function TrainingCertificateView() {
 
             {/* QR Code */}
             <div className="training-cert-qr">
-              <img
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${window.location.href}`}
-                alt="QR Code"
-              />
+              {cert.qrCodeImage ? (
+                <img
+                  src={cert.qrCodeImage}
+                  alt="QR Code"
+                />
+              ) : (
+                <div className="qr-error">QR Code unavailable</div>
+              )}
             </div>
           </div>
 
