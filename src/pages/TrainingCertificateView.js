@@ -160,10 +160,20 @@ function TrainingCertificateView() {
                 <img
                   src={cert.qrCodeImage}
                   alt="QR Code"
+                  onLoad={() => console.log('QR Code loaded successfully')}
+                  onError={(e) => {
+                    console.error('QR Code failed to load');
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
                 />
-              ) : (
-                <div className="qr-error">QR Code unavailable</div>
-              )}
+              ) : null}
+              <div
+                className="qr-error"
+                style={{ display: cert.qrCodeImage ? 'none' : 'flex' }}
+              >
+                QR Code unavailable
+              </div>
             </div>
           </div>
 
