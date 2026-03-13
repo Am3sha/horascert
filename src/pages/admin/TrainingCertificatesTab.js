@@ -18,13 +18,13 @@ export default function TrainingCertificatesTab({ onError }) {
     const [pagination, setPagination] = useState({ page: 1, limit: 20, total: 0 });
     const searchTimeoutRef = useRef(null);
 
-    const [showAddCertificate, setShowAddCertificate] = useState(false);
+    const [showAddCertificate, setShowAddCertificate] = useState(true);
     const [editingCertificate, setEditingCertificate] = useState(null);
     const [savingEdit, setSavingEdit] = useState(false);
 
     const [formData, setFormData] = useState({
         certificateNumber: '',
-        trainee: { name: '', organization: '', address: '' },
+        trainee: { name: '', organization: '', address: '', email: '' },
         training: { courseName: '', category: 'ISO 9001', date: '', hours: 8, trainer: '' },
         issueDate: new Date().toISOString().split('T')[0],
         expiryDate: '',
@@ -90,7 +90,7 @@ export default function TrainingCertificatesTab({ onError }) {
     const resetForm = () => {
         setFormData({
             certificateNumber: '',
-            trainee: { name: '', organization: '', address: '' },
+            trainee: { name: '', organization: '', address: '', email: '' },
             training: { courseName: '', category: 'ISO 9001', date: '', hours: 8, trainer: '' },
             issueDate: new Date().toISOString().split('T')[0],
             expiryDate: '',
@@ -111,7 +111,7 @@ export default function TrainingCertificatesTab({ onError }) {
         setEditingCertificate(cert);
         setFormData({
             certificateNumber: cert.certificateNumber || '',
-            trainee: cert.trainee || { name: '', organization: '', address: '' },
+            trainee: cert.trainee || { name: '', organization: '', address: '', email: '' },
             training: {
                 courseName: cert.training?.courseName || '',
                 category: cert.training?.category || 'ISO 9001',
@@ -313,173 +313,178 @@ export default function TrainingCertificatesTab({ onError }) {
             <div className="dash-page-title">Training Certificates Management</div>
             <div className="dash-page-sub">Manage and verify training certificates</div>
 
-            {showAddCertificate && (
-                <div className="modal-overlay" onClick={() => setShowAddCertificate(false)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal-head">
-                            <h3>{editingCertificate ? 'Edit' : 'Create'} Training Certificate</h3>
-                            <button type="button" className="modal-close" onClick={() => setShowAddCertificate(false)}>×</button>
-                        </div>
-                        <form className="dash-form" onSubmit={handleSaveForm}>
-                            <div className="modal-body">
-                                <div className="fg">
-                                    <label>Certificate Number</label>
-                                    <input
-                                        type="text"
-                                        placeholder="TRAIN-001"
-                                        value={formData.certificateNumber || ''}
-                                        onChange={(e) => setFormData({
-                                            ...formData,
-                                            certificateNumber: e.target.value
-                                        })}
-                                    />
-                                    <small style={{ color: '#757575', fontSize: '0.75rem' }}>
-                                        Leave empty to auto-generate
-                                    </small>
-                                </div>
-
-                                <h4>Trainee Information</h4>
-
-                                <div className="fg">
-                                    <label>Trainee Name *</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Full name"
-                                        value={formData.trainee.name}
-                                        onChange={(e) => setFormData({
-                                            ...formData,
-                                            trainee: { ...formData.trainee, name: e.target.value }
-                                        })}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="fg">
-                                    <label>Organization *</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Company or organization"
-                                        value={formData.trainee.organization}
-                                        onChange={(e) => setFormData({
-                                            ...formData,
-                                            trainee: { ...formData.trainee, organization: e.target.value }
-                                        })}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="fg">
-                                    <label>Address *</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Full address"
-                                        value={formData.trainee.address}
-                                        onChange={(e) => setFormData({
-                                            ...formData,
-                                            trainee: { ...formData.trainee, address: e.target.value }
-                                        })}
-                                        required
-                                    />
-                                </div>
-
-                                <h4>Training Details</h4>
-
-                                <div className="fg">
-                                    <label>Course Name *</label>
-                                    <input
-                                        type="text"
-                                        placeholder="ISO 9001:2015 Awareness and Implementation"
-                                        value={formData.training.courseName}
-                                        onChange={(e) => setFormData({
-                                            ...formData,
-                                            training: { ...formData.training, courseName: e.target.value }
-                                        })}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="form-row-2">
-                                    <div className="fg">
-                                        <label>Category</label>
-                                        <select
-                                            value={formData.training.category}
-                                            onChange={(e) => setFormData({
-                                                ...formData,
-                                                training: { ...formData.training, category: e.target.value }
-                                            })}
-                                        >
-                                            <option value="ISO 9001">ISO 9001</option>
-                                            <option value="ISO 14001">ISO 14001</option>
-                                            <option value="ISO 45001">ISO 45001</option>
-                                            <option value="HACCP">HACCP</option>
-                                            <option value="GMP">GMP</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                    <div className="fg">
-                                        <label>Training Hours *</label>
-                                        <input
-                                            type="number"
-                                            placeholder="8"
-                                            min="1"
-                                            value={formData.training.hours}
-                                            onChange={(e) => setFormData({
-                                                ...formData,
-                                                training: { ...formData.training, hours: e.target.value }
-                                            })}
-                                            required
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="fg">
-                                    <label>Training Date *</label>
-                                    <input
-                                        type="date"
-                                        value={formData.training.date}
-                                        onChange={(e) => setFormData({
-                                            ...formData,
-                                            training: { ...formData.training, date: e.target.value }
-                                        })}
-                                        required
-                                    />
-                                </div>
-
-                                <h4>Certificate Dates</h4>
-
-                                <div className="form-row-2">
-                                    <div className="fg">
-                                        <label>Issue Date *</label>
-                                        <input
-                                            type="date"
-                                            value={formData.issueDate}
-                                            onChange={(e) => setFormData({ ...formData, issueDate: e.target.value })}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="fg">
-                                        <label>Expiry Date *</label>
-                                        <input
-                                            type="date"
-                                            value={formData.expiryDate}
-                                            onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="modal-foot">
-                                <button type="button" className="dbtn dbtn-secondary btn-action" onClick={() => setShowAddCertificate(false)}>
-                                    Cancel
-                                </button>
-                                <button type="submit" className="dbtn dbtn-primary btn-primary" disabled={savingEdit}>
-                                    {savingEdit ? 'Saving...' : editingCertificate ? 'Update' : 'Create'}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <div className="dash-card">
+                <div className="dash-card-header">
+                    <h3>{editingCertificate ? 'Edit' : 'Create'} Training Certificate</h3>
                 </div>
-            )}
+                <form className="dash-form" onSubmit={handleSaveForm}>
+                    <div className="dash-card-body">
+                        <div className="fg">
+                            <label>Certificate Number</label>
+                            <input
+                                type="text"
+                                placeholder="TRAIN-001"
+                                value={formData.certificateNumber || ''}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    certificateNumber: e.target.value
+                                })}
+                            />
+                            <small style={{ color: '#757575', fontSize: '0.75rem' }}>
+                                Leave empty to auto-generate
+                            </small>
+                        </div>
+
+                        <h4>Trainee Information</h4>
+
+                        <div className="fg">
+                            <label>Trainee Name *</label>
+                            <input
+                                type="text"
+                                placeholder="Full name"
+                                value={formData.trainee.name}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    trainee: { ...formData.trainee, name: e.target.value }
+                                })}
+                                required
+                            />
+                        </div>
+
+                        <div className="fg">
+                            <label>Organization *</label>
+                            <input
+                                type="text"
+                                placeholder="Company or organization"
+                                value={formData.trainee.organization}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    trainee: { ...formData.trainee, organization: e.target.value }
+                                })}
+                                required
+                            />
+                        </div>
+
+                        <div className="fg">
+                            <label>Trainee Email</label>
+                            <input
+                                type="email"
+                                placeholder="Trainee email address"
+                                value={formData.trainee.email || ''}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    trainee: { ...formData.trainee, email: e.target.value }
+                                })}
+                            />
+                        </div>
+
+                        <div className="fg">
+                            <label>Address *</label>
+                            <input
+                                type="text"
+                                placeholder="Full address"
+                                value={formData.trainee.address}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    trainee: { ...formData.trainee, address: e.target.value }
+                                })}
+                                required
+                            />
+                        </div>
+
+                        <h4>Training Details</h4>
+
+                        <div className="fg">
+                            <label>Course Name *</label>
+                            <input
+                                type="text"
+                                placeholder="ISO 9001:2015 Awareness and Implementation"
+                                value={formData.training.courseName}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    training: { ...formData.training, courseName: e.target.value }
+                                })}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-row-2">
+                            <div className="fg">
+                                <label>Category</label>
+                                <select
+                                    value={formData.training.category}
+                                    onChange={(e) => setFormData({
+                                        ...formData,
+                                        training: { ...formData.training, category: e.target.value }
+                                    })}
+                                >
+                                    <option value="ISO 9001">ISO 9001</option>
+                                    <option value="ISO 14001">ISO 14001</option>
+                                    <option value="ISO 45001">ISO 45001</option>
+                                    <option value="HACCP">HACCP</option>
+                                    <option value="GMP">GMP</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div className="fg">
+                                <label>Training Hours *</label>
+                                <input
+                                    type="number"
+                                    placeholder="8"
+                                    min="1"
+                                    value={formData.training.hours}
+                                    onChange={(e) => setFormData({
+                                        ...formData,
+                                        training: { ...formData.training, hours: e.target.value }
+                                    })}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="fg">
+                            <label>Training Date *</label>
+                            <input
+                                type="date"
+                                value={formData.training.date}
+                                onChange={(e) => setFormData({
+                                    ...formData,
+                                    training: { ...formData.training, date: e.target.value }
+                                })}
+                                required
+                            />
+                        </div>
+
+                        <h4>Certificate Dates</h4>
+
+                        <div className="form-row-2">
+                            <div className="fg">
+                                <label>Issue Date *</label>
+                                <input
+                                    type="date"
+                                    value={formData.issueDate}
+                                    onChange={(e) => setFormData({ ...formData, issueDate: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="fg">
+                                <label>Expiry Date *</label>
+                                <input
+                                    type="date"
+                                    value={formData.expiryDate}
+                                    onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="dash-card-footer">
+                        <button type="submit" className="dbtn dbtn-primary btn-primary" disabled={savingEdit}>
+                            {savingEdit ? 'Saving...' : editingCertificate ? 'Update' : 'Create'}
+                        </button>
+                    </div>
+                </form>
+            </div>
 
             {loading ? (
                 <div className="loading">Loading training certificates...</div>
@@ -510,21 +515,13 @@ export default function TrainingCertificatesTab({ onError }) {
                             <option value="expired">Expired</option>
                             <option value="revoked">Revoked</option>
                         </select>
-                        <button className="dbtn dbtn-primary" onClick={handleAddNew} type="button">
-                            + Create Certificate
-                        </button>
                     </div>
 
                     {certificates.length === 0 ? (
                         <div className="empty-state">
                             <div className="empty-state-icon">🔍</div>
                             <div className="empty-state-title">No certificates found</div>
-                            <div className="empty-state-text">{search ? 'Try adjusting your search' : 'Start by creating your first training certificate'}</div>
-                            {!search && (
-                                <button onClick={handleAddNew} className="dbtn dbtn-primary" type="button">
-                                    + Create Certificate
-                                </button>
-                            )}
+                            <div className="empty-state-text">{search ? 'Try adjusting your search' : 'The form is ready above to create your first training certificate'}</div>
                         </div>
                     ) : (
                         <>
