@@ -85,7 +85,6 @@ function AppContent() {
     }, 10 * 60 * 1000);
 
     return () => {
-      mounted = false;
       if (intervalId) {
         window.clearInterval(intervalId);
       }

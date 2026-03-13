@@ -138,7 +138,7 @@ function TrainingCertificates() {
                                     </td>
                                 </tr>
                             ) : (
-                                certificates.map((cert) => (
+                                (certificates || []).map((cert) => (
                                     <tr key={cert._id}>
                                         <td>
                                             <span className="cert-number">{cert.certificateNumber}</span>
