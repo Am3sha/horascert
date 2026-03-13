@@ -142,8 +142,8 @@ const CertificateView = () => {
                             </thead>
                             <tbody>
 
-                                {certificate.sites && certificate.sites.length > 0 ? (
-                                    certificate.sites.map((site, idx) => (
+                                {(certificate.sites || []).length > 0 ? (
+                                    (certificate.sites || []).map((site, idx) => (
                                         <tr key={idx}>
                                             <td>{site.type || 'Main Site'}</td>
                                             <td>{site.location || companyAddress}</td>

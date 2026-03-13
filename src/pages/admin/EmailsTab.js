@@ -10,13 +10,20 @@ export default function EmailsTab({ onError, onSuccess }) {
     const [emails, setEmails] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
+    const [pagination, setPagination] = useState({ page: 1, limit: 20, total: 0 });
 
-    const load = useCallback(async () => {
+    const load = useCallback(async (page = 1) => {
         setLoading(true);
         try {
-            const res = await fetchEmails({ page: 1, limit: 100 });
+            const res = await fetchEmails({ page, limit: pagination.limit });
             if (res && res.success) {
                 setEmails(res.data || []);
+                setPagination(prev => ({
+                    ...prev,
+                    page: res.page || page,
+                    total: res.total || 0,
+                    count: res.count || 0
+                }));
             } else {
                 setEmails([]);
                 if (onError) onError((res && (res.message || res.error)) || 'Failed to fetch emails');
@@ -27,10 +34,14 @@ export default function EmailsTab({ onError, onSuccess }) {
         } finally {
             setLoading(false);
         }
-    }, [onError]);
+    }, [onError, pagination.limit]);
 
     useEffect(() => {
-        load();
+        load(1);
+    }, [load]);
+
+    const handlePageChange = useCallback((newPage) => {
+        load(newPage);
     }, [load]);
 
     const formatDate = (dateString) => {
@@ -58,13 +69,14 @@ export default function EmailsTab({ onError, onSuccess }) {
                 return;
             }
             if (onSuccess) onSuccess('Email status updated');
-            load();
+            load(1);
         } catch (err) {
             if (onError) onError((err && err.message) || 'Failed to update email');
         }
     };
 
     const handleDelete = (emailId) => {
+        console.log('handleDelete called with ID:', emailId);
         if (!emailId) return;
 
         // Show confirmation toast with action buttons
@@ -127,7 +139,7 @@ export default function EmailsTab({ onError, onSuccess }) {
                 return;
             }
             toast.success('Email deleted successfully');
-            load();
+            load(1);
         } catch (err) {
             toast.error((err && err.message) || 'Failed to delete email');
         } finally {
@@ -163,7 +175,7 @@ export default function EmailsTab({ onError, onSuccess }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {emails.map((email) => (
+                            {(emails || []).map((email) => (
                                 <tr key={email._id}>
                                     <td>{email.senderName}</td>
                                     <td>{email.senderEmail}</td>
@@ -201,6 +213,31 @@ export default function EmailsTab({ onError, onSuccess }) {
                             ))}
                         </tbody>
                     </table>
+                </div>
+            )}
+
+            {/* Pagination */}
+            {pagination.total > pagination.limit && (
+                <div className="pagination" style={{ marginTop: '1rem', textAlign: 'center' }}>
+                    <button
+                        className="dbtn dbtn-secondary"
+                        onClick={() => handlePageChange(pagination.page - 1)}
+                        disabled={pagination.page <= 1}
+                        style={{ marginRight: '0.5rem' }}
+                    >
+                        Previous
+                    </button>
+                    <span style={{ margin: '0 1rem' }}>
+                        Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
+                    </span>
+                    <button
+                        className="dbtn dbtn-secondary"
+                        onClick={() => handlePageChange(pagination.page + 1)}
+                        disabled={pagination.page >= Math.ceil(pagination.total / pagination.limit)}
+                        style={{ marginLeft: '0.5rem' }}
+                    >
+                        Next
+                    </button>
                 </div>
             )}
         </div>

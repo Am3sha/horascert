@@ -10,12 +10,6 @@ const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('certificates');
     const [error, setError] = useState('');
 
-    // Placeholder counts for UX (in a real app, you would fetch these from the backend)
-    const certCount = 0;
-    const trainingCount = 0;
-    const appCount = 0;
-    const msgCount = 0;
-
     // No auth check here - App.js already protects this route
     // App.js redirects to /login if not authenticated before rendering AdminDashboard
 
@@ -58,7 +52,6 @@ const AdminDashboard = () => {
                 >
                     <span className="dash-tab-icon">🏆</span>
                     ISO Certificates
-                    <span className="tab-count">{certCount}</span>
                 </div>
 
                 <div
@@ -67,7 +60,6 @@ const AdminDashboard = () => {
                 >
                     <span className="dash-tab-icon">📜</span>
                     Training Certificates
-                    <span className="tab-count">{trainingCount}</span>
                 </div>
 
                 <div
@@ -76,7 +68,6 @@ const AdminDashboard = () => {
                 >
                     <span className="dash-tab-icon">📋</span>
                     Applications
-                    <span className="tab-count">{appCount}</span>
                 </div>
 
                 <div
@@ -85,7 +76,6 @@ const AdminDashboard = () => {
                 >
                     <span className="dash-tab-icon">✉️</span>
                     Messages
-                    <span className="tab-count">{msgCount}</span>
                 </div>
             </div>
 

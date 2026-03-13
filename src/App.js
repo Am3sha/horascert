@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { verifyAuth } from './services/api';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 import './animations/animations.css';
 
@@ -174,6 +175,7 @@ function App() {
       <ErrorBoundary>
         <AppContent />
       </ErrorBoundary>
+      <Toaster position="top-right" />
     </Router>
   );
 }

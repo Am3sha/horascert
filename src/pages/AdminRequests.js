@@ -181,7 +181,7 @@ export default function AdminRequests() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {requests.map((req) => (
+                                {(requests || []).map((req) => (
                                     <tr key={req._id}>
                                         <td className="cert-number" title={req._id}>{shortId(req._id)}</td>
                                         <td>{req.companyName || '-'}</td>

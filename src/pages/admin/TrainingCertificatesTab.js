@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import {
     getTrainingCertificates,
-    getTrainingCertificateStats,
     createTrainingCertificate,
     updateTrainingCertificate,
     deleteTrainingCertificate,
@@ -16,16 +15,8 @@ export default function TrainingCertificatesTab({ onError }) {
     const [deletingId, setDeletingId] = useState(null);
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
-
-    // Real stats from server
-    const [stats, setStats] = useState({
-        total: 0,
-        active: 0,
-        expired: 0,
-        revoked: 0,
-        thisMonth: 0,
-        expiringSoon: 0
-    });
+    const [pagination, setPagination] = useState({ page: 1, limit: 20, total: 0 });
+    const searchTimeoutRef = useRef(null);
 
     const [showAddCertificate, setShowAddCertificate] = useState(false);
     const [editingCertificate, setEditingCertificate] = useState(null);
@@ -39,21 +30,23 @@ export default function TrainingCertificatesTab({ onError }) {
         expiryDate: '',
     });
 
-    const load = useCallback(async () => {
+    const load = useCallback(async (page = 1, searchQuery = search) => {
         setLoading(true);
         try {
-            // Fetch stats
-            const statsRes = await getTrainingCertificateStats();
-            if (statsRes && statsRes.success) {
-                setStats(statsRes.stats);
-            }
-
-            // Fetch certificates with optional status filter
             const res = await getTrainingCertificates({
+                page,
+                limit: pagination.limit,
+                ...(searchQuery && { search: searchQuery }),
                 ...(statusFilter && { status: statusFilter })
             });
             if (res && res.success) {
                 setCertificates(res.data || []);
+                setPagination(prev => ({
+                    ...prev,
+                    page: res.page || page,
+                    total: res.total || 0,
+                    count: res.count || 0
+                }));
             } else {
                 setCertificates([]);
                 if (onError) onError((res && (res.message || res.error)) || 'Failed to fetch training certificates');
@@ -64,11 +57,26 @@ export default function TrainingCertificatesTab({ onError }) {
         } finally {
             setLoading(false);
         }
-    }, [onError, statusFilter]);
+    }, [onError, statusFilter, pagination.limit]);
 
     useEffect(() => {
-        load();
+        load(1);
     }, [load]);
+
+    // Debounced search
+    const handleSearchChange = useCallback((value) => {
+        setSearch(value);
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
+        searchTimeoutRef.current = setTimeout(() => {
+            load(1, value);
+        }, 300);
+    }, [load]);
+
+    const handlePageChange = useCallback((newPage) => {
+        load(newPage, search);
+    }, [load, search]);
 
     const formatDate = (dateString) => {
         if (!dateString) return 'N/A';
@@ -128,10 +136,7 @@ export default function TrainingCertificatesTab({ onError }) {
 
     const generateAndDownloadQR = async (certificateUrl, filename) => {
         try {
-            // Use external QR code service for frontend compatibility
             const qrServiceUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(certificateUrl)}`;
-
-            // Convert to data URL
             const response = await fetch(qrServiceUrl);
             const blob = await response.blob();
             const dataUrl = await new Promise((resolve) => {
@@ -139,10 +144,8 @@ export default function TrainingCertificatesTab({ onError }) {
                 reader.onloadend = () => resolve(reader.result);
                 reader.readAsDataURL(blob);
             });
-
             downloadQRCode(dataUrl, filename);
         } catch (err) {
-            // Silently handle QR code generation errors
             console.error('QR generation failed:', err);
         }
     };
@@ -205,11 +208,8 @@ export default function TrainingCertificatesTab({ onError }) {
             if (!editingCertificate && res.data) {
                 const certificateNumber = res.data.certificateNumber;
                 const certificateUrl = `${window.location.origin}/verify/training/${certificateNumber}`;
-
                 toast.success(`Training Certificate created! Certificate Number: ${certificateNumber}`);
                 setShowAddCertificate(false);
-
-                // Generate and download QR automatically (non-blocking)
                 generateAndDownloadQR(certificateUrl, `QR_${certificateNumber}.png`)
                     .catch(() => {
                         // Silently handle QR code download errors
@@ -219,7 +219,7 @@ export default function TrainingCertificatesTab({ onError }) {
                 setShowAddCertificate(false);
             }
 
-            load();
+            load(1, search);
         } catch (err) {
             toast.error((err && err.message) || 'Failed to save certificate');
         } finally {
@@ -230,6 +230,7 @@ export default function TrainingCertificatesTab({ onError }) {
     const handleDelete = (certificateId) => {
         if (!certificateId) return;
 
+        // Show confirmation toast with action buttons
         const toastId = toast(
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span style={{ flex: 1 }}>Delete this certificate?</span>
@@ -289,7 +290,7 @@ export default function TrainingCertificatesTab({ onError }) {
                 return;
             }
             toast.success('Certificate deleted successfully');
-            load();
+            load(1, search);
         } catch (err) {
             toast.error((err && err.message) || 'Failed to delete certificate');
         } finally {
@@ -298,58 +299,18 @@ export default function TrainingCertificatesTab({ onError }) {
     };
 
     const handleView = (cert) => {
-        // Navigate to training certificate verification page
         if (cert.certificateNumber) {
             navigate(`/verify/training/${cert.certificateNumber}`);
         } else if (cert.qrCode) {
-            // Fallback: extract certificateNumber from qrCode URL if needed
             const parts = cert.qrCode.split('/');
             const certNum = parts[parts.length - 1];
             if (certNum) navigate(`/verify/training/${certNum}`);
         }
     };
 
-    // Filter certificates for search
-    const filteredCertificates = certificates.filter(cert => {
-        if (!search) return true;
-        const s = search.toLowerCase();
-        return (
-            (cert.certificateNumber && cert.certificateNumber.toLowerCase().includes(s)) ||
-            (cert.trainee && cert.trainee.name && cert.trainee.name.toLowerCase().includes(s)) ||
-            (cert.training && cert.training.courseName && cert.training.courseName.toLowerCase().includes(s))
-        );
-    });
-
     return (
         <div className="tab-panel">
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <div className="stat-icon stat-icon-blue">📜</div>
-                    <div className="stat-value">{stats.total}</div>
-                    <div className="stat-label">Total Certificates</div>
-                </div>
-                <div className="stat-card">
-                    <div className="stat-icon stat-icon-green">✓</div>
-                    <div className="stat-value">{stats.active}</div>
-                    <div className="stat-label">Active</div>
-                </div>
-                <div
-                    className="stat-card"
-                    onClick={() => setStatusFilter(statusFilter === 'expired' ? '' : 'expired')}
-                    style={{ cursor: 'pointer', opacity: statusFilter === 'expired' ? 0.7 : 1 }}
-                >
-                    <div className="stat-icon stat-icon-orange">⏰</div>
-                    <div className="stat-value">{stats.expired}</div>
-                    <div className="stat-label">Expired</div>
-                </div>
-                <div className="stat-card">
-                    <div className="stat-icon stat-icon-purple">📊</div>
-                    <div className="stat-value">{stats.thisMonth}</div>
-                    <div className="stat-label">This Month</div>
-                </div>
-            </div>
-
-            <div className="dash-page-title" style={{ marginTop: '2rem' }}>Training Certificates Management</div>
+            <div className="dash-page-title">Training Certificates Management</div>
             <div className="dash-page-sub">Manage and verify training certificates</div>
 
             {showAddCertificate && (
@@ -361,7 +322,6 @@ export default function TrainingCertificatesTab({ onError }) {
                         </div>
                         <form className="dash-form" onSubmit={handleSaveForm}>
                             <div className="modal-body">
-                                {/* Certificate Number - EDITABLE */}
                                 <div className="fg">
                                     <label>Certificate Number</label>
                                     <input
@@ -378,7 +338,6 @@ export default function TrainingCertificatesTab({ onError }) {
                                     </small>
                                 </div>
 
-                                {/* Trainee Information */}
                                 <h4>Trainee Information</h4>
 
                                 <div className="fg">
@@ -423,7 +382,6 @@ export default function TrainingCertificatesTab({ onError }) {
                                     />
                                 </div>
 
-                                {/* Training Details */}
                                 <h4>Training Details</h4>
 
                                 <div className="fg">
@@ -487,7 +445,6 @@ export default function TrainingCertificatesTab({ onError }) {
                                     />
                                 </div>
 
-                                {/* Certificate Dates */}
                                 <h4>Certificate Dates</h4>
 
                                 <div className="form-row-2">
@@ -510,8 +467,6 @@ export default function TrainingCertificatesTab({ onError }) {
                                         />
                                     </div>
                                 </div>
-
-
                             </div>
                             <div className="modal-foot">
                                 <button type="button" className="dbtn dbtn-secondary btn-action" onClick={() => setShowAddCertificate(false)}>
@@ -536,7 +491,7 @@ export default function TrainingCertificatesTab({ onError }) {
                                 type="text"
                                 placeholder="Search certificates..."
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)}
+                                onChange={(e) => handleSearchChange(e.target.value)}
                             />
                         </div>
                         <select
@@ -560,7 +515,7 @@ export default function TrainingCertificatesTab({ onError }) {
                         </button>
                     </div>
 
-                    {filteredCertificates.length === 0 ? (
+                    {certificates.length === 0 ? (
                         <div className="empty-state">
                             <div className="empty-state-icon">🔍</div>
                             <div className="empty-state-title">No certificates found</div>
@@ -572,62 +527,89 @@ export default function TrainingCertificatesTab({ onError }) {
                             )}
                         </div>
                     ) : (
-                        <div className="data-table-container">
-                            <table className="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Certificate Number</th>
-                                        <th>Trainee Name</th>
-                                        <th>Training Name</th>
-                                        <th>Issue Date</th>
-                                        <th>Expiry Date</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredCertificates.map((cert) => (
-                                        <tr key={cert._id}>
-                                            <td className="cert-number">{cert.certificateNumber}</td>
-                                            <td>{cert.trainee?.name || 'N/A'}</td>
-                                            <td>{cert.training?.courseName || 'N/A'}</td>
-                                            <td>{formatDate(cert.issueDate)}</td>
-                                            <td>{formatDate(cert.expiryDate)}</td>
-                                            <td>
-                                                <span className={`status-badge status-${(cert.displayStatus || cert.status || 'active').toLowerCase()}`}>
-                                                    {cert.displayStatus ? cert.displayStatus.charAt(0).toUpperCase() + cert.displayStatus.slice(1) : (cert.status || 'active')}
-                                                </span>
-                                            </td>
-                                            <td className="actions-cell">
-                                                <button
-                                                    onClick={() => handleView(cert)}
-                                                    className="action-btn action-btn-view"
-                                                    type="button"
-                                                >
-                                                    View
-                                                </button>
-                                                <button
-                                                    onClick={() => handleEdit(cert)}
-                                                    className="action-btn action-btn-edit"
-                                                    title="Edit Certificate"
-                                                    type="button"
-                                                >
-                                                    Edit
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDelete(cert._id)}
-                                                    className="action-btn action-btn-del"
-                                                    disabled={deletingId === cert._id}
-                                                    type="button"
-                                                >
-                                                    {deletingId === cert._id ? 'Deleting...' : 'Delete'}
-                                                </button>
-                                            </td>
+                        <>
+                            <div className="data-table-container">
+                                <table className="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Certificate Number</th>
+                                            <th>Trainee Name</th>
+                                            <th>Training Name</th>
+                                            <th>Issue Date</th>
+                                            <th>Expiry Date</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        {(certificates || []).map((cert) => (
+                                            <tr key={cert._id}>
+                                                <td className="cert-number">{cert.certificateNumber}</td>
+                                                <td>{cert.trainee?.name || 'N/A'}</td>
+                                                <td>{cert.training?.courseName || 'N/A'}</td>
+                                                <td>{formatDate(cert.issueDate)}</td>
+                                                <td>{formatDate(cert.expiryDate)}</td>
+                                                <td>
+                                                    <span className={`status-badge status-${(cert.displayStatus || cert.status || 'active').toLowerCase()}`}>
+                                                        {cert.displayStatus ? cert.displayStatus.charAt(0).toUpperCase() + cert.displayStatus.slice(1) : (cert.status || 'active')}
+                                                    </span>
+                                                </td>
+                                                <td className="actions-cell">
+                                                    <button
+                                                        onClick={() => handleView(cert)}
+                                                        className="action-btn action-btn-view"
+                                                        type="button"
+                                                    >
+                                                        View
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleEdit(cert)}
+                                                        className="action-btn action-btn-edit"
+                                                        title="Edit Certificate"
+                                                        type="button"
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(cert._id)}
+                                                        className="action-btn action-btn-del"
+                                                        disabled={deletingId === cert._id}
+                                                        type="button"
+                                                    >
+                                                        {deletingId === cert._id ? 'Deleting...' : 'Delete'}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Pagination */}
+                            {pagination.total > pagination.limit && (
+                                <div className="pagination" style={{ marginTop: '1rem', textAlign: 'center' }}>
+                                    <button
+                                        className="dbtn dbtn-secondary"
+                                        onClick={() => handlePageChange(pagination.page - 1)}
+                                        disabled={pagination.page <= 1}
+                                        style={{ marginRight: '0.5rem' }}
+                                    >
+                                        Previous
+                                    </button>
+                                    <span style={{ margin: '0 1rem' }}>
+                                        Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
+                                    </span>
+                                    <button
+                                        className="dbtn dbtn-secondary"
+                                        onClick={() => handlePageChange(pagination.page + 1)}
+                                        disabled={pagination.page >= Math.ceil(pagination.total / pagination.limit)}
+                                        style={{ marginLeft: '0.5rem' }}
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
             )}

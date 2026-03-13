@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import {
     deleteCertificateById,
     fetchCertificates,
-    getCertificateStats,
     updateCertificateById
 } from '../../services/api';
 import AddCertificateForm from './AddCertificateForm';
@@ -14,16 +13,9 @@ export default function CertificatesTab({ onError, onSuccess }) {
     const [deletingId, setDeletingId] = useState(null);
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
+    const [pagination, setPagination] = useState({ page: 1, limit: 20, total: 0 });
+    const searchTimeoutRef = useRef(null);
 
-    // Real stats from server
-    const [stats, setStats] = useState({
-        total: 0,
-        active: 0,
-        expired: 0,
-        revoked: 0,
-        thisMonth: 0,
-        expiringSoon: 0
-    });
 
     const [showAddCertificate, setShowAddCertificate] = useState(false);
 
@@ -59,23 +51,24 @@ export default function CertificatesTab({ onError, onSuccess }) {
         return map;
     }, [standardOptions]);
 
-    const load = useCallback(async () => {
+    const load = useCallback(async (page = 1, searchQuery = search) => {
         setLoading(true);
         try {
-            // Fetch stats
-            const statsRes = await getCertificateStats();
-            if (statsRes && statsRes.success) {
-                setStats(statsRes.stats);
-            }
-
-            // Fetch certificates with optional status filter
+            // Fetch certificates with pagination and filters
             const res = await fetchCertificates({
-                page: 1,
-                limit: 100,
+                page,
+                limit: pagination.limit,
+                ...(searchQuery && { search: searchQuery }),
                 ...(statusFilter && { status: statusFilter })
             });
             if (res && res.success) {
                 setCertificates(res.data || []);
+                setPagination(prev => ({
+                    ...prev,
+                    page: res.page || page,
+                    total: res.total || 0,
+                    count: res.count || 0
+                }));
             } else {
                 setCertificates([]);
                 if (onError) onError((res && (res.message || res.error)) || 'Failed to fetch certificates');
@@ -86,11 +79,26 @@ export default function CertificatesTab({ onError, onSuccess }) {
         } finally {
             setLoading(false);
         }
-    }, [onError, statusFilter]);
+    }, [onError, statusFilter, pagination.limit]);
 
     useEffect(() => {
-        load();
+        load(1);
     }, [load]);
+
+    // Debounced search
+    const handleSearchChange = useCallback((value) => {
+        setSearch(value);
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
+        searchTimeoutRef.current = setTimeout(() => {
+            load(1, value);
+        }, 300);
+    }, [load]);
+
+    const handlePageChange = useCallback((newPage) => {
+        load(newPage, search);
+    }, [load, search]);
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -148,7 +156,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
 
             if (onSuccess) onSuccess('Certificate updated successfully');
             setEditingCertificate(null);
-            load();
+            load(1, search);
         } catch (err) {
             if (onError) onError((err && err.message) || 'Failed to update certificate');
         } finally {
@@ -159,6 +167,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
     const handleDelete = (certificateId) => {
         if (!certificateId) return;
 
+        // Show confirmation toast with action buttons
         const toastId = toast(
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span style={{ flex: 1 }}>Delete this certificate?</span>
@@ -218,7 +227,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
                 return;
             }
             toast.success('Certificate deleted successfully');
-            load();
+            load(1, search);
         } catch (err) {
             toast.error((err && err.message) || 'Failed to delete certificate');
         } finally {
@@ -226,47 +235,10 @@ export default function CertificatesTab({ onError, onSuccess }) {
         }
     };
 
-    // Filter certificates for search
-    const filteredCertificates = certificates.filter(cert => {
-        if (!search) return true;
-        const s = search.toLowerCase();
-        return (
-            (cert.certificateNumber && cert.certificateNumber.toLowerCase().includes(s)) ||
-            (cert.companyName && cert.companyName.toLowerCase().includes(s)) ||
-            (cert.standard && cert.standard.toLowerCase().includes(s))
-        );
-    });
 
     return (
         <div className="tab-panel">
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <div className="stat-icon stat-icon-blue">🏆</div>
-                    <div className="stat-value">{stats.total}</div>
-                    <div className="stat-label">Total ISO</div>
-                </div>
-                <div className="stat-card">
-                    <div className="stat-icon stat-icon-green">✓</div>
-                    <div className="stat-value">{stats.active}</div>
-                    <div className="stat-label">Active</div>
-                </div>
-                <div
-                    className="stat-card"
-                    onClick={() => setStatusFilter(statusFilter === 'expired' ? '' : 'expired')}
-                    style={{ cursor: 'pointer', opacity: statusFilter === 'expired' ? 0.7 : 1 }}
-                >
-                    <div className="stat-icon stat-icon-orange">⏰</div>
-                    <div className="stat-value">{stats.expired}</div>
-                    <div className="stat-label">Expired</div>
-                </div>
-                <div className="stat-card">
-                    <div className="stat-icon stat-icon-purple">📊</div>
-                    <div className="stat-value">{stats.thisMonth}</div>
-                    <div className="stat-label">This Month</div>
-                </div>
-            </div>
-
-            <div className="dash-page-title" style={{ marginTop: '2rem' }}>Certificates Management</div>
+            <div className="dash-page-title">Certificates Management</div>
             <div className="dash-page-sub">Manage and verify ISO certificates</div>
 
             <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -274,7 +246,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
                     type="text"
                     placeholder="Search by certificate number, company, or standard..."
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => handleSearchChange(e.target.value)}
                     style={{
                         flex: 1,
                         padding: '0.75rem 1rem',
@@ -316,7 +288,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
                         <AddCertificateForm
                             onSuccess={() => {
                                 setShowAddCertificate(false);
-                                load();
+                                load(1, search);
                             }}
                             onCancel={() => setShowAddCertificate(false)}
                         />
@@ -442,7 +414,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
                             type="text"
                             placeholder="Search ISO certificates..."
                             value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => handleSearchChange(e.target.value)}
                         />
                     </div>
                     <button className="dbtn dbtn-primary" onClick={() => setShowAddCertificate(true)}>
@@ -452,7 +424,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
 
                 {loading ? (
                     <div className="loading">Loading certificates...</div>
-                ) : filteredCertificates.length === 0 ? (
+                ) : certificates.length === 0 ? (
                     <div className="empty-state">
                         <div className="empty-state-icon">🏆</div>
                         <div className="empty-state-title">No Certificates Found</div>
@@ -466,61 +438,88 @@ export default function CertificatesTab({ onError, onSuccess }) {
                         )}
                     </div>
                 ) : (
-                    <div className="data-table-container">
-                        <table className="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Certificate #</th>
-                                    <th>Company</th>
-                                    <th>Standard</th>
-                                    <th>Issue Date</th>
-                                    <th>Expiry</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredCertificates.map((cert) => (
-                                    <tr key={cert._id}>
-                                        <td className="cert-number">{cert.certificateNumber}</td>
-                                        <td>{cert.companyName}</td>
-                                        <td>{cert.standard}</td>
-                                        <td>{formatDate(cert.issueDate)}</td>
-                                        <td>{formatDate(cert.expiryDate)}</td>
-                                        <td>
-                                            <span className={`status-badge status-${(cert.displayStatus || cert.status || 'active').toLowerCase()}`}>
-                                                {cert.displayStatus ? cert.displayStatus.charAt(0).toUpperCase() + cert.displayStatus.slice(1) : cert.status}
-                                            </span>
-                                        </td>
-                                        <td className="actions-cell">
-                                            <button
-                                                className="btn-action btn-view"
-                                                onClick={() => handleView(cert.certificateId)}
-                                                title="View"
-                                            >
-                                                👁️
-                                            </button>
-                                            <button
-                                                className="btn-action btn-edit"
-                                                onClick={() => handleEdit(cert.certificateId)}
-                                                title="Edit"
-                                            >
-                                                ✏️
-                                            </button>
-                                            <button
-                                                className="btn-action btn-delete"
-                                                onClick={() => handleDelete(cert.certificateId)}
-                                                disabled={deletingId === cert.certificateId}
-                                                title="Delete"
-                                            >
-                                                {deletingId === cert.certificateId ? '...' : '🗑️'}
-                                            </button>
-                                        </td>
+                    <>
+                        <div className="data-table-container">
+                            <table className="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Certificate #</th>
+                                        <th>Company</th>
+                                        <th>Standard</th>
+                                        <th>Issue Date</th>
+                                        <th>Expiry</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    {(certificates || []).map((cert) => (
+                                        <tr key={cert._id}>
+                                            <td className="cert-number">{cert.certificateNumber}</td>
+                                            <td>{cert.companyName}</td>
+                                            <td>{cert.standard}</td>
+                                            <td>{formatDate(cert.issueDate)}</td>
+                                            <td>{formatDate(cert.expiryDate)}</td>
+                                            <td>
+                                                <span className={`status-badge status-${(cert.displayStatus || cert.status || 'active').toLowerCase()}`}>
+                                                    {cert.displayStatus ? cert.displayStatus.charAt(0).toUpperCase() + cert.displayStatus.slice(1) : cert.status}
+                                                </span>
+                                            </td>
+                                            <td className="actions-cell">
+                                                <button
+                                                    className="btn-action btn-view"
+                                                    onClick={() => handleView(cert.certificateId)}
+                                                    title="View"
+                                                >
+                                                    View
+                                                </button>
+                                                <button
+                                                    className="btn-action btn-edit"
+                                                    onClick={() => handleEdit(cert.certificateId)}
+                                                    title="Edit"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    className="btn-action btn-delete"
+                                                    onClick={() => handleDelete(cert.certificateId)}
+                                                    disabled={deletingId === cert.certificateId}
+                                                    title="Delete"
+                                                >
+                                                    {deletingId === cert.certificateId ? '...' : 'Delete'}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {/* Pagination */}
+                        {pagination.total > pagination.limit && (
+                            <div className="pagination" style={{ marginTop: '1rem', textAlign: 'center' }}>
+                                <button
+                                    className="dbtn dbtn-secondary"
+                                    onClick={() => handlePageChange(pagination.page - 1)}
+                                    disabled={pagination.page <= 1}
+                                    style={{ marginRight: '0.5rem' }}
+                                >
+                                    Previous
+                                </button>
+                                <span style={{ margin: '0 1rem' }}>
+                                    Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
+                                </span>
+                                <button
+                                    className="dbtn dbtn-secondary"
+                                    onClick={() => handlePageChange(pagination.page + 1)}
+                                    disabled={pagination.page >= Math.ceil(pagination.total / pagination.limit)}
+                                    style={{ marginLeft: '0.5rem' }}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>
