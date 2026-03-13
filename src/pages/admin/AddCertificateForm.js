@@ -7,6 +7,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
     const [formData, setFormData] = useState({
         certificateNumber: '',
         companyName: '',
+        companyEmail: '',
         companyAddress: '',
         standard: 'ISO 9001:2015',
         standardDescription: 'Quality Management System',
@@ -143,6 +144,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     setFormData({
                         certificateNumber: '',
                         companyName: '',
+                        companyEmail: '',
                         companyAddress: '',
                         standard: 'ISO 9001:2015',
                         standardDescription: 'Quality Management System',
@@ -212,6 +214,18 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                             onChange={handleChange}
                             placeholder="Company Name"
                             required
+                            disabled={loading}
+                        />
+                    </div>
+
+                    <div className="form-group full-width">
+                        <label>Company Email (optional)</label>
+                        <input
+                            type="email"
+                            name="companyEmail"
+                            value={formData.companyEmail}
+                            onChange={handleChange}
+                            placeholder="Company email address"
                             disabled={loading}
                         />
                     </div>
