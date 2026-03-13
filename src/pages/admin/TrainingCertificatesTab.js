@@ -175,7 +175,7 @@ export default function TrainingCertificatesTab({ onError }) {
                 const certificateUrl = `${window.location.origin}/verify/training/${certificateNumber}`;
                 toast.success(`Training Certificate created! Certificate Number: ${certificateNumber}`);
                 setShowAddCertificate(false);
-                
+
                 // Download QR code
                 try {
                     const qrServiceUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(certificateUrl)}`;
@@ -186,7 +186,7 @@ export default function TrainingCertificatesTab({ onError }) {
                         reader.onloadend = () => resolve(reader.result);
                         reader.readAsDataURL(blob);
                     });
-                    
+
                     const link = document.createElement('a');
                     link.href = dataUrl;
                     link.download = `QR_${certificateNumber}.png`;
@@ -213,9 +213,55 @@ export default function TrainingCertificatesTab({ onError }) {
     const handleDelete = (certificateId) => {
         if (!certificateId) return;
 
-        if (window.confirm('Are you sure you want to delete this certificate?')) {
-            performDelete(certificateId);
-        }
+        // Show confirmation toast with action buttons
+        const toastId = toast(
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span style={{ flex: 1 }}>Delete this certificate?</span>
+                <button
+                    onClick={() => {
+                        toast.dismiss(toastId);
+                        performDelete(certificateId);
+                    }}
+                    style={{
+                        padding: '4px 12px',
+                        border: 'none',
+                        borderRadius: '4px',
+                        background: '#dc2626',
+                        color: 'white',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                    }}
+                >
+                    Delete
+                </button>
+                <button
+                    onClick={() => toast.dismiss(toastId)}
+                    style={{
+                        padding: '4px 12px',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '4px',
+                        background: '#f3f4f6',
+                        color: '#6b7280',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                    }}
+                >
+                    Cancel
+                </button>
+            </div>,
+            {
+                duration: 10000, // 10 seconds to decide
+                position: 'top-right',
+                style: {
+                    background: '#fff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                    color: '#111827',
+                    padding: '12px 16px'
+                }
+            }
+        );
     };
 
     const performDelete = async (certificateId) => {
@@ -363,9 +409,9 @@ export default function TrainingCertificatesTab({ onError }) {
                                         type="email"
                                         placeholder="Trainee Email (optional)"
                                         value={formData.trainee.email || ""}
-                                        onChange={(e)=>setFormData({
+                                        onChange={(e) => setFormData({
                                             ...formData,
-                                            trainee:{...formData.trainee,email:e.target.value}
+                                            trainee: { ...formData.trainee, email: e.target.value }
                                         })}
                                     />
                                 </div>
@@ -543,14 +589,14 @@ export default function TrainingCertificatesTab({ onError }) {
                                                 <td className="actions-cell">
                                                     <button
                                                         onClick={() => handleView(cert)}
-                                                        className="action-btn action-btn-view"
+                                                        className="btn-action btn-view"
                                                         type="button"
                                                     >
                                                         View
                                                     </button>
                                                     <button
                                                         onClick={() => handleEdit(cert)}
-                                                        className="action-btn action-btn-edit"
+                                                        className="btn-action btn-edit"
                                                         title="Edit Certificate"
                                                         type="button"
                                                     >
@@ -558,11 +604,11 @@ export default function TrainingCertificatesTab({ onError }) {
                                                     </button>
                                                     <button
                                                         onClick={() => handleDelete(cert._id)}
-                                                        className="action-btn action-btn-del"
+                                                        className="btn-action btn-delete"
                                                         disabled={deletingId === cert._id}
                                                         type="button"
                                                     >
-                                                        {deletingId === cert._id ? 'Deleting...' : 'Delete'}
+                                                        {deletingId === cert._id ? '...' : 'Delete'}
                                                     </button>
                                                 </td>
                                             </tr>
