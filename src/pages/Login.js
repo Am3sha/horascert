@@ -30,12 +30,7 @@ export default function Login() {
         setLoading(true);
 
         try {
-            const requestData = {
-                email: email.trim(),
-                password: password
-            };
-
-            const res = await adminLogin(requestData.email, requestData.password);
+            const res = await adminLogin(email.trim(), password);
 
             if (res && res.success) {
                 // Login successful, cookie is set by backend

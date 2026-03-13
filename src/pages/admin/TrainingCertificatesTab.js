@@ -215,7 +215,7 @@ export default function TrainingCertificatesTab({ onError }) {
 
         // Show confirmation toast with action buttons
         const toastId = toast(
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} lang="en">
                 <span style={{ flex: 1 }}>Delete this certificate?</span>
                 <button
                     onClick={() => {

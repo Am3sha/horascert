@@ -169,7 +169,7 @@ export default function ApplicationsTab({ onError, onSuccess }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {applications.map((app) => (
+                            {(applications || []).map((app) => (
                                 <tr key={app._id}>
                                     <td>{app.companyName || '-'}</td>
                                     <td>{app.phone || '-'}</td>
