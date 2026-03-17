@@ -299,7 +299,9 @@ const Home = () => {
           <p className="section-subtitle">
             Contact us for a free consultation and quote. Our team is ready to help you achieve certification excellence.
           </p>
-          <ContactForm />
+          <div className="contact-cta-card">
+            <ContactForm />
+          </div>
         </div>
       </section>
     </article>
