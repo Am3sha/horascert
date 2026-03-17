@@ -160,7 +160,7 @@ function TrainingCertificateView() {
                 <img
                   src={cert.qrCodeImage}
                   alt="QR Code"
-                  onLoad={() => console.log('QR Code loaded successfully')}
+                  onLoad={() => { }}
                   onError={(e) => {
                     console.error('QR Code failed to load');
                     e.target.style.display = 'none';

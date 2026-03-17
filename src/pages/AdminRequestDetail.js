@@ -491,7 +491,7 @@ export default function AdminRequestDetail() {
 
                                     <div className="form-field-admin full-width">
                                         <div className="field-label">Certification Scope</div>
-                                        <div className="field-value">{additionalInfo?.certificationRequest?.scope || 'Not provided'}</div>
+                                        <div className="field-value">{request.certificationScope || additionalInfo?.certificationRequest?.scope || 'Not provided'}</div>
                                     </div>
                                 </div>
 

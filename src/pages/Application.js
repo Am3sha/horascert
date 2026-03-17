@@ -76,6 +76,7 @@ const Application = () => {
     workforceSeasonalEmployees: '',
 
     desiredStandards: [],
+    certificationScope: '',
     certificationProgramme: '',
     transferReason: '',
     transferExpiringDate: '',
@@ -234,6 +235,12 @@ const Application = () => {
     }
 
     if (targetStep === 2) {
+      validationRules.certificationScope = {
+        required: true,
+        requiredMessage: 'Certification scope is required',
+        minLength: 2,
+        maxLength: 200
+      };
       validationRules.certificationProgramme = {
         required: true,
         requiredMessage: 'Certification programme is required',
@@ -508,7 +515,8 @@ const Application = () => {
     appendIfFilled('contactPhone', formData.telephone);
     appendIfFilled('contactPersonName', formData.contactPersonName || formData.executiveManagerName);
     appendIfFilled('contactPersonPosition', formData.contactPersonPosition);
-    appendIfFilled('standards', JSON.stringify(formData.desiredStandards));
+    appendIfFilled('standards', formData.desiredStandards.join(', '));
+    appendIfFilled('certificationScope', formData.certificationScope);
 
     // Add contact information - only if filled
     appendIfFilled('telephone', formData.telephone);
@@ -602,16 +610,69 @@ const Application = () => {
 
       if (result.success) {
         setSubmitStatus('success');
-        setSubmitMessage('Application submitted successfully! We will contact you soon.');
+        setSubmitError('Application submitted successfully! We will contact you soon.');
+
+        // Reset form after success
+        setTimeout(() => {
+          setFormData({
+            companyName: '',
+            telephone: '',
+            fax: '',
+            email: '',
+            website: '',
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            state: '',
+            postalCode: '',
+            country: '',
+            executiveManagerName: '',
+            executiveManagerMobile: '',
+            executiveManagerEmail: '',
+            contactPersonName: '',
+            contactPersonPosition: '',
+            contactPersonMobile: '',
+            contactPersonEmail: '',
+            workforceTotalEmployees: '',
+            workforceEmployeesPerShift: '',
+            workforceNumberOfShifts: '',
+            workforceSeasonalEmployees: '',
+            desiredStandards: [],
+            certificationScope: '',
+            certificationProgramme: '',
+            transferReason: '',
+            transferExpiringDate: '',
+            iso9001DesignAndDevelopment: '',
+            iso9001OtherNonApplicableClauses: '',
+            iso9001OtherNonApplicableClausesText: '',
+            iso14001SitesManaged: '',
+            iso14001RegisterOfSignificantAspects: '',
+            iso14001EnvironmentalManagementManual: '',
+            iso14001InternalAuditProgramme: '',
+            iso14001InternalAuditImplemented: '',
+            iso22000HaccpImplementation: '',
+            iso22000HaccpStudies: '',
+            iso22000Sites: '',
+            iso22000ProcessLines: '',
+            iso22000ProcessingType: '',
+            iso45001HazardsIdentified: '',
+            iso45001CriticalRisks: ''
+          });
+          setAttachedFiles([]);
+          setErrors({});
+          setStep(1);
+          setSubmitStatus(null);
+          setSubmitError('');
+        }, 1000); // Wait 1 seconds for user to see success message
       } else {
         setSubmitStatus('error');
-        setSubmitMessage(result.error || 'Failed to submit application');
+        setSubmitError(result.error || 'Failed to submit application');
       }
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage(error.message || 'Failed to submit application');
+      setSubmitError(error.message || 'Failed to submit application');
     } finally {
-      setSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -625,7 +686,7 @@ const Application = () => {
 
       <section className="section">
         <div className="container">
-          <form className="application-form" onSubmit={handleSubmit}>
+          <form className="application-form" onSubmit={handleSubmit} noValidate>
             <div className="progress">
               <div className="progress-text">Step {step} of 3</div>
               <div className="progress-steps">
@@ -840,6 +901,25 @@ const Application = () => {
                     ))}
                   </div>
                   {errors.desiredStandards && <div className="form-error">{errors.desiredStandards}</div>}
+                </div>
+
+                <div className="form-section card">
+                  <div className="section-title">Certification Scope</div>
+                  <div className="section-subtitle">(Products/Processes covered / activity)</div>
+                  <div className="form-group full-width">
+                    <label htmlFor="certificationScope">Scope <span className="required">*</span></label>
+                    <textarea
+                      id="certificationScope"
+                      name="certificationScope"
+                      value={formData.certificationScope}
+                      onChange={handleChange}
+                      placeholder="Please describe the products, processes, or activities covered by the certification"
+                      className={`certification-scope-textarea ${errors.certificationScope ? 'error' : ''}`}
+                      rows="6"
+                    ></textarea>
+                    <div className="char-count">{formData.certificationScope.length} / 200</div>
+                    {errors.certificationScope && <div className="form-error">{errors.certificationScope}</div>}
+                  </div>
                 </div>
 
                 <div className="form-section card">

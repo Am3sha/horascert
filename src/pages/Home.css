@@ -5,8 +5,8 @@
 
 /* Company Description Section */
 .company-description-section {
-  background-color: var(--black);
-  padding: 80px 0;
+  background-color: var(--off-white);
+  padding: 100px 0;
 }
 
 .company-description-content {
@@ -20,7 +20,8 @@
   text-align: left;
   margin-bottom: 24px;
   color: var(--primary-navy);
-  font-size: 2.5rem;
+  font-size: 2.75rem;
+  letter-spacing: -0.5px;
 }
 
 .lead-text {
@@ -101,8 +102,9 @@
   background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   padding: 40px 32px;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 4px solid var(--accent-gold);
   transition: all 0.3s ease;
 }
 
@@ -110,7 +112,7 @@
 .mission-card:hover {
   background-color: rgba(255, 255, 255, 0.12);
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .vision-card .card-icon,
@@ -158,22 +160,22 @@
 
 .accreditation-card {
   background-color: #ffffff;
-  padding: 32px 24px;
-  border-radius: 12px;
+  padding: 40px 24px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .accreditation-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.06);
 }
 
 .accreditation-image-container {
@@ -273,17 +275,17 @@
 
 .process-step {
   text-align: center;
-  padding: 32px 20px;
+  padding: 36px 24px;
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: 16px;
   transition: all 0.3s ease;
   position: relative;
-  box-shadow: 0 2px 16px rgba(30, 58, 95, 0.08);
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.06);
 }
 
 .process-step:hover {
   transform: translateY(-6px);
-  box-shadow: 0 6px 24px rgba(30, 58, 95, 0.15);
+  box-shadow: 0 12px 28px rgba(30, 58, 95, 0.12);
 }
 
 .step-number {
@@ -417,7 +419,7 @@
   .accreditation-section,
   .services-section,
   .certification-process-section,
-  
+
   .contact-cta-section {
     padding: 60px 0;
   }

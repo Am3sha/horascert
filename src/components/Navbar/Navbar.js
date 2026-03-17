@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import TopBar from './TopBar';
 import { useNavbarScroll } from '../../hooks/useScrollReveal';
 import './Navbar.css';
 
@@ -58,15 +57,23 @@ const Navbar = () => {
 
   return (
     <>
-      <TopBar />
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="navbar-content">
-            <Link to="/" className="navbar-logo">
-              <div className="logo-text">
-                <h1>HORAS Cert</h1>
-                <span>QUALITY SYSTEMS & CERTIFICATIONS</span>
+            <Link to="/" className="navbar-brand">
+              <div className="logo-wrapper">
+                <img
+                  src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png"
+                  alt="Horas Certification Logo"
+                  className="logo-image"
+                  width="62"
+                  height="62"
+                  decoding="async"
+                  loading="eager"
+                  fetchPriority="high"
+                />
               </div>
+             
             </Link>
 
             <button

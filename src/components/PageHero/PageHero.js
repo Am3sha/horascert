@@ -1,10 +1,10 @@
 import React from 'react';
 import './PageHero.css';
 
-const PageHero = ({ 
-  title, 
-  subtitle, 
-  breadcrumb 
+const PageHero = ({
+  title,
+  subtitle,
+  breadcrumb
 }) => {
   return (
     <section className="page-hero">
@@ -23,14 +23,14 @@ const PageHero = ({
             ))}
           </div>
         )}
-          
+
         <h1>{title}</h1>
-        
+
         {subtitle && <p>{subtitle}</p>}
-        
+
         <div className="page-hero-divider"></div>
       </div>
-      
+
       {/* Animated floating shapes */}
       <div className="floating-shapes">
         <div className="shape shape-1"></div>

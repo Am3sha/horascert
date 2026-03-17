@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { toast } from 'react-hot-toast';
 import {
     deleteEmail,
@@ -6,7 +7,7 @@ import {
     updateEmailStatus
 } from '../../services/api';
 
-export default function EmailsTab({ onError, onSuccess }) {
+function EmailsTab({ onError, onSuccess }) {
     const [emails, setEmails] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
@@ -76,7 +77,6 @@ export default function EmailsTab({ onError, onSuccess }) {
     };
 
     const handleDelete = (emailId) => {
-        console.log('handleDelete called with ID:', emailId);
         if (!emailId) return;
 
         // Show confirmation toast with action buttons
@@ -243,3 +243,5 @@ export default function EmailsTab({ onError, onSuccess }) {
         </div>
     );
 }
+
+export default memo(EmailsTab);

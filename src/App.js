@@ -37,13 +37,21 @@ function Loading() {
   return (
     <div style={{
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: '60vh',
-      fontSize: '18px',
-      color: '#0066cc'
+      gap: '16px',
     }}>
-      Loading...
+      <div style={{
+        width: '36px',
+        height: '36px',
+        border: '3px solid #e5e7eb',
+        borderTop: '3px solid #102F4F',
+        borderRadius: '50%',
+        animation: 'spin 0.8s linear infinite',
+      }} />
+      <span style={{ color: '#6b7280', fontSize: '14px', fontWeight: '500' }}>Loading...</span>
     </div>
   );
 }

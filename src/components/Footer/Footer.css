@@ -1,87 +1,132 @@
+/* =============================================
+   FOOTER — Premium Corporate Style
+   ============================================= */
+
 .footer {
-  background-color: var(--primary-navy);
-  color: var(--white);
+  background: linear-gradient(180deg, #102F4F 0%, #0B2A4A 100%);
+  color: #BFC9D4;
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* ---- Main Grid ---- */
 .footer-main-content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 48px;
-  padding: 60px 0 40px;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 56px;
+  padding: 72px 0 52px;
 }
 
+/* ---- Column Headings ---- */
 .footer-column h3 {
-  color: var(--accent-gold);
-  font-size: 1.25rem;
-  margin-bottom: 24px;
+  color: #ffffff;
+  font-size: 1rem;
   font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  position: relative;
 }
 
-/* Company Info Section */
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background: #C8A44D;
+  border-radius: 2px;
+}
+
+/* ---- Company Block ---- */
 .footer-company {
   max-width: 100%;
 }
 
 .footer-logo-section {
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.footer-logo {
-  font-size: 1.75rem;
-  color: var(--white);
-  margin: 0 0 8px 0;
+.footer-logo-image {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-name {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.footer-brand-tag {
+  font-size: 0.7rem;
+  color: var(--accent-gold);
+  margin-top: 5px;
   font-weight: 700;
-}
-
-.footer-tagline {
-  font-size: 0.9rem;
-  color: var(--accent-gold-light);
-  margin: 0 0 20px 0;
-  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .footer-description {
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.8;
-  font-size: 0.95rem;
-  margin-bottom: 24px;
+  color: #BFC9D4;
+  line-height: 1.75;
+  font-size: 14px;
+  margin-bottom: 22px;
 }
 
-/* Accreditation Badges */
+/* ---- Accreditation Badges ---- */
 .accreditation-badges {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .accreditation-badge {
   display: inline-block;
-  padding: 6px 12px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--white);
-  border: 1px solid var(--accent-gold);
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  padding: 6px 14px;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #BFC9D4;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  cursor: default;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .accreditation-badge:hover {
-  background-color: var(--accent-gold);
-  color: var(--primary-navy);
+  background: #C8A44D;
+  color: #0B2A4A;
+  border-color: #C8A44D;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(201, 169, 97, 0.3);
+  box-shadow: 0 6px 16px rgba(200, 164, 77, 0.25);
 }
 
+/* ---- Social Icons ---- */
 .footer-social-icons {
   display: flex;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 16px;
+  margin-top: 15px;
 }
 
 .social-icon {
@@ -90,23 +135,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid var(--accent-gold);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  color: var(--accent-gold);
-  transition: all 0.3s ease;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   text-decoration: none;
 }
 
 .social-icon:hover {
-  background-color: var(--accent-gold);
-  color: var(--primary-navy);
-  border-color: var(--accent-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+  background-color: #C8A44D;
+  border-color: #C8A44D;
+  color: #0B2A4A;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 6px 16px rgba(200, 164, 77, 0.3);
 }
 
-/* Services List */
+/* ---- Services List ---- */
 .footer-services {
   max-width: 100%;
 }
@@ -118,23 +163,24 @@
 }
 
 .services-list li {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .services-list li a {
-  color: rgba(255, 255, 255, 0.9);
+  color: #BFC9D4;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 14px;
+  line-height: 1.6;
   transition: all 0.3s ease;
   display: inline-block;
 }
 
 .services-list li a:hover {
-  color: var(--accent-gold);
-  padding-left: 8px;
+  color: #C8A44D;
+  padding-left: 5px;
 }
 
-/* Quick Links */
+/* ---- Quick Links ---- */
 .footer-links ul {
   list-style: none;
   padding: 0;
@@ -142,23 +188,24 @@
 }
 
 .footer-links ul li {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .footer-links ul li a {
-  color: rgba(255, 255, 255, 0.9);
+  color: #BFC9D4;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 14px;
+  line-height: 1.6;
   transition: all 0.3s ease;
   display: inline-block;
 }
 
 .footer-links ul li a:hover {
-  color: var(--accent-gold);
-  padding-left: 8px;
+  color: #C8A44D;
+  padding-left: 5px;
 }
 
-/* Contact Information */
+/* ---- Contact Info ---- */
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -168,39 +215,46 @@
 .contact-item {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   line-height: 1.6;
+}
+
+.contact-item svg {
+  flex-shrink: 0;
+  color: #C8A44D;
+  margin-top: 2px;
+  opacity: 0.9;
 }
 
 .contact-icon {
-  font-size: 1.1rem;
-  flex-shrink: 0;
-  margin-top: 2px;
-  line-height: 1;
+  display: none;
 }
 
 .contact-text {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
+  color: #BFC9D4;
+  font-size: 14px;
   flex: 1;
-  line-height: 1.6;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .contact-item a {
-  color: rgba(255, 255, 255, 0.9);
+  color: #BFC9D4;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .contact-item a:hover {
-  color: var(--accent-gold);
+  color: #C8A44D;
 }
 
-/* Footer Bottom */
+/* ---- Footer Bottom Bar ---- */
 .footer-bottom {
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 24px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .footer-bottom-content {
@@ -210,16 +264,17 @@
 }
 
 .footer-copyright {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  color: #BFC9D4;
   text-align: center;
+  opacity: 0.8;
 }
 
 .footer-copyright p {
   margin: 0;
 }
 
-/* Responsive Design */
+/* ---- Responsive ---- */
 @media (max-width: 1024px) {
   .footer-main-content {
     grid-template-columns: repeat(2, 1fr);
@@ -230,39 +285,43 @@
 @media (max-width: 768px) {
   .footer-main-content {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 40px 0 30px;
+    gap: 36px;
+    padding: 48px 0 36px;
   }
 
   .footer-social-icons {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .accreditation-badges {
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  .footer-column h3::after {
+    width: 28px;
   }
 }
 
 @media (max-width: 480px) {
   .footer-main-content {
-    gap: 24px;
-    padding: 32px 0 24px;
+    gap: 28px;
+    padding: 36px 0 28px;
   }
 
   .footer-column h3 {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     margin-bottom: 16px;
   }
 
   .footer-logo {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .footer-description {
-    font-size: 0.9rem;
+    font-size: 13px;
   }
 
   .contact-text {
-    font-size: 0.9rem;
+    font-size: 13px;
   }
 }

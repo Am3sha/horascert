@@ -2,67 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Performance optimizations -->
+    <!-- === Critical Preconnects === -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="dns-prefetch" href="//images.unsplash.com">
 
-    <!-- ✅ Favicon (اللوجو في التبويب) -->
+    <!-- === Favicon === -->
     <link rel="icon" href="%PUBLIC_URL%/imgeteam/favicon.ico" />
 
-    <!-- SEO Meta Tags -->
+    <!-- === SEO Meta Tags === -->
     <meta 
       name="description" 
-      content="Welcome To HORAS Cert – Organization for Quality Systems and Certifications is an accredited certification body recognized by the Egyptian Accreditation Council (EGAC) for international ISO standards." 
+      content="HORAS Cert – EGAC Accredited ISO Certification Body. Internationally recognized certification services for ISO 9001, ISO 14001, ISO 45001, ISO 22000, HACCP, and GMP in Egypt and the Middle East." 
     />
     <meta 
       name="keywords" 
       content="HORAS CERT, ISO Certification, Quality Management, EGAC, IAF, ISO 9001, ISO 14001, ISO 45001, Egypt Certification Body" 
     />
     <meta name="author" content="HORASCERT" />
-
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://horascert.com/" />
 
-    <!-- Open Graph / Social Media -->
+    <!-- === Open Graph / Social Media === -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://horascert.com/" />
-    <meta property="og:title" content="Horascert" />
+    <meta property="og:title" content="HORASCERT - ISO Certification Body" />
     <meta 
       property="og:description" 
-      content="Welcome To HORASCert – Organization for Quality Systems and Certifications recognized by IAF && EGAC for international ISO standards."
+      content="EGAC Accredited ISO Certification Body. Recognized by IAF & EGAC for international ISO standards in Egypt, Saudi Arabia, and UAE."
     />
     <meta property="og:image" content="%PUBLIC_URL%/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png" />
-
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://horascert.com/" />
     <meta property="twitter:title" content="HORASCERT - ISO Certification Body" />
-    <meta 
-      property="twitter:description" 
-      content="Welcome To HORASCert – Organization for Quality Systems and Certifications recognized by EGAC." 
-    />
+    <meta property="twitter:description" content="EGAC Accredited certification body for ISO standards." />
 
-    <!-- Fonts with performance optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-    
-    <!-- Critical font preload -->
-    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfecg.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://fonts.gstatic.com/s/opensans/v18/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2">
-    
-    <link rel="preload" as="image" href="/imges/About-home.jpeg" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <!-- === Critical LCP Image Preload === -->
+    <link rel="preload" as="image" href="/imges/About-home.jpeg" fetchpriority="high">
+    <link rel="preload" as="image" href="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png">
+
+    <!-- === Google Fonts (single optimized request with font-display=swap) === -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" media="print" onload="this.media='all'">
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
     </noscript>
 
-    <title>HorasCert</title>
+    <title>HORASCERT - ISO Certification Body Egypt</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

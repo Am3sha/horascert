@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, useRef, memo } from 'react';
 import { toast } from 'react-hot-toast';
 import {
     deleteCertificateById,
@@ -7,7 +7,7 @@ import {
 } from '../../services/api';
 import AddCertificateForm from './AddCertificateForm';
 
-export default function CertificatesTab({ onError, onSuccess }) {
+function CertificatesTab({ onError, onSuccess }) {
     const [certificates, setCertificates] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
@@ -247,6 +247,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
                     placeholder="Search by certificate number, company, or standard..."
                     value={search}
                     onChange={(e) => handleSearchChange(e.target.value)}
+                    aria-label="Search certificates"
                     style={{
                         flex: 1,
                         padding: '0.75rem 1rem',
@@ -260,6 +261,7 @@ export default function CertificatesTab({ onError, onSuccess }) {
                 <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
+                    aria-label="Filter certificates by status"
                     style={{
                         padding: '0.75rem 1rem',
                         borderRadius: '8px',
@@ -277,6 +279,8 @@ export default function CertificatesTab({ onError, onSuccess }) {
                 <button
                     className="dbtn dbtn-primary"
                     onClick={() => setShowAddCertificate(true)}
+                    type="button"
+                    aria-label="Create new certificate"
                 >
                     + Create
                 </button>
@@ -525,3 +529,5 @@ export default function CertificatesTab({ onError, onSuccess }) {
         </div>
     );
 }
+
+export default memo(CertificatesTab);

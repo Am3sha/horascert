@@ -324,11 +324,13 @@ export default function TrainingCertificatesTab({ onError }) {
                         placeholder="Search certificates..."
                         value={search}
                         onChange={(e) => handleSearchChange(e.target.value)}
+                        aria-label="Search training certificates"
                     />
                 </div>
                 <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
+                    aria-label="Filter training certificates by status"
                     style={{
                         padding: '0.75rem 1rem',
                         borderRadius: '8px',
@@ -342,7 +344,7 @@ export default function TrainingCertificatesTab({ onError }) {
                     <option value="expired">Expired</option>
                     <option value="revoked">Revoked</option>
                 </select>
-                <button className="dbtn dbtn-primary" onClick={handleAddNew} type="button">
+                <button className="dbtn dbtn-primary" onClick={handleAddNew} type="button" aria-label="Create new training certificate">
                     + Create Certificate
                 </button>
             </div>

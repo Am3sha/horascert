@@ -192,8 +192,9 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                 <div className="form-grid">
 
                     <div className="form-group full-width">
-                        <label>Certificate Number *</label>
+                        <label htmlFor="certificateNumber">Certificate Number *</label>
                         <input
+                            id="certificateNumber"
                             type="text"
                             name="certificateNumber"
                             value={formData.certificateNumber}
@@ -206,8 +207,9 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group full-width">
-                        <label>Company Name *</label>
+                        <label htmlFor="companyName">Company Name *</label>
                         <input
+                            id="companyName"
                             type="text"
                             name="companyName"
                             value={formData.companyName}
@@ -219,8 +221,9 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group full-width">
-                        <label>Company Email (optional)</label>
+                        <label htmlFor="companyEmail">Company Email (optional)</label>
                         <input
+                            id="companyEmail"
                             type="email"
                             name="companyEmail"
                             value={formData.companyEmail}
@@ -231,8 +234,9 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group full-width">
-                        <label>Full Address *</label>
+                        <label htmlFor="companyAddress">Full Address *</label>
                         <textarea
+                            id="companyAddress"
                             name="companyAddress"
                             value={formData.companyAddress}
                             onChange={handleChange}
@@ -244,14 +248,16 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group">
-                        <label>ISO Standard *</label>
+                        <label htmlFor="standard">ISO Standard *</label>
                         <select
+                            id="standard"
                             name="standard"
                             value={formData.standard}
                             onChange={handleChange}
                             required
                             disabled={loading}
                         >
+                            <option value="">Select a standard...</option>
                             {standards.map(s => (
                                 <option key={s.value} value={s.value}>
                                     {s.value} - {s.desc}
@@ -261,8 +267,9 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group">
-                        <label>Status</label>
+                        <label htmlFor="status">Status</label>
                         <select
+                            id="status"
                             name="status"
                             value={formData.status}
                             onChange={handleChange}
@@ -275,8 +282,9 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group full-width">
-                        <label>Scope of Registration *</label>
+                        <label htmlFor="scope">Scope of Registration *</label>
                         <textarea
+                            id="scope"
                             name="scope"
                             value={formData.scope}
                             onChange={handleChange}
@@ -288,26 +296,30 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                     </div>
 
                     <div className="form-group">
-                        <label>Issue Date *</label>
+                        <label htmlFor="issueDate">Issue Date *</label>
                         <input
+                            id="issueDate"
                             type="date"
                             name="issueDate"
                             value={formData.issueDate}
                             onChange={handleChange}
                             required
                             disabled={loading}
+                            aria-label="Issue Date"
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Expiry Date *</label>
+                        <label htmlFor="expiryDate">Expiry Date *</label>
                         <input
+                            id="expiryDate"
                             type="date"
                             name="expiryDate"
                             value={formData.expiryDate}
                             onChange={handleChange}
                             required
                             disabled={loading}
+                            aria-label="Expiry Date"
                         />
                     </div>
 

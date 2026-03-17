@@ -75,9 +75,9 @@ const CertificationValidation = () => {
                 <div className="container">
                     <div className="validation-container">
                         <div className="validation-card">
-                            <form onSubmit={handleSubmit} className="validation-form">
+                            <form onSubmit={handleSubmit} className="validation-form" aria-label="Certificate validation form">
                                 <div className="form-group">
-                                    <label htmlFor="certificateNumber">Certificate Number</label>
+                                    <label htmlFor="certificateNumber">Certificate Number <span className="required" aria-label="required">*</span></label>
                                     <input
                                         type="text"
                                         id="certificateNumber"
@@ -86,7 +86,7 @@ const CertificationValidation = () => {
                                             const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
                                             setCertificateNumber(value);
                                         }}
-                                        placeholder="HOR09152025112"
+                                        placeholder="HOR*****"
                                         className="form-input"
                                         disabled={loading}
                                         required
@@ -94,7 +94,11 @@ const CertificationValidation = () => {
                                         maxLength={16}
                                         pattern="[A-Z0-9]{3,16}"
                                         title="Use only letters and numbers (3 to 16 characters)."
+                                        aria-describedby="cert-help"
                                     />
+                                    <small id="cert-help" style={{ display: 'block', marginTop: '4px', color: '#666', fontSize: '0.85em' }}>
+                                        Enter certificate number
+                                    </small>
                                 </div>
 
                                 <div className="form-buttons">
@@ -102,6 +106,7 @@ const CertificationValidation = () => {
                                         type="submit"
                                         className="btn btn-primary validate-btn"
                                         disabled={loading || certificateNumber.trim().length < 3}
+                                        aria-busy={loading}
                                     >
                                         {loading ? 'Validating certificate...' : 'Validate Certificate'}
                                     </button>
@@ -112,6 +117,7 @@ const CertificationValidation = () => {
                                             onClick={handleReset}
                                             className="btn btn-secondary reset-btn"
                                             disabled={loading}
+                                            aria-label="Clear certificate number"
                                         >
                                             Clear
                                         </button>
@@ -121,16 +127,16 @@ const CertificationValidation = () => {
                         </div>
 
                         {error && (
-                            <div className="validation-result error">
-                                <div className="result-icon">✕</div>
+                            <div className="validation-result error" role="alert" aria-live="polite">
+                                <div className="result-icon" aria-hidden="true">✕</div>
                                 <h3>Certificate Not Found</h3>
                                 <p>{error}</p>
                             </div>
                         )}
 
                         {result && (
-                            <div className="validation-result success">
-                                <div className="result-icon">✔</div>
+                            <div className="validation-result success" role="region" aria-live="polite" aria-label="Certificate validation results">
+                                <div className="result-icon" aria-hidden="true">✔</div>
                                 <h3>Certificate Validated</h3>
                                 <div className="certificate-info">
                                     <div className="info-row">

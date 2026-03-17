@@ -203,28 +203,28 @@ const ContactForm = () => {
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="name">Your Name <span className="required">*</span></label>
+              <label htmlFor="name" className="form-label">Your Name <span className="required">*</span></label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={errors.name ? 'error' : ''}
+                className={`form-input ${errors.name ? 'error' : ''}`}
                 placeholder="Enter your full name"
               />
               {errors.name && <span className="error-message">{errors.name}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email <span className="required">*</span></label>
+              <label htmlFor="email" className="form-label">Email <span className="required">*</span></label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={errors.email ? 'error' : ''}
+                className={`form-input ${errors.email ? 'error' : ''}`}
                 placeholder="your.email@example.com"
               />
               {errors.email && <span className="error-message">{errors.email}</span>}
@@ -233,14 +233,14 @@ const ContactForm = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="phone">Phone <span className="required">*</span></label>
+              <label htmlFor="phone" className="form-label">Phone <span className="required">*</span></label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className={errors.phone ? 'error' : ''}
+                className={`form-input ${errors.phone ? 'error' : ''}`}
                 placeholder="+20 XXX XXX XXXX"
                 inputMode="numeric"
                 pattern="[0-9+\-\s()]*"
@@ -249,38 +249,35 @@ const ContactForm = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="subject">Subject <span className="required">*</span></label>
+              <label htmlFor="subject" className="form-label">Subject <span className="required">*</span></label>
               <input
                 type="text"
                 id="subject"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className={errors.subject ? 'error' : ''}
+                className={`form-input ${errors.subject ? 'error' : ''}`}
                 placeholder="What is this regarding?"
               />
               {errors.subject && <span className="error-message">{errors.subject}</span>}
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="message">Message <span className="required">*</span></label>
+          <div className="form-group full-width">
+            <label htmlFor="message" className="form-label">Message <span className="required">*</span></label>
             <div style={{ position: 'relative' }}>
               <textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className={errors.message ? 'error' : ''}
+                className={`form-textarea ${errors.message ? 'error' : ''}`}
                 rows="6"
                 placeholder="Tell us about your requirements..."
                 maxLength="300"
               ></textarea>
-              <div style={{
-                fontSize: '12px',
+              <div className="character-count" style={{
                 color: formData.message.length >= 250 ? '#dc2626' : '#6b7280',
-                marginTop: '4px',
-                textAlign: 'right'
               }}>
                 {formData.message.length} / 300 characters
               </div>

@@ -97,14 +97,17 @@ const TrainingValidation = () => {
                                         id="certificateNumber"
                                         value={certificateNumber}
                                         onChange={(e) => {
-                                            setCertificateNumber(e.target.value);
+                                            const value = e.target.value.toUpperCase().replace(/[^A-Z0-9\-]/g, '');
+                                            setCertificateNumber(value);
                                         }}
-                                        placeholder="e.g., TRAIN-001 or HOR-TR-2025-09"
+                                        placeholder="HOR*****"
                                         className="form-input"
                                         disabled={loading}
                                         required
                                         minLength={3}
-                                        maxLength={20}
+                                        maxLength={16}
+                                        pattern="[A-Z0-9\-]{3,20}"
+                                        title="Use only letters, numbers, and hyphens (3 to 20 characters)."
                                     />
                                 </div>
 

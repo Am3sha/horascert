@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import {
@@ -7,7 +8,7 @@ import {
     updateApplicationStatus
 } from '../../services/api';
 
-export default function ApplicationsTab({ onError, onSuccess }) {
+function ApplicationsTab({ onError, onSuccess }) {
     const navigate = useNavigate();
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -244,3 +245,5 @@ export default function ApplicationsTab({ onError, onSuccess }) {
         </div>
     );
 }
+
+export default memo(ApplicationsTab);
