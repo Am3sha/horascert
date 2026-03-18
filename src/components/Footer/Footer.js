@@ -37,11 +37,11 @@ const Footer = () => {
           <div className="footer-column footer-company">
             <div className="footer-logo-section">
               <img
-                src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png"
+                src="/imgeteam/LOGO.jpeg"
                 alt="Horas Certification Logo"
                 className="footer-logo-image"
-                width="52"
-                height="52"
+                width="512"
+                height="512"
                 loading="lazy"
                 decoding="async"
               />

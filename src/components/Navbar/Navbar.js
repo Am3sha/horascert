@@ -63,17 +63,16 @@ const Navbar = () => {
             <Link to="/" className="navbar-brand">
               <div className="logo-wrapper">
                 <img
-                  src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png"
+                  src="/imgeteam/LOGO.jpeg"
                   alt="Horas Certification Logo"
                   className="logo-image"
-                  width="62"
-                  height="62"
+                  width="512"
+                  height="512"
                   decoding="async"
                   loading="eager"
                   fetchPriority="high"
                 />
               </div>
-             
             </Link>
 
             <button

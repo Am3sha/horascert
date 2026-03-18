@@ -64,7 +64,7 @@ function TrainingCertificateView() {
 
         {/* Logo */}
         <div className="training-cert-logo">
-          <img src="/imgeteam/78e306e6-0535-4e1c-a4ae-8f5895dc1c44.png" alt="HORAS-Cert" />
+          <img src="/imgeteam/LOGO.jpeg" alt="HORAS-Cert" />
         </div>
 
         {/* Status badge */}
