@@ -96,10 +96,12 @@ const Home = () => {
             </div>
             <div className="company-description-image anim-slide-right">
               <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&q=75&fm=webp"
+                src="imges/abb0.jpg.jpeg?w=500&q=75&fm=webp"
                 alt="HORAS-Cert professional certification team"
                 loading="lazy"
                 decoding="async"
+                width="500"
+                height="400"
               />
             </div>
           </div>

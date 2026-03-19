@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { adminLogin } from '../services/api';
 import './Login.css';
 
@@ -9,6 +9,7 @@ import './Login.css';
  * Horas Cert ISO certification branding
  */
 export default function Login() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -34,8 +35,8 @@ export default function Login() {
 
             if (res && res.success) {
                 // Login successful, cookie is set by backend
-                // Navigate to dashboard; App.js will verify auth via ProtectedRoute
-                window.location.href = '/dashboard';
+                // Navigate to dashboard using React Router instead of page reload
+                navigate('/dashboard', { replace: true });
             } else {
                 // Friendly error message
                 setError('Invalid email or password. Please try again.');

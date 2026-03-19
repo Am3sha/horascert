@@ -1,6 +1,6 @@
 .navbar {
   background-color: #ffffff;
-  height: 88px;
+  height: 99px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -26,7 +26,7 @@
   margin: 0 auto;
   padding: 0 60px;
   width: 100%;
-  gap: 215px;
+  gap: 110px;
 }
 
 /* ---- Logo/Brand ---- */
@@ -40,11 +40,11 @@
 }
 
 .navbar-brand:hover {
-  transform: translateX(2px);
+  transform: translateX(1px);
 }
 
 .logo-wrapper {
-  height: 85px;
+  height: 99px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -60,14 +60,14 @@
 }
 
 .navbar.scrolled .logo-wrapper {
-  height: 52px;
+  height: 80px;
 }
 
 /* ---- Navigation Links ---- */
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 66px;
+  gap: 48px;
   align-items: center;
   margin: 0 auto;
   padding: 0;

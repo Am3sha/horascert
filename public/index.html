@@ -1,79 +1,176 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- === Charset & Viewport === -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b1f3a" />
 
-    <!-- === Critical Preconnects === -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- === Performance: Resource Hints === -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
-    <!-- === Favicon === -->
-    <link rel="icon" href="%PUBLIC_URL%/imgeteam/favicon.ico" />
-   
+    <!-- === Favicon & Icons === -->
+    <link
+      rel="shortcut icon"
+      href="%PUBLIC_URL%/imgeteam/12.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      href="%PUBLIC_URL%/imgeteam/12.ico"
+      type="image/x-icon"
+      sizes="any"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
 
-    <!-- === SEO Meta Tags === -->
+    <!-- === Critical SEO Meta Tags === -->
+    <title>
+      HORASCERT - EGAC Accredited ISO Certification Services | Quality
+      Management Systems
+    </title>
     <meta
       name="description"
-      content="HORAS Cert – EGAC Accredited ISO Certification Body. Internationally recognized certification services for ISO 9001, ISO 14001, ISO 45001, ISO 22000, HACCP, and GMP in Egypt and the Middle East."
+      content="HORAS Cert - EGAC & IAF Accredited ISO Certification Body. Internationally recognized certification for ISO 9001, ISO 14001, ISO 45001, ISO 22000, HACCP, and GMP. Serving Egypt, Saudi Arabia, and UAE."
     />
     <meta
       name="keywords"
-      content="HORAS CERT, ISO Certification, Quality Management, EGAC, IAF, ISO 9001, ISO 14001, ISO 45001, Egypt Certification Body"
+      content="ISO certification, ISO 9001, ISO 14001, ISO 45001, ISO 22000, quality management, EGAC accredited, certification body, Egypt, Saudi Arabia, UAE"
     />
-    <meta name="author" content="HORASCERT" />
-    <meta name="robots" content="index, follow" />
+    <meta name="author" content="HORAS Cert" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="revisit-after" content="7 days" />
     <link rel="canonical" href="https://horascert.com/" />
 
-    <!-- === Open Graph / Social Media === -->
+    <!-- === Open Graph / Social Media (Premium) === -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://horascert.com/" />
-    <meta property="og:title" content="HORASCERT - ISO Certification Body" />
+    <meta
+      property="og:title"
+      content="HORAS Cert - EGAC Accredited ISO Certification Body"
+    />
     <meta
       property="og:description"
-      content="EGAC Accredited ISO Certification Body. Recognized by IAF & EGAC for international ISO standards in Egypt, Saudi Arabia, and UAE."
-    />
-    <meta property="og:image" content="%PUBLIC_URL%/imgeteam/LOGO.jpeg" />
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://horascert.com/" />
-    <meta
-      property="twitter:title"
-      content="HORASCERT - ISO Certification Body"
+      content="Internationally recognized ISO certification services. Trusted by 500+ organizations in Egypt, Saudi Arabia, and UAE. ISO 9001 | ISO 14001 | ISO 45001 | ISO 22000"
     />
     <meta
-      property="twitter:description"
-      content="EGAC Accredited certification body for ISO standards."
+      property="og:image"
+      content="https://horascert.com/imgeteam/LOGO.jpeg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="HORAS Cert" />
+
+    <!-- === Twitter Card === -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://horascert.com/" />
+    <meta name="twitter:title" content="HORAS Cert - ISO Certification Body" />
+    <meta
+      name="twitter:description"
+      content="EGAC & IAF Accredited ISO certification services for businesses worldwide. Excellence in Quality Systems."
+    />
+    <meta
+      name="twitter:image"
+      content="https://horascert.com/imgeteam/LOGO.jpeg"
     />
 
-    <!-- === Critical LCP Image Preload === -->
+    <!-- === Structured Data (Schema.org) === -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "HORAS Cert",
+        "description": "EGAC Accredited ISO Certification Body providing internationally recognized certification services",
+        "url": "https://horascert.com",
+        "logo": "https://horascert.com/imgeteam/LOGO.jpeg",
+        "sameAs": [
+          "https://www.facebook.com/horas.cert/",
+          "https://www.linkedin.com/company/horas-cert"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Service",
+          "availableLanguage": ["en", "ar"]
+        },
+        "areaServed": ["EG", "SA", "AE", "KW", "QA", "BH"],
+        "foundingYear": 2015,
+        "ISO": ["9001:2015", "14001:2015", "45001:2018", "22000:2018"]
+      }
+    </script>
+
+    <!-- === Performance: Font Preload === -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      as="style"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&display=swap"
+      as="style"
+      crossorigin
+    />
+
+    <!-- === Performance: LCP Image Preload === -->
     <link
       rel="preload"
       as="image"
-      href="/imges/About-home.jpeg"
+      href="/imges/disk-4k.png"
       fetchpriority="high"
+      type="image/png"
     />
-    <link rel="preload" as="image" href="/imgeteam/LOGO.jpeg" />
+    <link
+      rel="preload"
+      as="image"
+      href="/imgeteam/LOGO.jpeg"
+      fetchpriority="high"
+      type="image/jpeg"
+    />
 
-    <!-- === Google Fonts (single optimized request with font-display=swap) === -->
+    <!-- === Google Fonts (Optimized Loading with display=swap) === -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-      media="print"
-      onload="this.media = 'all'"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap"
+      crossorigin
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
-      />
-    </noscript>
 
-    <title>HorasCert</title>
+    <!-- === Mobile Optimization === -->
+    <meta
+      name="format-detection"
+      content="telephone=no, email=no, address=no"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div
+        style="
+          padding: 20px;
+          text-align: center;
+          font-family: system-ui, sans-serif;
+        "
+      >
+        <h1>JavaScript Required</h1>
+        <p>
+          HORAS Cert website requires JavaScript to be enabled. Please enable it
+          in your browser settings.
+        </p>
+      </div>
+    </noscript>
     <div id="root"></div>
   </body>
 </html>

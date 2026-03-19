@@ -15,7 +15,7 @@ const HeroSlider = () => {
         subtitle: "Excellence in Quality Systems",
         description:
           "HORAS Cert is your trusted partner for internationally recognized ISO certification services, accredited by the Egyptian Accreditation Council (EGAC) and recognized through IAF MLA.",
-        image: "imges/About-home.jpeg",
+        image: "imges/disk-4k.png?w=1280&q=75&fm=webp",
         imageAlt: "HORAS Cert International ISO Certification Services",
         ctaPrimary: { text: "Get Started", link: "/application" },
         ctaSecondary: { text: "Our Services", link: "/services" }
@@ -27,7 +27,7 @@ const HeroSlider = () => {
         subtitle: "ISO 9001 | ISO 14001 | ISO 45001",
         description:
           "Comprehensive certification services for quality, environmental, and occupational health & safety management systems to help your organization achieve global recognition.",
-        image: "imges/About-home.jpeg",
+        image: "imges/Horas-6stander.png?w=1280&q=75&fm=webp",
         imageAlt: "HORAS Cert International ISO Certification Services",
         ctaPrimary: { text: "Apply Now", link: "/application" },
         ctaSecondary: { text: "View Standards", link: "/services" }
@@ -39,7 +39,7 @@ const HeroSlider = () => {
         subtitle: "Building Trust Through Certification",
         description:
           "Join hundreds of successful organizations across Egypt, Saudi Arabia, and UAE who have achieved international standards with HORAS Cert certification.",
-        image: "imges/abb0.jpg.jpeg",
+        image: "imges/About-home.jpeg",
         imageAlt: "HORAS Cert Trusted Certification Services",
         ctaPrimary: { text: "Contact Us", link: "/contact" },
         ctaSecondary: { text: "Our Clients", link: "/clients" }

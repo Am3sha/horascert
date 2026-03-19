@@ -42,16 +42,29 @@ function Loading() {
       alignItems: 'center',
       minHeight: '60vh',
       gap: '16px',
+      padding: '24px',
     }}>
-      <div style={{
-        width: '36px',
-        height: '36px',
-        border: '3px solid #e5e7eb',
-        borderTop: '3px solid #102F4F',
-        borderRadius: '50%',
-        animation: 'spin 0.8s linear infinite',
-      }} />
-      <span style={{ color: '#6b7280', fontSize: '14px', fontWeight: '500' }}>Loading...</span>
+      {/* Loading spinner with accessible ARIA */}
+      <div
+        role="status"
+        aria-live="polite"
+        style={{
+          width: '44px',
+          height: '44px',
+          border: '4px solid #e5e7eb',
+          borderTop: '4px solid #0b1f3a',
+          borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }}
+      />
+      <span style={{
+        color: '#6b7280',
+        fontSize: '14px',
+        fontWeight: '500',
+        textAlign: 'center',
+      }}>
+        Loading page...
+      </span>
     </div>
   );
 }

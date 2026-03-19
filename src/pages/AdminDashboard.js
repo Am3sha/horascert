@@ -1,4 +1,5 @@
 import React, { useState, Suspense, lazy } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { adminLogout } from '../services/api';
 import './AdminDashboard.css';
 
@@ -17,6 +18,7 @@ const TabLoading = () => (
 );
 
 const AdminDashboard = () => {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('certificates');
     const [error, setError] = useState('');
 
@@ -29,8 +31,8 @@ const AdminDashboard = () => {
             // Wait 500ms to ensure logout request reaches backend
             await new Promise(resolve => setTimeout(resolve, 500));
         } finally {
-            // Reload page to clear auth state
-            window.location.href = '/login';
+            // Navigate to login using React Router instead of page reload
+            navigate('/login', { replace: true });
         }
     };
 

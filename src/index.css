@@ -232,6 +232,13 @@ img {
 
 .btn-primary:active {
   transform: translateY(-1px);
+  background: var(--gold-dark);
+  box-shadow: 0 8px 16px rgba(212, 175, 55, 0.24);
+}
+
+.btn-primary:focus {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
 }
 
 .btn-outline {
@@ -251,11 +258,24 @@ img {
   box-shadow: 0 8px 20px rgba(212, 175, 55, 0.28);
 }
 
+.btn-outline:active {
+  transform: translateY(-1px);
+  background: var(--gold-dark);
+  color: var(--primary-navy);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.btn-outline:focus {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
 .btn-secondary {
   background-color: transparent;
   color: var(--primary-navy);
   border: 2px solid var(--primary-navy);
   font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .btn-secondary:hover {
@@ -263,6 +283,17 @@ img {
   color: var(--white);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(11, 31, 58, 0.25);
+}
+
+.btn-secondary:active {
+  transform: translateY(-1px);
+  background-color: var(--navy-dark);
+  box-shadow: 0 4px 12px rgba(11, 31, 58, 0.2);
+}
+
+.btn-secondary:focus {
+  outline: 2px solid var(--primary-navy);
+  outline-offset: 2px;
 }
 
 .btn:focus-visible {
@@ -276,6 +307,7 @@ img {
   color: var(--white);
   backdrop-filter: blur(10px);
   font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .btn-white:hover {
@@ -284,6 +316,17 @@ img {
   color: var(--accent-gold);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+}
+
+.btn-white:active {
+  transform: translateY(-1px);
+  background: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+.btn-white:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
 }
 
 /* Responsive */

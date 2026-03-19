@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './PageHero.css';
 
 const PageHero = ({
@@ -17,7 +18,7 @@ const PageHero = ({
                 {item.isCurrent ? (
                   <span className="breadcrumb-current">{item.label}</span>
                 ) : (
-                  <a href={item.path} className="breadcrumb-link">{item.label}</a>
+                  <Link to={item.path} className="breadcrumb-link">{item.label}</Link>
                 )}
               </span>
             ))}
