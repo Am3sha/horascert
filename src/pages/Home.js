@@ -46,7 +46,7 @@ const Home = () => {
       id: 'iso-22000',
       name: 'ISO 22000:2018',
       tagline: 'Food Safety Management System',
-      icon: '/imges/iso 45001-2018.jpeg',
+      icon: '/imges/ISO-22000-2018.webp',
       description: 'Food Safety Management System'
     },
     {
@@ -167,7 +167,7 @@ const Home = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imgeteam/HORWE.png"
+                  src="/imges/International_Accreditation_Forum_Logo.svg.webp"
                   alt="IAF Member"
                   className="accreditation-image"
                   loading="lazy"
@@ -211,7 +211,7 @@ const Home = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/logo-capq (1).webp?w=120&q=80&fm=webp&auto=format"
+                  src="/imges/logo-capq.webp?w=120&q=80&fm=webp&auto=format"
                   alt="Certification Body"
                   className="accreditation-image"
                   loading="lazy"

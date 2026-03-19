@@ -37,7 +37,7 @@ const Services = () => {
       id: 'iso-22000',
       name: 'ISO 22000:2018',
       tagline: 'Food Safety Management System',
-      icon: '/imges/iso 45001-2018.jpeg',
+      icon: '/imges/ISO-22000-2018.webp',
       description: 'Specifies requirements for a food safety management system to ensure food is safe at the time of human consumption, covering the entire food chain from farm to fork.'
     },
     {
