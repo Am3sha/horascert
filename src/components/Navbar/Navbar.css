@@ -51,16 +51,20 @@
   transition: height 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.navbar-brand:hover .logo-wrapper {
+  transform: translateY(-2px);
+}
+
+.navbar.scrolled .logo-wrapper {
+  height: 80px;
+}
+
 .logo-image {
   height: 100%;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(100 200px 80px rgba(0, 0, 0, 0.06));
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.navbar.scrolled .logo-wrapper {
-  height: 80px;
 }
 
 /* ---- Navigation Links ---- */
@@ -302,7 +306,6 @@
   .logo-image {
     height: 100% !important;
     width: auto !important;
-    object-fit: contain;
   }
 
   .mobile-menu-toggle {

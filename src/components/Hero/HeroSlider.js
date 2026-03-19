@@ -39,7 +39,7 @@ const HeroSlider = () => {
         subtitle: "Building Trust Through Certification",
         description:
           "Join hundreds of successful organizations across Egypt, Saudi Arabia, and UAE who have achieved international standards with HORAS Cert certification.",
-        image: "/imges/About-home.jpeg",
+        image: "/imges/About-home.webp",
         imageAlt: "HORAS Cert Trusted Certification Services",
         ctaPrimary: { text: "Contact Us", link: "/contact" },
         ctaSecondary: { text: "Our Clients", link: "/clients" }

@@ -11,12 +11,12 @@
 
 /* Main Two-Column Grid */
 .section-contact-main {
-  max-width: 1320px;
+  max-width: 1800px;
   margin: 80px auto 60px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  padding: 0 48px;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 65px;
+  padding: 0 60px;
   animation: fadeIn 0.5s ease;
 }
 
@@ -34,8 +34,8 @@
 /* ---- Left: Form Card ---- */
 .contact-form-card {
   background: var(--white);
-  border-radius: 12px;
-  padding: 52px 48px;
+  border-radius: 20px;
+  padding: 70px 60px;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--light-gray);
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -48,10 +48,10 @@
 }
 
 .contact-form-card h2 {
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--primary-navy);
-  margin-bottom: 36px;
+  margin-bottom: 40px;
   text-align: left;
   letter-spacing: -0.5px;
 }

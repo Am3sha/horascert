@@ -1,13 +1,13 @@
 /* =============================================
-   FOOTER — Premium Corporate Style
-   Navy #0B1F3A | Gold #D4AF37
+   FOOTER — Clean & Elegant Design
+   Navy #2C4F7C | Gold #D4A83D | Green #1B5E44
    ============================================= */
 
 .footer {
-  background-color: #0b1f3a;
-  color: rgba(255, 255, 255, 0.7);
+  background-color: var(--horas-navy-900);
+  color: rgba(255, 255, 255, 0.75);
   margin-top: auto;
-  border-top: 1px solid rgba(212, 175, 55, 0.12);
+  border-top: 3px solid var(--primary-gold);
 }
 
 /* ---- Main Grid ---- */
@@ -37,9 +37,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 36px;
-  height: 2.5px;
-  background: #d4af37;
+  width: 40px;
+  height: 3px;
+  background: var(--primary-gold);
   border-radius: 2px;
 }
 
@@ -56,18 +56,22 @@
 }
 
 .footer-logo-image {
-  height: 99px;
-  width: auto;
+  height: 100px;
+  width: 100px;
   object-fit: contain;
-  background-color: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 8px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding: 1px;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 3px solid var(--primary-gold);
 }
 
 .footer-logo-section:hover .footer-logo-image {
-  background-color: rgba(212, 175, 55, 0.15);
-  transform: translateY(-2px);
+  background-color: #ffffff;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(212, 168, 61, 0.4);
+  border-color: #ffffff;
 }
 
 .footer-brand-text {
@@ -85,11 +89,11 @@
 }
 
 .footer-brand-tag {
-  font-size: 0.65rem;
-  color: #d4af37;
+  font-size: 0.7rem;
+  color: var(--primary-gold);
   margin-top: 6px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
@@ -113,23 +117,23 @@
   display: inline-block;
   padding: 8px 16px;
   background-color: transparent;
-  color: #d4af37;
-  border: 1.5px solid #d4af37;
+  color: var(--primary-gold);
+  border: 1.5px solid var(--primary-gold);
   border-radius: 24px;
   font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.7px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   cursor: default;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .accreditation-badge:hover {
-  background: #d4af37;
-  color: #0b1f3a;
-  border-color: #d4af37;
+  background: var(--primary-gold);
+  color: var(--horas-navy-900);
+  border-color: var(--primary-gold);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 20px rgba(212, 168, 61, 0.3);
 }
 
 .footer-social-icons {
@@ -193,12 +197,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #d4af37;
+  background: var(--primary-gold);
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .services-list li a:hover {
-  color: #d4af37;
+  color: var(--primary-gold);
   padding-left: 6px;
 }
 
@@ -235,12 +239,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #d4af37;
+  background: var(--primary-gold);
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .footer-links ul li a:hover {
-  color: #d4af37;
+  color: var(--primary-gold);
   padding-left: 6px;
 }
 
@@ -264,7 +268,7 @@
 
 .contact-item svg {
   flex-shrink: 0;
-  color: #d4af37;
+  color: var(--primary-gold);
   margin-top: 3px;
   opacity: 1;
   width: 20px;
@@ -300,12 +304,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #d4af37;
+  background: var(--primary-gold);
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .contact-item a:hover {
-  color: #d4af37;
+  color: var(--primary-gold);
 }
 
 .contact-item a:hover::after {
@@ -314,9 +318,9 @@
 
 /* ---- Footer Bottom Bar ---- */
 .footer-bottom {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 28px 48px;
-  border-top: 1px solid rgba(212, 175, 55, 0.12);
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 24px 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-bottom-content {

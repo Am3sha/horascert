@@ -19,16 +19,13 @@ const ServiceDetail = () => {
     'iso-9001': {
       name: 'ISO 9001:2015',
       fullName: 'ISO 9001:2015 - Quality Management System',
-      description: 'ISO 9001:2015 is the international standard that specifies requirements for a quality management system (QMS). Organizations use this standard to demonstrate their ability to consistently provide products and services that meet customer and regulatory requirements.',
+      description: 'ISO 9001:2015 is an international standard that specifies the requirements for a quality management system (QMS). The standard provides guidelines for organizations to establish, implement, maintain, and continually improve their QMS to enhance customer satisfaction and meet applicable regulatory requirements.',
       benefits: [
-        'Improved customer satisfaction and loyalty',
-        'Enhanced process efficiency and productivity',
-        'Better risk management',
-        'Increased market credibility and competitive advantage',
-        'Consistent quality of products and services',
-        'Reduced waste and operational costs',
-        'Improved employee engagement and morale',
-        'Access to new markets and business opportunities'
+        'Improved customer satisfaction',
+        'Increased efficiency and productivity',
+        'Enhanced reputation',
+        'Compliance with regulatory requirements',
+        'Helps identify and address risks and vulnerabilities in processes'
       ],
       industries: [
         'Manufacturing',
@@ -41,28 +38,24 @@ const ServiceDetail = () => {
         'Retail and distribution'
       ],
       requirements: [
-        'Context of the organization',
-        'Leadership and commitment',
-        'Planning for the QMS',
-        'Support and resources',
-        'Operation of processes',
-        'Performance evaluation',
-        'Continual improvement'
+        'A focus on customer satisfaction',
+        'A commitment to continuous improvement',
+        'Effective communication with interested parties',
+        'The involvement of employees in the quality management process',
+        'Leadership commitment',
+        'Risk-based thinking',
+        'Establishment of clear policies, objectives, and processes for achieving quality objectives'
       ]
     },
     'iso-14001': {
       name: 'ISO 14001:2015',
       fullName: 'ISO 14001:2015 - Environmental Management System',
-      description: 'ISO 14001:2015 sets out the criteria for an environmental management system and can be certified to. It maps out a framework that a company or organization can follow to set up an effective environmental management system.',
+      description: 'ISO 14001:2015 is an international standard that provides a framework for organizations to manage and improve their environmental performance.',
       benefits: [
-        'Reduced environmental impact',
-        'Compliance with environmental regulations',
-        'Lower operational costs through resource efficiency',
-        'Enhanced corporate image and reputation',
-        'Improved stakeholder relationships',
-        'Better risk management',
-        'Access to new markets requiring environmental certification',
-        'Increased employee engagement'
+        'Improved environmental performance',
+        'Increased efficiency',
+        'Reduced waste and costs',
+        'Enhanced reputation and credibility'
       ],
       industries: [
         'Manufacturing',
@@ -75,29 +68,22 @@ const ServiceDetail = () => {
         'Any organization with environmental impact'
       ],
       requirements: [
-        'Environmental policy',
-        'Environmental aspects and impacts',
-        'Legal and other requirements',
-        'Objectives and targets',
-        'Environmental management programs',
-        'Operational control',
-        'Emergency preparedness and response',
-        'Monitoring and measurement'
+        'A commitment to environmental management',
+        'Identification of environmental aspects and impacts',
+        'Establishment of objectives and targets',
+        'Implementation of operational controls',
+        'Monitoring and measurement of environmental performance'
       ]
     },
     'iso-45001': {
       name: 'ISO 45001:2018',
       fullName: 'ISO 45001:2018 - Occupational Health and Safety Management System',
-      description: 'ISO 45001:2018 is an international standard that specifies requirements for an occupational health and safety (OH&S) management system. It provides a framework to improve employee safety, reduce workplace risks, and create better, safer working conditions.',
+      description: 'ISO 45001:2018 is an international standard that provides a framework for organizations to manage and improve their occupational health and safety performance.',
       benefits: [
-        'Reduced workplace accidents and injuries',
-        'Improved employee health and safety',
-        'Compliance with health and safety regulations',
-        'Lower insurance premiums',
-        'Enhanced corporate reputation',
-        'Increased employee morale and productivity',
-        'Better risk management',
-        'Reduced absenteeism and turnover'
+        'Improved safety and health performance',
+        'Increased efficiency',
+        'Reduced accidents and costs',
+        'Enhanced reputation and credibility'
       ],
       industries: [
         'Construction',
@@ -110,29 +96,22 @@ const ServiceDetail = () => {
         'Any organization with workplace hazards'
       ],
       requirements: [
-        'OH&S policy',
-        'Hazard identification and risk assessment',
-        'Legal and other requirements',
-        'OH&S objectives',
-        'Operational planning and control',
-        'Emergency preparedness and response',
-        'Performance monitoring and measurement',
-        'Incident investigation and corrective action'
+        'A commitment to occupational health and safety management',
+        'Identification of hazards and risks',
+        'Establishment of objectives and targets',
+        'Implementation of operational controls',
+        'Monitoring and measurement of safety and health performance'
       ]
     },
     'iso-22000': {
       name: 'ISO 22000:2018',
       fullName: 'ISO 22000:2018 - Food Safety Management System',
-      description: 'ISO 22000:2018 specifies requirements for a food safety management system where an organization in the food chain needs to demonstrate its ability to control food safety hazards to ensure that food is safe at the time of human consumption.',
+      description: 'ISO 22000:2018 is an international standard that provides a framework for organizations to manage and improve their food safety performance.',
       benefits: [
-        'Enhanced food safety',
-        'Reduced food safety incidents',
-        'Compliance with food safety regulations',
-        'Improved customer confidence',
-        'Better supply chain management',
-        'Access to international markets',
-        'Reduced product recalls',
-        'Improved operational efficiency'
+        'Improved food safety performance',
+        'Increased efficiency',
+        'Reduced risks and costs',
+        'Enhanced reputation and credibility'
       ],
       industries: [
         'Food manufacturing',
@@ -145,29 +124,26 @@ const ServiceDetail = () => {
         'Feed production'
       ],
       requirements: [
-        'Food safety policy',
-        'Hazard analysis and critical control points (HACCP)',
-        'Prerequisite programs (PRPs)',
-        'Operational prerequisite programs (OPRPs)',
-        'Traceability system',
-        'Emergency preparedness and response',
-        'Control of nonconformities',
-        'Verification and validation'
+        'A commitment to food safety management',
+        'Identification of hazards and risks',
+        'Establishment of objectives and targets',
+        'Implementation of operational controls',
+        'Monitoring and measurement of food safety performance',
+        'Communication and collaboration throughout the food supply chain'
       ]
     },
     'haccp': {
       name: 'HACCP',
       fullName: 'HACCP - Hazard Analysis Critical Control Points',
-      description: 'HACCP is a systematic preventive approach to food safety that addresses physical, chemical, and biological hazards as a means of prevention rather than finished product inspection. HACCP is used in the food industry to identify potential food safety hazards.',
+      description: 'HACCP Certificate is a certificate for the analysis of critical hazards in the food industry. It helps companies working in the food sector to preserve and handle food and apply this system in all stages of food preparation and packaging methods, in addition to paying attention to monitoring the effectiveness of cleaning and disinfection operations in the stages of the food manufacturing process. HACCP is a preventive system that is primarily concerned with the food safety file. This is done by identifying the risks that threaten the public safety of individuals, whether biological, chemical or physical, and is concerned with controlling these risks so that the product is produced in a safe and healthy manner.',
       benefits: [
-        'Prevention of food safety hazards',
-        'Compliance with food safety regulations',
-        'Reduced risk of foodborne illness',
-        'Improved product quality',
-        'Enhanced customer confidence',
-        'Better documentation and traceability',
-        'Reduced product waste',
-        'International recognition'
+        'Developing systems that care about the safety of food products within manufacturing companies',
+        'Establishing guarantees for analyzing food hazards',
+        'Defining high-precision specifications and requirements for food safety management',
+        'Establishing standards that cover all areas of activities related to the food sector',
+        'Increasing customer confidence in this company to ensure that it achieves quality standards',
+        'The company\'s ability to achieve a competitive advantage among companies in the food sector',
+        'Ensuring product safety to the satisfaction of customers'
       ],
       industries: [
         'Food manufacturing',
@@ -192,16 +168,17 @@ const ServiceDetail = () => {
     'gmp': {
       name: 'GMP',
       fullName: 'GMP - Good Manufacturing Practice',
-      description: 'Good Manufacturing Practice (GMP) is a system for ensuring that products are consistently produced and controlled according to quality standards. It is designed to minimize the risks involved in any pharmaceutical, food, or cosmetic production.',
+      description: 'GMP Good Manufacturing Practices treats the enterprise from all aspects, the basic characteristics it must have and the different standards for each production process. It determines and controls the quality and reliability of the production site, environment, tool – equipment, production process, personnel and raw materials. GMP, which covers the pharmaceutical, cosmetics and food sectors, also covers this sector by adopting the Cosmetics Act.',
       benefits: [
-        'Consistent product quality',
-        'Compliance with regulatory requirements',
-        'Reduced product defects and recalls',
-        'Enhanced customer confidence',
-        'Improved operational efficiency',
-        'Better documentation and traceability',
-        'Reduced waste and costs',
-        'Access to regulated markets'
+        'Ensures compliance with legal requirements and reduces possibility of facing penalty cases',
+        'Customer requests can be met more quickly',
+        'Increases awareness of production safety among employees',
+        'Products are produced in the most accurate way and under appropriate conditions',
+        'Increases the company\'s reliability image in public opinion',
+        'Creates an advantage in international trade',
+        'All stages of production are followed and product reaches user in a healthy way',
+        'Relevant processes and employees are kept under control to prevent confusion and errors',
+        'Gains competitive advantage in the market and increases employee motivation'
       ],
       industries: [
         'Pharmaceutical manufacturing',
@@ -214,14 +191,17 @@ const ServiceDetail = () => {
         'Any regulated manufacturing'
       ],
       requirements: [
-        'Quality management system',
-        'Personnel qualifications and training',
-        'Premises and equipment',
-        'Documentation and records',
-        'Production and process controls',
-        'Quality control and testing',
-        'Storage and distribution',
-        'Complaint handling and recalls'
+        'Establishment of quality management',
+        'Staff structure and organizational structure',
+        'Ensuring the standard in buildings, machinery, equipment and materials',
+        'Documentation of business processes and application instructions',
+        'Definition of principles for the introduction, processing, storage and distribution of raw materials',
+        'Quality and efficiency control tests',
+        'Approval of all activities and identification of authorized persons',
+        'Complaint and product recall systems',
+        'Investigation of errors and taking precautions',
+        'Storage of samples, destruction of problematic or defective products',
+        'Providing internal and external audit'
       ]
     }
   };
@@ -231,10 +211,37 @@ const ServiceDetail = () => {
 
   return (
     <div className="service-detail-page">
-      <div className="page-header">
-        <div className="container">
-          <h1>{service.fullName}</h1>
-          <p className="page-subtitle">Professional certification services for {service.name}</p>
+      <div
+        className="page-header"
+        style={{
+          background: '#2C4F7C',
+          color: '#ffffff',
+          padding: '40px 20px',
+          textAlign: 'center',
+          minHeight: '100px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+          animation: 'shimmer 2s infinite'
+        }} />
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <h1 style={{ fontSize: '1.8rem', margin: '0 0 6px 0', color: '#ffffff', fontWeight: 700 }}>
+            {service.fullName}
+          </h1>
+          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.9)', margin: 0 }}>
+            Professional certification services for {service.name}
+          </p>
         </div>
       </div>
 

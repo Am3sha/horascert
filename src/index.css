@@ -5,75 +5,139 @@
 }
 
 :root {
-  /* Premium ISO Certification Badge Color System */
-  /* Navy Blue, Gold, White, Green */
+  /* ================================================
+     HORASCERT — COLOR SYSTEM (Logo-Based)
+     Navy Blue + Gold + Green — Professional Theme
+     ================================================ */
 
-  /* Primary Colors */
-  --primary-navy: #0b1f3a;
-  --navy-dark: #051220;
-  --navy-light: #1a3a5c;
-  --navy-medium: #0f2d4d;
+  /* ===== BRAND COLORS (From Logo) ===== */
+  --horas-navy-900:    #1F3A5F;  /* Darkest navy */
+  --horas-navy-800:    #2C4F7C;  /* Main logo navy */
+  --horas-navy-700:    #34495E;  /* Medium navy */
+  --horas-navy-600:    #3D6399;  /* Light navy */
+  --horas-navy-500:    #4A73A8;  /* Lighter navy */
 
-  /* Secondary Colors - Gold */
-  --accent-gold: #d4af37;
-  --gold-light: #f0e68c;
-  --gold-dark: #b8860b;
-  --gold-medium: #daa520;
+  --horas-gold-900:    #B8922A;  /* Dark gold */
+  --horas-gold-800:    #D4A83D;  /* Main logo gold */
+  --horas-gold-700:    #E5C05B;  /* Light gold */
+  --horas-gold-600:    #F0DDB4;  /* Lighter gold */
 
-  /* Accent - Green (limited use) */
-  --accent-green: #25a244;
-  --green-dark: #1b7a31;
-  --green-light: #4dbf6b;
+  --horas-green-900:   #124032;  /* Dark green */
+  --horas-green-800:   #1B5E44;  /* Main logo green */
+  --horas-green-700:   #2A7D5F;  /* Light green */
+  --horas-green-600:   #3D9973;  /* Lighter green */
 
-  /* Neutral */
-  --white: #ffffff;
-  --off-white: #f9fafb;
-  --light-gray: #f3f4f6;
-  --medium-gray: #e5e7eb;
-  --dark-gray: #6b7280;
+  /* ===== PRIMARY PALETTE ===== */
+  --primary-navy:      var(--horas-navy-800);
+  --primary-gold:      var(--horas-gold-800);
+  --primary-green:     var(--horas-green-800);
 
-  /* Text Colors */
-  --text-dark: #0b1f3a;
-  --text-gray: #4b5563;
-  --text-light: #7f8b9a;
+  /* ===== NEUTRALS ===== */
+  --white:             #FFFFFF;
+  --cream:             #FDFBF7;
+  --gray-50:           #F8F9FA;
+  --gray-100:          #E8ECF0;
+  --gray-200:          #D1D8E0;
+  --gray-300:          #B4BCC7;
+  --gray-400:          #95A0AE;
+  --gray-500:          #6C7A89;
+  --gray-600:          #4A5568;
+  --gray-700:          #2D3748;
+  --gray-800:          #1A202C;
+  --gray-900:          #0F1419;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(
-    135deg,
-    var(--accent-gold) 0%,
-    var(--gold-dark) 100%
-  );
-  --gradient-dark-section: linear-gradient(
-    135deg,
-    var(--primary-navy) 0%,
-    var(--navy-dark) 100%
-  );
-  --gradient-light-section: linear-gradient(
-    135deg,
-    var(--off-white) 0%,
-    var(--light-gray) 100%
-  );
-  --gradient-accent: linear-gradient(90deg, var(--accent-gold), transparent);
+  /* ===== SEMANTIC COLORS ===== */
+  --color-success:     var(--horas-green-800);
+  --color-success-bg:  rgba(27, 94, 68, 0.1);
+  --color-success-light: var(--horas-green-700);
 
-  /* Gold Overlays */
-  --gold-bg-light: rgba(212, 175, 55, 0.08);
-  --gold-bg-medium: rgba(212, 175, 55, 0.12);
-  --gold-border-light: rgba(212, 175, 55, 0.15);
-  --gold-border-medium: rgba(212, 175, 55, 0.25);
+  --color-warning:     var(--horas-gold-800);
+  --color-warning-bg:  rgba(212, 168, 61, 0.1);
+  --color-warning-light: var(--horas-gold-700);
 
-  /* White Text Overlays */
+  --color-error:       #C94A3D;
+  --color-error-bg:    rgba(201, 74, 61, 0.1);
+
+  --color-info:        var(--horas-navy-600);
+  --color-info-bg:     rgba(61, 99, 153, 0.1);
+
+  /* ===== TEXT COLORS ===== */
+  --text-primary:      var(--gray-900);
+  --text-secondary:    var(--gray-600);
+  --text-muted:        var(--gray-500);
+  --text-on-navy:      var(--white);
+  --text-on-gold:      var(--horas-navy-900);
+  --text-on-green:     var(--white);
+
+  /* ===== BACKGROUNDS ===== */
+  --bg-primary:        var(--white);
+  --bg-secondary:      var(--cream);
+  --bg-tertiary:       var(--gray-50);
+  --bg-navy:           var(--primary-navy);
+  --bg-gold:           var(--primary-gold);
+  --bg-green:          var(--primary-green);
+
+  /* ===== BORDERS ===== */
+  --border-color:      var(--gray-200);
+  --border-hover:      var(--primary-gold);
+  --border-focus:      var(--primary-navy);
+
+  /* ===== SHADOWS ===== */
+  --shadow-sm:    0 2px 4px rgba(44, 79, 124, 0.06);
+  --shadow-md:    0 4px 12px rgba(44, 79, 124, 0.08);
+  --shadow-lg:    0 8px 24px rgba(44, 79, 124, 0.12);
+  --shadow-xl:    0 12px 40px rgba(44, 79, 124, 0.15);
+  --shadow-2xl:   0 20px 60px rgba(44, 79, 124, 0.2);
+
+  --shadow-gold:  0 4px 20px rgba(212, 168, 61, 0.3);
+  --shadow-green: 0 4px 20px rgba(27, 94, 68, 0.3);
+
+  /* ===== GRADIENTS ===== */
+  --gradient-navy:     linear-gradient(135deg, var(--horas-navy-900) 0%, var(--horas-navy-800) 50%, var(--horas-green-900) 100%);
+  --gradient-gold:     linear-gradient(135deg, var(--horas-gold-900), var(--horas-gold-800));
+  --gradient-hero:     linear-gradient(135deg, #1F3A5F 0%, #2C4F7C 50%, #124032 100%);
+
+  /* ===== LEGACY SUPPORT ===== */
+  --primary-teal:      var(--primary-navy);
+  --accent-blue:       var(--primary-gold);
+
+  /* Legacy aliases for backward compatibility */
+  --off-white: var(--cream);
+  --light-gray: var(--gray-100);
+  --medium-gray: var(--gray-200);
+  --dark-gray: var(--gray-500);
+
+  /* Legacy text colors */
+  --text-dark: var(--gray-900);
+  --text-gray: var(--gray-600);
+  --text-light: var(--gray-500);
+
+  /* Legacy colors */
+  --accent-gold: var(--primary-gold);
+  --gold-light: var(--horas-gold-700);
+  --gold-dark: var(--horas-gold-900);
+  --gold-medium: var(--horas-gold-600);
+  --navy-dark: var(--horas-navy-900);
+  --navy-light: var(--horas-navy-600);
+  --navy-medium: var(--horas-navy-700);
+  --accent-green: var(--primary-green);
+  --green-dark: var(--horas-green-900);
+  --green-light: var(--horas-green-700);
+
+  /* Legacy overlays */
   --white-text-strong: rgba(255, 255, 255, 0.95);
   --white-text-medium: rgba(255, 255, 255, 0.85);
   --white-text-light: rgba(255, 255, 255, 0.7);
+  --gold-bg-light: rgba(212, 168, 61, 0.08);
+  --gold-bg-medium: rgba(212, 168, 61, 0.12);
+  --gold-border-light: rgba(212, 168, 61, 0.15);
+  --gold-border-medium: rgba(212, 168, 61, 0.25);
 
-  /* Shadow System */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-
-  /* Legacy Aliases - Remove gradually */
-  --primary-teal: var(--primary-navy);
-  --accent-blue: var(--primary-navy);
+  /* Legacy gradients */
+  --gradient-primary: var(--gradient-gold);
+  --gradient-dark-section: var(--gradient-navy);
+  --gradient-light-section: linear-gradient(135deg, var(--cream) 0%, var(--gray-50) 100%);
+  --gradient-accent: linear-gradient(90deg, var(--primary-gold), transparent);
 }
 
 body {
@@ -228,38 +292,38 @@ img, video, svg, canvas {
 }
 
 .btn-primary {
-  background: var(--accent-gold);
-  color: var(--primary-navy);
+  background: var(--primary-gold);
+  color: var(--text-on-gold);
   border-radius: 8px;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   padding: 13px 32px;
   font-weight: 700;
-  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.24);
+  box-shadow: var(--shadow-gold);
 }
 
 .btn-primary:hover {
-  background: var(--gold-light);
-  color: var(--primary-navy);
+  background: var(--horas-gold-700);
+  color: var(--text-on-gold);
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(212, 175, 55, 0.32);
+  box-shadow: 0 12px 28px rgba(212, 168, 61, 0.4);
 }
 
 .btn-primary:active {
   transform: translateY(-1px);
-  background: var(--gold-dark) !important;
-  color: var(--primary-navy) !important;
-  box-shadow: 0 8px 16px rgba(212, 175, 55, 0.24) !important;
+  background: var(--horas-gold-900) !important;
+  color: var(--text-on-gold) !important;
+  box-shadow: var(--shadow-gold) !important;
   transition: none !important;
 }
 
 .btn-primary:focus {
-  outline: 2px solid var(--accent-gold);
+  outline: 2px solid var(--primary-gold);
   outline-offset: 2px;
 }
 
 .btn-outline {
-  border: 2px solid var(--accent-gold);
-  color: var(--accent-gold);
+  border: 2px solid var(--primary-gold);
+  color: var(--primary-gold);
   background: transparent;
   border-radius: 8px;
   padding: 11px 30px;
@@ -268,22 +332,22 @@ img, video, svg, canvas {
 }
 
 .btn-outline:hover {
-  background: var(--accent-gold);
-  color: var(--primary-navy);
+  background: var(--primary-gold);
+  color: var(--text-on-gold);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.28);
+  box-shadow: var(--shadow-gold);
 }
 
 .btn-outline:active {
   transform: translateY(-1px);
-  background: var(--gold-dark) !important;
-  color: var(--primary-navy) !important;
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2) !important;
+  background: var(--horas-gold-900) !important;
+  color: var(--text-on-gold) !important;
+  box-shadow: 0 4px 12px rgba(212, 168, 61, 0.2) !important;
   transition: none !important;
 }
 
 .btn-outline:focus {
-  outline: 2px solid var(--accent-gold);
+  outline: 2px solid var(--primary-gold);
   outline-offset: 2px;
 }
 
@@ -299,14 +363,14 @@ img, video, svg, canvas {
   background-color: var(--primary-navy);
   color: var(--white);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(11, 31, 58, 0.25);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary:active {
   transform: translateY(-1px);
-  background-color: var(--navy-dark) !important;
+  background-color: var(--horas-navy-900) !important;
   color: var(--white) !important;
-  box-shadow: 0 4px 12px rgba(11, 31, 58, 0.2) !important;
+  box-shadow: var(--shadow-md) !important;
   transition: none !important;
 }
 
@@ -316,7 +380,7 @@ img, video, svg, canvas {
 }
 
 .btn:focus-visible {
-  outline: 2.5px solid var(--accent-gold);
+  outline: 2.5px solid var(--primary-gold);
   outline-offset: 3px;
 }
 
@@ -330,22 +394,56 @@ img, video, svg, canvas {
 }
 
 .btn-white:hover {
-  border-color: var(--accent-gold);
-  background: rgba(212, 175, 55, 0.15);
-  color: var(--accent-gold);
+  border-color: var(--primary-gold);
+  background: rgba(212, 168, 61, 0.15);
+  color: var(--primary-gold);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 20px rgba(212, 168, 61, 0.2);
 }
 
 .btn-white:active {
   transform: translateY(-1px);
-  background: rgba(212, 175, 55, 0.25);
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+  background: rgba(212, 168, 61, 0.25);
+  box-shadow: 0 4px 12px rgba(212, 168, 61, 0.15);
 }
 
 .btn-white:focus {
   outline: 2px solid rgba(255, 255, 255, 0.8);
   outline-offset: 2px;
+}
+
+/* Additional button variants */
+.btn-success {
+  background: var(--primary-green);
+  color: var(--white);
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 13px 32px;
+  font-weight: 700;
+  box-shadow: var(--shadow-green);
+}
+
+.btn-success:hover {
+  background: var(--horas-green-700);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(27, 94, 68, 0.4);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--primary-gold);
+  border: 2px solid var(--primary-gold);
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 11px 30px;
+  border-radius: 8px;
+}
+
+.btn-outline-gold:hover {
+  background: var(--primary-gold);
+  color: var(--horas-navy-900);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-gold);
 }
 
 /* Responsive */
