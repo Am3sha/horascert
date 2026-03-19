@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createCertificate } from '../../services/api';
 import './AddCertificateForm.css';
 
 const AddCertificateForm = ({ onSuccess, onCancel }) => {
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         certificateNumber: '',
@@ -68,8 +70,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
 
             downloadQRCode(dataUrl, filename);
         } catch (err) {
-            // Silently handle QR code generation errors
-            console.error('QR generation failed:', err);
+            // Handle QR code generation error silently
         }
     };
 
@@ -134,7 +135,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
 
                 // Optional: Redirect after success is visible (brief pause for UX clarity)
                 setTimeout(() => {
-                    window.open(certificateUrl, '_blank');
+                    navigate(`/certificate/${data.data.certificateId || data.data._id}`);
 
                     if (onSuccess) {
                         onSuccess(data.data);

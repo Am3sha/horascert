@@ -194,7 +194,7 @@ export default function TrainingCertificatesTab({ onError }) {
                     link.click();
                     document.body.removeChild(link);
                 } catch (err) {
-                    console.error('QR generation failed:', err);
+                    // Handle QR generation error silently
                 }
             } else if (editingCertificate) {
                 toast.success('Certificate updated successfully');

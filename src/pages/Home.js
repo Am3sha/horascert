@@ -46,7 +46,7 @@ const Home = () => {
       id: 'iso-22000',
       name: 'ISO 22000:2018',
       tagline: 'Food Safety Management System',
-      icon: '/imges/2200.jpeg',
+      icon: '/imges/iso 45001-2018.jpeg',
       description: 'Food Safety Management System'
     },
     {
@@ -96,12 +96,16 @@ const Home = () => {
             </div>
             <div className="company-description-image anim-slide-right">
               <img
-                src="imges/abb0.jpg.jpeg?w=500&q=75&fm=webp"
+                src="/imges/abb0.jpg.jpeg?w=500&q=80&fm=webp&auto=format"
                 alt="HORAS-Cert professional certification team"
                 loading="lazy"
                 decoding="async"
                 width="500"
                 height="400"
+                style={{
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 30px rgba(30, 58, 95, 0.12)'
+                }}
               />
             </div>
           </div>
@@ -141,7 +145,7 @@ const Home = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/img.png"
+                  src="/imges/img.png?w=120&q=80&fm=webp&auto=format"
                   alt="EGAC Accredited"
                   className="accreditation-image"
                   loading="lazy"
@@ -163,7 +167,7 @@ const Home = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/International_Accreditation_Forum_Logo.svg.png"
+                  src="/imgeteam/HORWE.png"
                   alt="IAF Member"
                   className="accreditation-image"
                   loading="lazy"
@@ -185,7 +189,7 @@ const Home = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/download.png"
+                  src="/imges/download.png?w=120&q=80&fm=webp&auto=format"
                   alt="Accreditation"
                   className="accreditation-image"
                   loading="lazy"
@@ -207,7 +211,7 @@ const Home = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/logo-capq (1).webp"
+                  src="/imges/logo-capq (1).webp?w=120&q=80&fm=webp&auto=format"
                   alt="Certification Body"
                   className="accreditation-image"
                   loading="lazy"

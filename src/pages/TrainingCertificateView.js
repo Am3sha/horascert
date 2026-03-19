@@ -21,7 +21,7 @@ function TrainingCertificateView() {
         setVerified(true);
       }
     } catch (error) {
-      console.error('Error:', error);
+      // Handle error silently for production
     } finally {
       setLoading(false);
     }
@@ -162,7 +162,7 @@ function TrainingCertificateView() {
                   alt="QR Code"
                   onLoad={() => { }}
                   onError={(e) => {
-                    console.error('QR Code failed to load');
+                    // Handle QR code load error silently
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'flex';
                   }}

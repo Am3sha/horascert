@@ -8,9 +8,9 @@ const ServiceDetail = () => {
   // Map service IDs to certificate images
   const certificateImages = {
     'iso-9001': '/imges/ISO_9001-2015-1003x1024.jpg',
-    'iso-14001': '/imges/iso14001-1024x1024.png',
-    'iso-45001': '/imges/iso-45001.png',
-    'iso-22000': '/imges/ISO-22000-2018.jpg',
+    'iso-14001': '/imges/ISO_9001-2015-1003x1024.jpg',
+    'iso-45001': '/imges/iso 45001-2018.jpeg',
+    'iso-22000': '/imges/iso 45001-2018.jpeg',
     'haccp': '/imges/HACCP-Certification-Logo-for-News-webpage-1024x750.jpg',
     'gmp': '/imges/gmp-good-manufacturing-practice-certified-round-stamp-on-white-background-vector-e1731932642480.jpg'
   };

@@ -31,13 +31,19 @@ instance.interceptors.response.use(
     (err) => {
         const status = err && err.response ? err.response.status : undefined;
         if (status === 401) {
-            // Smart redirect: Only redirect if on admin/dashboard routes
+            // Smart redirect: Only redirect if on admin/protected routes
             const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
             const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard');
 
             if (isAdminRoute) {
-                // Redirect admin/protected routes to login
-                window.location.replace('/login');
+                // Use React Router navigation instead of full page reload
+                if (typeof window !== 'undefined' && window.history) {
+                    window.history.pushState({}, '', '/login');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                } else {
+                    // Fallback for SSR or non-browser environments
+                    window.location.replace('/login');
+                }
             }
             // For public routes: do nothing, let component handle error
         }

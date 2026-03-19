@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState, useRef, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import {
     deleteCertificateById,
@@ -8,6 +9,7 @@ import {
 import AddCertificateForm from './AddCertificateForm';
 
 function CertificatesTab({ onError, onSuccess }) {
+    const navigate = useNavigate();
     const [certificates, setCertificates] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
@@ -110,7 +112,7 @@ function CertificatesTab({ onError, onSuccess }) {
 
 
     const handleView = (certificateId) => {
-        window.open(`/certificate/${certificateId}`, '_blank');
+        navigate(`/certificate/${certificateId}`);
     };
 
     const handleEdit = (certificateId) => {
