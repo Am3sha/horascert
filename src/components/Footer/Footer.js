@@ -37,7 +37,7 @@ const Footer = () => {
           <div className="footer-column footer-company">
             <div className="footer-logo-section">
               <img
-                src="/imgeteam/LOGO.jpeg"
+                src="/imgeteam/LOGO.webp"
                 alt="Horas Certification Logo"
                 className="footer-logo-image"
                 width="100"

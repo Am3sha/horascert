@@ -43,6 +43,29 @@
   margin: 20px 0 28px;
 }
 
+.standards-list p {
+  padding: 12px 0 12px 28px;
+  position: relative;
+  color: var(--text-gray);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.standards-list p:last-child {
+  border-bottom: none;
+}
+
+.standards-list p::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-gold);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
 .standards-list li {
   padding: 10px 0 10px 28px;
   position: relative;

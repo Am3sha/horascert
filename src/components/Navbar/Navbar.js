@@ -63,7 +63,7 @@ const Navbar = () => {
             <Link to="/" className="navbar-brand">
               <div className="logo-wrapper">
                 <img
-                  src="/imgeteam/LOGO.jpeg"
+                  src="/imgeteam/LOGO.webp"
                   alt="Horas Certification Logo"
                   className="logo-image"
                   width="512"

@@ -60,7 +60,7 @@ export default function Login() {
             <div className="login-card">
                 <div className="login-header">
                     <img
-                        src="/imgeteam/LOGO.jpeg"
+                        src="/imgeteam/LOGO.webp"
                         alt="HORAS-Cert Logo"
                         className="login-logo"
                     />

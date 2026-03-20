@@ -83,13 +83,12 @@ const Home = () => {
               <p className="lead-text">
                 <strong>HORAS Cert Organization for Quality Systems and Certifications</strong> is an accredited certification body recognized by the Egyptian Accreditation Council (EGAC) for the following international standards:
               </p>
-              <ul className="standards-list">
-                <li>ISO 9001:2015 - Quality Management System</li>
-                <li>ISO 14001:2015 - Environmental Management System</li>
-                <li>ISO 45001:2018 - Occupational Health and Safety Management System</li>
-                <li>ISO 22000:2018 - Food Safety Management System</li>
-              </ul>
-
+              <div className="standards-list">
+                <p>ISO 9001:2015 - Quality Management System</p>
+                <p>ISO 14001:2015 - Environmental Management System</p>
+                <p>ISO 45001:2018 - Occupational Health and Safety Management System</p>
+                <p>ISO 22000:2018 - Food Safety Management System</p>
+              </div>
               <Link to="/about" className="btn btn-secondary anim-fade-up anim-delay-200">
                 Learn More About Us
               </Link>

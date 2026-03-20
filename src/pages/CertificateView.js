@@ -70,7 +70,7 @@ const CertificateView = () => {
                     <div className="certificate-header">
                         <div className="certificate-header-left">
                             <img
-                                src="/imgeteam/LOGO.jpeg"
+                                src="/imgeteam/LOGO.webp"
                                 alt="HORAS-Cert Logo"
                                 className="certificate-company-logo"
                             />

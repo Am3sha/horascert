@@ -114,7 +114,7 @@ const About = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/International_Accreditation_Forum_Logo.svg.png"
+                  src="/imges/International_Accreditation_Forum_Logo.svg.webp"
                   alt="IAF"
                   className="accreditation-image"
                   loading="lazy"
@@ -158,7 +158,7 @@ const About = () => {
             <div className="accreditation-card">
               <div className="accreditation-image-container">
                 <img
-                  src="/imges/logo-capq (1).webp"
+                  src="/imges/logo-capq.webp"
                   alt="CAPQ"
                   className="accreditation-image"
                   loading="lazy"
