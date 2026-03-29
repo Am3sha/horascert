@@ -1,2 +1,28 @@
+# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+
+# Sitemap location
+Sitemap: https://horascert.com/sitemap.xml
+
+# Crawl-delay (optional - gives time between requests)
+Crawl-delay: 10
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Disallow admin and API endpoints
+Disallow: /admin
+Disallow: /api/internal
+Disallow: /*.json$
+

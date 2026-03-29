@@ -1,0 +1,21 @@
+2026-03-29 11:21:31 [[32MINFO[39M] Server is running on port 5001 
+2026-03-29 11:21:31 [[32MINFO[39M] Environment: development 
+2026-03-29 11:21:32 [[32MINFO[39M] ✅ MongoDB connected successfully 
+2026-03-29 11:26:30 [[32MINFO[39M] Sending email {
+  "to": "amashaa469@gmail.com",
+  "subject": "Application Status Update"
+}
+2026-03-29 11:26:30 [[32MINFO[39M] Email sent successfully {
+  "to": "amashaa469@gmail.com",
+  "messageId": "99fe9d96-b2b3-4959-b744-5bb3f30adad0"
+}
+2026-03-29 11:26:30 [[32MINFO[39M] Application status update email sent to client {
+  "requestId": "69c78c1fd77200fa0538930c",
+  "to": "amashaa469@gmail.com"
+}
+2026-03-29 11:28:08 [[31MERROR[39M] 404 - Certificate not found with number 3d00254a6b5a4648b9254a51 - /api/v1/certificates/certificateId/3d00254a6b5a4648b9254a51 - GET - 127.0.0.1 {
+  "stack": "ApiError: Certificate not found with number 3d00254a6b5a4648b9254a51\n    at getCertificate (D:\\Frist.c++\\build\\H010\\server\\controllers\\certificateController.js:383:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}
+2026-03-29 11:28:08 [[31MERROR[39M] 404 - Certificate not found with number 3d00254a6b5a4648b9254a51 - /api/v1/certificates/certificateId/3d00254a6b5a4648b9254a51 - GET - 127.0.0.1 {
+  "stack": "ApiError: Certificate not found with number 3d00254a6b5a4648b9254a51\n    at getCertificate (D:\\Frist.c++\\build\\H010\\server\\controllers\\certificateController.js:383:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+}

@@ -1,3 +1,36 @@
+/* ================================================
+   WEBSITE DEFAULT ZOOM: 80%
+   Applied to all visitors by default
+   ================================================ */
+
+body {
+  zoom: 0.8;
+}
+
+/* Firefox compatibility */
+@-moz-document url-prefix() {
+  body {
+    transform: scale(0.8);
+    transform-origin: top left;
+    width: 125%;
+    height: 125%;
+  }
+}
+
+/* Keep 100% zoom on mobile devices */
+@media (max-width: 768px) {
+  body {
+    zoom: 1;
+    transform: none;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ================================================
+   UNIVERSAL RESET
+   ================================================ */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,95 +44,109 @@
      ================================================ */
 
   /* ===== BRAND COLORS (From Logo) ===== */
-  --horas-navy-900:    #1F3A5F;  /* Darkest navy */
-  --horas-navy-800:    #2C4F7C;  /* Main logo navy */
-  --horas-navy-700:    #34495E;  /* Medium navy */
-  --horas-navy-600:    #3D6399;  /* Light navy */
-  --horas-navy-500:    #4A73A8;  /* Lighter navy */
+  --horas-navy-900: #1f3a5f; /* Darkest navy */
+  --horas-navy-800: #2c4f7c; /* Main logo navy */
+  --horas-navy-700: #34495e; /* Medium navy */
+  --horas-navy-600: #3d6399; /* Light navy */
+  --horas-navy-500: #4a73a8; /* Lighter navy */
 
-  --horas-gold-900:    #B8922A;  /* Dark gold */
-  --horas-gold-800:    #D4A83D;  /* Main logo gold */
-  --horas-gold-700:    #E5C05B;  /* Light gold */
-  --horas-gold-600:    #F0DDB4;  /* Lighter gold */
+  --horas-gold-900: #b8922a; /* Dark gold */
+  --horas-gold-800: #d4a83d; /* Main logo gold */
+  --horas-gold-700: #e5c05b; /* Light gold */
+  --horas-gold-600: #f0ddb4; /* Lighter gold */
 
-  --horas-green-900:   #124032;  /* Dark green */
-  --horas-green-800:   #1B5E44;  /* Main logo green */
-  --horas-green-700:   #2A7D5F;  /* Light green */
-  --horas-green-600:   #3D9973;  /* Lighter green */
+  --horas-green-900: #124032; /* Dark green */
+  --horas-green-800: #1b5e44; /* Main logo green */
+  --horas-green-700: #2a7d5f; /* Light green */
+  --horas-green-600: #3d9973; /* Lighter green */
 
   /* ===== PRIMARY PALETTE ===== */
-  --primary-navy:      var(--horas-navy-800);
-  --primary-gold:      var(--horas-gold-800);
-  --primary-green:     var(--horas-green-800);
+  --primary-navy: var(--horas-navy-800);
+  --primary-gold: var(--horas-gold-800);
+  --primary-green: var(--horas-green-800);
 
   /* ===== NEUTRALS ===== */
-  --white:             #FFFFFF;
-  --cream:             #FDFBF7;
-  --gray-50:           #F8F9FA;
-  --gray-100:          #E8ECF0;
-  --gray-200:          #D1D8E0;
-  --gray-300:          #B4BCC7;
-  --gray-400:          #95A0AE;
-  --gray-500:          #6C7A89;
-  --gray-600:          #4A5568;
-  --gray-700:          #2D3748;
-  --gray-800:          #1A202C;
-  --gray-900:          #0F1419;
+  --white: #ffffff;
+  --cream: #fdfbf7;
+  --gray-50: #f8f9fa;
+  --gray-100: #e8ecf0;
+  --gray-200: #d1d8e0;
+  --gray-300: #b4bcc7;
+  --gray-400: #95a0ae;
+  --gray-500: #6c7a89;
+  --gray-600: #4a5568;
+  --gray-700: #2d3748;
+  --gray-800: #1a202c;
+  --gray-900: #0f1419;
 
   /* ===== SEMANTIC COLORS ===== */
-  --color-success:     var(--horas-green-800);
-  --color-success-bg:  rgba(27, 94, 68, 0.1);
+  --color-success: var(--horas-green-800);
+  --color-success-bg: rgba(27, 94, 68, 0.1);
   --color-success-light: var(--horas-green-700);
 
-  --color-warning:     var(--horas-gold-800);
-  --color-warning-bg:  rgba(212, 168, 61, 0.1);
+  --color-warning: var(--horas-gold-800);
+  --color-warning-bg: rgba(212, 168, 61, 0.1);
   --color-warning-light: var(--horas-gold-700);
 
-  --color-error:       #C94A3D;
-  --color-error-bg:    rgba(201, 74, 61, 0.1);
+  --color-error: #c94a3d;
+  --color-error-bg: rgba(201, 74, 61, 0.1);
 
-  --color-info:        var(--horas-navy-600);
-  --color-info-bg:     rgba(61, 99, 153, 0.1);
+  --color-info: var(--horas-navy-600);
+  --color-info-bg: rgba(61, 99, 153, 0.1);
 
   /* ===== TEXT COLORS ===== */
-  --text-primary:      var(--gray-900);
-  --text-secondary:    var(--gray-600);
-  --text-muted:        var(--gray-500);
-  --text-on-navy:      var(--white);
-  --text-on-gold:      var(--horas-navy-900);
-  --text-on-green:     var(--white);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-500);
+  --text-on-navy: var(--white);
+  --text-on-gold: var(--horas-navy-900);
+  --text-on-green: var(--white);
 
   /* ===== BACKGROUNDS ===== */
-  --bg-primary:        var(--white);
-  --bg-secondary:      var(--cream);
-  --bg-tertiary:       var(--gray-50);
-  --bg-navy:           var(--primary-navy);
-  --bg-gold:           var(--primary-gold);
-  --bg-green:          var(--primary-green);
+  --bg-primary: var(--white);
+  --bg-secondary: var(--cream);
+  --bg-tertiary: var(--gray-50);
+  --bg-navy: var(--primary-navy);
+  --bg-gold: var(--primary-gold);
+  --bg-green: var(--primary-green);
 
   /* ===== BORDERS ===== */
-  --border-color:      var(--gray-200);
-  --border-hover:      var(--primary-gold);
-  --border-focus:      var(--primary-navy);
+  --border-color: var(--gray-200);
+  --border-hover: var(--primary-gold);
+  --border-focus: var(--primary-navy);
 
   /* ===== SHADOWS ===== */
-  --shadow-sm:    0 2px 4px rgba(44, 79, 124, 0.06);
-  --shadow-md:    0 4px 12px rgba(44, 79, 124, 0.08);
-  --shadow-lg:    0 8px 24px rgba(44, 79, 124, 0.12);
-  --shadow-xl:    0 12px 40px rgba(44, 79, 124, 0.15);
-  --shadow-2xl:   0 20px 60px rgba(44, 79, 124, 0.2);
+  --shadow-sm: 0 2px 4px rgba(44, 79, 124, 0.06);
+  --shadow-md: 0 4px 12px rgba(44, 79, 124, 0.08);
+  --shadow-lg: 0 8px 24px rgba(44, 79, 124, 0.12);
+  --shadow-xl: 0 12px 40px rgba(44, 79, 124, 0.15);
+  --shadow-2xl: 0 20px 60px rgba(44, 79, 124, 0.2);
 
-  --shadow-gold:  0 4px 20px rgba(212, 168, 61, 0.3);
+  --shadow-gold: 0 4px 20px rgba(212, 168, 61, 0.3);
   --shadow-green: 0 4px 20px rgba(27, 94, 68, 0.3);
 
   /* ===== GRADIENTS ===== */
-  --gradient-navy:     linear-gradient(135deg, var(--horas-navy-900) 0%, var(--horas-navy-800) 50%, var(--horas-green-900) 100%);
-  --gradient-gold:     linear-gradient(135deg, var(--horas-gold-900), var(--horas-gold-800));
-  --gradient-hero:     linear-gradient(135deg, #1F3A5F 0%, #2C4F7C 50%, #124032 100%);
+  --gradient-navy: linear-gradient(
+    135deg,
+    var(--horas-navy-900) 0%,
+    var(--horas-navy-800) 50%,
+    var(--horas-green-900) 100%
+  );
+  --gradient-gold: linear-gradient(
+    135deg,
+    var(--horas-gold-900),
+    var(--horas-gold-800)
+  );
+  --gradient-hero: linear-gradient(
+    135deg,
+    #1f3a5f 0%,
+    #2c4f7c 50%,
+    #124032 100%
+  );
 
   /* ===== LEGACY SUPPORT ===== */
-  --primary-teal:      var(--primary-navy);
-  --accent-blue:       var(--primary-gold);
+  --primary-teal: var(--primary-navy);
+  --accent-blue: var(--primary-gold);
 
   /* Legacy aliases for backward compatibility */
   --off-white: var(--cream);
@@ -136,7 +183,11 @@
   /* Legacy gradients */
   --gradient-primary: var(--gradient-gold);
   --gradient-dark-section: var(--gradient-navy);
-  --gradient-light-section: linear-gradient(135deg, var(--cream) 0%, var(--gray-50) 100%);
+  --gradient-light-section: linear-gradient(
+    135deg,
+    var(--cream) 0%,
+    var(--gray-50) 100%
+  );
   --gradient-accent: linear-gradient(90deg, var(--primary-gold), transparent);
 }
 
@@ -223,7 +274,10 @@ img {
 }
 
 /* Prevent horizontal overflow for media elements */
-img, video, svg, canvas {
+img,
+video,
+svg,
+canvas {
   max-width: 100%;
   height: auto;
 }

@@ -13,7 +13,7 @@ const Clients = () => {
     { id: 2, name: 'ZAD For Export', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.33.48-AM.jpeg' },
     { id: 3, name: 'Al Remas Furniture', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.34.36-AM.jpeg' },
     { id: 4, name: 'Abdelwahab Fruits', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.35.15-AM-1024x277.jpeg' },
-    { id: 5, name: 'Green Harvest Egypt', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.36.13-AM-1024x633.jpeg' },
+    { id: 5, name: 'TOMNA', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.36.13-AM-1024x633.jpeg' },
     { id: 6, name: 'Cotton & More', logo: '/imgesclinet/WhatsApp-Image-2024-12-17-at-11.36.47-AM.jpeg' },
     { id: 7, name: 'Royal', logo: '/imgesclinet/WhatsApp-Image-2025-01-30-at-10.17.05-AM-768x512.jpeg' },
     { id: 8, name: 'CPT', logo: '/imgesclinet/WhatsApp-Image-2025-01-30-at-10.17.06-AM-1024x248.jpeg' },

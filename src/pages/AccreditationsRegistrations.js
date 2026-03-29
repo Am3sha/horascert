@@ -10,24 +10,6 @@ export default function AccreditationsRegistrations() {
                     HORAS Cert maintains recognized accreditations and registrations to ensure that our services are delivered in accordance with applicable standards, regulatory expectations, and international best practices.
                 </p>
             </header>
-
-            <section className="section">
-                <h2 className="section-title">Egyptian Organization for Standards and Quality (EOS)</h2>
-                <p className="paragraph">
-                    HORAS Cert holds formal registration with the Egyptian Organization for Standards and Quality (EOS) in support of our conformity assessment activities.
-                </p>
-                <p className="paragraph">
-                    Registration and supporting documentation are maintained as controlled records and are made available to relevant parties upon request, where applicable.
-                </p>
-            </section>
-
-            <section className="section">
-                <h2 className="section-title">About The Egyptian Organization for Standards and Quality (EOS)</h2>
-                <p className="paragraph">
-                    The Egyptian Organization for Standards and Quality, established in 1957, is a prestigious governmental body operating under the Ministry of Trade and Industry. With its headquarters in Cairo, EOS is dedicated to the development and promotion of national standards across various sectors.
-                </p>
-            </section>
-
             <section className="section">
                 <h2 className="section-title">Our Professional Profile on EGAC Website</h2>
                 <p className="paragraph">
@@ -57,6 +39,23 @@ export default function AccreditationsRegistrations() {
                 </p>
                 <p className="paragraph">
                     Furthermore, IAF serves as a central platform for its members to exchange ideas, best practices and engage in collaborative efforts to enhance the quality and efficiency of conformity assessment activities. IAF is recognized by many international bodies, including the World Trade Organization (WTO), as the pre-eminent authority in the field of accreditation.
+                </p>
+            </section>
+
+            <section className="section">
+                <h2 className="section-title">Egyptian Organization for Standards and Quality (EOS)</h2>
+                <p className="paragraph">
+                    HORAS Cert holds formal registration with the Egyptian Organization for Standards and Quality (EOS) in support of our conformity assessment activities.
+                </p>
+                <p className="paragraph">
+                    Registration and supporting documentation are maintained as controlled records and are made available to relevant parties upon request, where applicable.
+                </p>
+            </section>
+
+            <section className="section">
+                <h2 className="section-title">About The Egyptian Organization for Standards and Quality (EOS)</h2>
+                <p className="paragraph">
+                    The Egyptian Organization for Standards and Quality, established in 1957, is a prestigious governmental body operating under the Ministry of Trade and Industry. With its headquarters in Cairo, EOS is dedicated to the development and promotion of national standards across various sectors.
                 </p>
             </section>
         </div>

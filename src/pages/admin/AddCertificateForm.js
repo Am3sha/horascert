@@ -3,6 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import { createCertificate } from '../../services/api';
 import './AddCertificateForm.css';
 
+const TECHNICAL_SECTORS = [
+    { code: "1", name: "Agriculture, forestry and fishing" },
+    { code: "C0", name: "Animal - Primary conversion" },
+    { code: "12", name: "Chemicals, chemical products and fibres" },
+    { code: "37", name: "Education" },
+    { code: "32", name: "Financial intermediation; real estate; renting" },
+    { code: "C", name: "Food Manufacturing" },
+    { code: "3", name: "Food products, beverages and tobacco" },
+    { code: "C-Food", name: "Food, ingredient and pet food processing" },
+    { code: "30", name: "Hotels and restaurants" },
+    { code: "33", name: "Information technology" },
+    { code: "7", name: "Limited to Pulp and paper manufacturing" },
+    { code: "10", name: "Manufacture of coke and refined petroleum products" },
+    { code: "23", name: "Manufacturing not elsewhere classified" },
+    { code: "15", name: "Non-metallic mineral products" },
+    { code: "35", name: "Other services" },
+    { code: "CIV", name: "Processing of ambient stable products" },
+    { code: "CIII", name: "Processing of perishable animal and plant products (mixed)" },
+    { code: "CI", name: "Processing of perishable animal products" },
+    { code: "CII", name: "Processing of perishable plant products" },
+    { code: "36", name: "Public administration" },
+    { code: "14", name: "Rubber and plastic products" },
+    { code: "4", name: "Textiles and textile products" },
+    { code: "29", name: "Wholesale and retail trade" },
+    { code: "6", name: "Wood and wood products" }
+];
+
 const AddCertificateForm = ({ onSuccess, onCancel }) => {
     const navigate = useNavigate();
 
@@ -14,6 +41,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
         standard: 'ISO 9001:2015',
         standardDescription: 'Quality Management System',
         scope: '',
+        technicalSector: '',
         issueDate: '',
         expiryDate: '',
         firstIssueDate: '',
@@ -117,7 +145,13 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
         }
 
         try {
-            const data = await createCertificate({ ...formData });
+            // Ensure technicalSector is included
+            const payload = {
+                ...formData,
+                technicalSector: formData.technicalSector && formData.technicalSector.trim() ? formData.technicalSector : null
+            };
+
+            const data = await createCertificate(payload);
 
             if (data && data.success && data.data && data.data.certificateId) {
                 const certificateUrl = `${window.location.origin}/certificate/${data.data.certificateId}`;
@@ -150,6 +184,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                         standard: 'ISO 9001:2015',
                         standardDescription: 'Quality Management System',
                         scope: '',
+                        technicalSector: '',
                         issueDate: '',
                         expiryDate: '',
                         firstIssueDate: '',
@@ -294,6 +329,30 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
                             disabled={loading}
                             rows="3"
                         />
+                    </div>
+
+                    <div className="form-group full-width">
+                        <label htmlFor="technicalSector">
+                            Technical Sector
+                            <span style={{ fontSize: '0.875rem', color: '#6C757D', fontWeight: '400', marginLeft: '0.5rem' }}>(Optional)</span>
+                        </label>
+                        <select
+                            id="technicalSector"
+                            name="technicalSector"
+                            value={formData.technicalSector}
+                            onChange={handleChange}
+                            disabled={loading}
+                        >
+                            <option value="">-- Select Technical Sector (Optional) --</option>
+                            {TECHNICAL_SECTORS.map(sector => (
+                                <option key={sector.code} value={sector.name}>
+                                    {sector.code} - {sector.name}
+                                </option>
+                            ))}
+                        </select>
+                        <small style={{ display: 'block', marginTop: '0.5rem', fontSize: '0.875rem', color: '#6C757D' }}>
+                            Select the technical sector that applies to this certificate (optional)
+                        </small>
                     </div>
 
                     <div className="form-group">

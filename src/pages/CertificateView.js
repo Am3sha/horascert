@@ -12,6 +12,8 @@ const CertificateView = () => {
             try {
                 const response = await fetchCertificateById(certificateId);
                 if (response.success && response.data) {
+                    console.log('Certificate loaded:', response.data);
+                    console.log('Technical Sector:', response.data.technicalSector);
                     setCertificate(response.data);
                 } else {
                     setError('Certificate not found');
@@ -127,6 +129,18 @@ const CertificateView = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Technical Sector - Conditional Display */}
+                    {certificate.technicalSector && (
+                        <div className="section">
+                            <h2>TECHNICAL SECTOR</h2>
+                            <div className="details-row">
+                                <span className="details-label">Technical Sector</span>
+                                <span className="details-value">{certificate.technicalSector}</span>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Scope of Registration removed per request */}
                     {/* Sites Table */}
                     <div className="section">

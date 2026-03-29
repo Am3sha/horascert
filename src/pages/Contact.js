@@ -59,8 +59,8 @@ const Contact = () => {
               <div className="info-title">Call Us</div>
               <div className="info-value">
                 <ul>
-                  <li><a href="tel:+201066672250">+20 106 667 2250</a></li>
                   <li><a href="tel:+201009551633">+20 100 955 1633</a></li>
+                  <li><a href="tel:+201066672250">+20 106 667 2250</a></li>
                   <li><a href="tel:+201009610880">+20 100 961 0880</a></li>
                 </ul>
               </div>
