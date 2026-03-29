@@ -172,7 +172,7 @@ export default function TrainingCertificatesTab({ onError }) {
 
             if (!editingCertificate && res.data) {
                 const certificateNumber = res.data.certificateNumber;
-                const certificateUrl = `${window.location.origin}/verify/training/${certificateNumber}`;
+                const certificateUrl = `https://horascert.com/verify/training/${certificateNumber}`;
                 toast.success(`Training Certificate created! Certificate Number: ${certificateNumber}`);
                 setShowAddCertificate(false);
 

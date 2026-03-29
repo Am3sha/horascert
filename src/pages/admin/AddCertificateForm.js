@@ -154,7 +154,7 @@ const AddCertificateForm = ({ onSuccess, onCancel }) => {
             const data = await createCertificate(payload);
 
             if (data && data.success && data.data && data.data.certificateId) {
-                const certificateUrl = `${window.location.origin}/certificate/${data.data.certificateId}`;
+                const certificateUrl = `https://horascert.com/certificate/${data.data.certificateId}`;
 
                 // Show success message IMMEDIATELY - data is safely in database!
                 setSuccessMessage(`Certificate created successfully! Certificate Number: ${data.data.certificateNumber}, Certificate ID: ${data.data.certificateId}.`);

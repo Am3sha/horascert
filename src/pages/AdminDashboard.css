@@ -1185,18 +1185,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 2rem;
   animation: fadeIn 0.25s ease forwards;
+  overflow-y: auto;
+  zoom: 0.78 !important; /* Force normal zoom for modals */
 }
 
 .modal-box {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-width: 800px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
   animation: modalSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
@@ -1227,12 +1230,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #e5e7eb;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  flex-shrink: 0;
 }
 
 .modal-head h3 {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #212121;
   margin: 0;
@@ -1261,6 +1265,27 @@
 
 .modal-body {
   padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Custom scrollbar for modal body */
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
 }
 
 .modal-foot {
@@ -1268,8 +1293,83 @@
   justify-content: flex-end;
   gap: 1rem;
   padding: 1.5rem 2rem;
-  border-top: 1px solid #f5f5f5;
-  background: #fafafa;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  flex-shrink: 0;
+}
+
+/* ===== FORM LAYOUT - 2 COLUMN GRID ===== */
+.create-certificate-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.form-label .required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+  font-family: inherit;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #2c4f7c;
+  box-shadow: 0 0 0 3px rgba(44, 79, 124, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Responsive: Single column on smaller screens */
+@media (max-width: 768px) {
+  .create-certificate-form {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-box {
+    max-width: 95%;
+    max-height: 95vh;
+    margin: 1rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+
+  .modal-head,
+  .modal-foot {
+    padding: 1rem 1.5rem;
+  }
 }
 
 /* Form improvements */
